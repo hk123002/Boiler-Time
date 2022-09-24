@@ -1,3 +1,4 @@
+import 'package:corn_market/constants/routes.dart';
 import 'package:corn_market/views/login_view.dart';
 import 'package:corn_market/views/register_view.dart';
 import 'package:corn_market/views/verify_email_view.dart';
@@ -17,9 +18,9 @@ void main() {
     ),
     home: const HomePage(),
     routes: {
-      '/login/': (context) => const LoginView(),
-      '/register/': (context) => const RegisterView(),
-      '/main/': (context) => const MainView(),
+      loginRoute: (context) => const LoginView(),
+      registerRoute: (context) => const RegisterView(),
+      mainRoute: (context) => const MainView(),
     },
   ));
 }
@@ -78,8 +79,10 @@ class _MainViewState extends State<MainView> {
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout) {
                     await FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login/', (route) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      loginRoute,
+                      (route) => false,
+                    );
                   }
               }
             },
