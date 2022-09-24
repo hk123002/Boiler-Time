@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.corn_market">
    <application
+        android:usesCleartextTraffic="true"
         android:label="corn_market"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
