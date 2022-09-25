@@ -14,7 +14,7 @@ Add Firebase to your Flutter app
 
 ## what we need
 
-    .
+    
     ├── market                  
     │   ├── post using floating button (+)
     │   │   ├── camera function
