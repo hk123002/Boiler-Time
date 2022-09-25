@@ -72,7 +72,7 @@ Add Firebase to your Flutter app
     ├── services
     |  ├── auth
     ├── utility
-    |   ├── showe error dialog
+    |   ├── show_error_dialog
     ├── views    
     │   ├── auth
     │   ├── chat
