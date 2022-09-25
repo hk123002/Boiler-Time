@@ -71,7 +71,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
           ),
           TextButton(
               onPressed: () async {
-                await AuthService.firebase().logOut();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   loginRoute,
                   (route) => false,
