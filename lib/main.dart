@@ -1,10 +1,10 @@
 import 'package:corn_market/constants/routes.dart';
 import 'package:corn_market/services/auth/auth_service.dart';
-import 'package:corn_market/views/forgot_password_view.dart';
-import 'package:corn_market/views/login_view.dart';
+import 'package:corn_market/views/auth/forgot_password_view.dart';
+import 'package:corn_market/views/auth/login_view.dart';
 import 'package:corn_market/views/main_view.dart';
-import 'package:corn_market/views/register_view.dart';
-import 'package:corn_market/views/verify_email_view.dart';
+import 'package:corn_market/views/auth/register_view.dart';
+import 'package:corn_market/views/auth/verify_email_view.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;

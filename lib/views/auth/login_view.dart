@@ -4,16 +4,16 @@ import 'package:corn_market/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
-import '../utilities/show_error_dialog.dart';
+import '../../utilities/show_error_dialog.dart';
 
-class RegisterView extends StatefulWidget {
-  const RegisterView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<RegisterView> createState() => _RegisterViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
+class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
 
@@ -35,7 +35,7 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text('Login'),
       ),
       body: Column(
         children: [
@@ -59,48 +59,59 @@ class _RegisterViewState extends State<RegisterView> {
               final password = _password.text;
 
               try {
-                await AuthService.firebase().createUser(
-                  email: email,
-                  password: password,
-                );
                 await AuthService.firebase().logIn(
                   email: email,
                   password: password,
                 );
-                AuthService.firebase().sendEmailVerification();
-                Navigator.of(context).pushNamed(verifyEmailRoute);
-              } on WeakPasswordAuthException {
+                final user = AuthService.firebase().currentUser;
+                if (user?.isEmailVerified ?? false) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    mainRoute,
+                    (route) => false,
+                  );
+                } else {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    verifyEmailRoute,
+                    (route) => false,
+                  );
+                }
+              } on UserNotFoundAuthException {
                 await showErrorDialog(
                   context,
-                  'weak password',
+                  'User not found',
                 );
-              } on EmailAlreadyInUseException {
+              } on WrongPasswordAuthException {
                 await showErrorDialog(
                   context,
-                  'The email is already in use',
-                );
-              } on InvalidEmailAuthException {
-                await showErrorDialog(
-                  context,
-                  'invalid email!',
+                  'Wrong password',
                 );
               } on GenericAuthException {
                 await showErrorDialog(
                   context,
-                  'Failed to register',
+                  'Authentication error',
                 );
               }
             },
-            child: const Text('Register'),
+            child: const Text('Login'),
           ),
           TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  loginRoute,
-                  (route) => false,
-                );
-              },
-              child: const Text("Already registered? Login"))
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                forgotPasswordRoute,
+                (route) => false,
+              );
+            },
+            child: const Text("Forgot password?"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                registerRoute,
+                (route) => false,
+              );
+            },
+            child: const Text("Signup"),
+          ),
         ],
       ),
     );

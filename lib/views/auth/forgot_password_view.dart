@@ -4,7 +4,7 @@ import 'package:corn_market/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
-import '../utilities/show_error_dialog.dart';
+import '../../utilities/show_error_dialog.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({super.key});
