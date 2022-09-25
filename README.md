@@ -33,7 +33,7 @@ changes](https://docs.flutter.dev/release/breaking-changes) across releases.
 
 Make sure your Flutter environment is setup
 
-[Flutter setup](https://docs.flutter.dev/get-started/install/windows)
+[Flutter setup](https://flutter.dev/get-started/)
 
 Add Firebase to your Flutter app
 
