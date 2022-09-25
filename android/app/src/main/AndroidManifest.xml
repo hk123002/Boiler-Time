@@ -2,7 +2,7 @@
     package="com.example.corn_market">
    <application
         android:usesCleartextTraffic="true"
-        android:label="corn_market"
+        android:label="Corn Market"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
