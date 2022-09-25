@@ -35,3 +35,23 @@ Add Firebase to your Flutter app
     ├── side menu                 
     │   ├── log out
     │   ├── contact us
+    
+    ## projec structure
+
+    
+    ├── constants
+    |  ├── routes
+    ├── enums    
+    ├── services
+    |  ├── auth
+    ├── utility
+    |   ├── showe error dialog
+    ├── views    
+    │   ├── auth
+    │   ├── chat
+    │   ├── community
+    │   ├── market
+    │   ├── profile
+    ├── main    
+    
+   
