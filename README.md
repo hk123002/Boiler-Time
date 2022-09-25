@@ -36,7 +36,7 @@ Add Firebase to your Flutter app
     │   ├── log out
     │   ├── contact us
     
-    ## projec structure
+   ## project structure
 
     
     ├── constants
