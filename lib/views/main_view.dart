@@ -30,7 +30,7 @@ class _MainViewState extends State<MainView> {
       style: optionStyle,
     ),
     Text(
-      'Index 3: Setting',
+      'Index 3: Profile',
       style: optionStyle,
     ),
   ];
@@ -79,30 +79,30 @@ class _MainViewState extends State<MainView> {
         onPressed: () {
           // Add your onPressed code here!
         },
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.amber,
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: Colors.amber,
             icon: Icon(Icons.add_business),
             label: 'Market',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: Colors.amber,
             icon: Icon(Icons.monitor_sharp),
             label: 'Community',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepOrange,
+            backgroundColor: Colors.amber,
             icon: Icon(Icons.message),
             label: 'Chat',
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.deepOrange,
-            icon: Icon(Icons.miscellaneous_services),
-            label: 'Setting',
+            backgroundColor: Colors.amber,
+            icon: Icon(Icons.people),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
