@@ -81,4 +81,8 @@ Add Firebase to your Flutter app
     │   ├── profile
     ├── main    
     
-   
+   ## Data base structure
+
+    
+    ├── user
+    
