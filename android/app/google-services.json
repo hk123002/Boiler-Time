@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "286476221066",
+    "project_id": "corn-market-24cdf",
+    "storage_bucket": "corn-market-24cdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286476221066:android:6968627bb9b27e4ce18b73",
+        "android_client_info": {
+          "package_name": "com.example.corn_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286476221066-j5afrberehejog5hi16fb763lts05275.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh0LfEEc3KXe0fuZorWLqe3WrJPG4MtpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286476221066-j5afrberehejog5hi16fb763lts05275.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "286476221066-diaev6lbujnotot80qeuh1frthh7hdf6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cornMarket"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
