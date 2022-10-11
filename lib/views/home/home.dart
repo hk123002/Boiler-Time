@@ -5,14 +5,14 @@ import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
 
-class Chat extends StatefulWidget {
-  const Chat({super.key});
+class home extends StatefulWidget {
+  const home({super.key});
 
   @override
-  State<Chat> createState() => _chatViewState();
+  State<home> createState() => _homeViewState();
 }
 
-class _chatViewState extends State<Chat> {
+class _homeViewState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

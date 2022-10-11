@@ -2,6 +2,7 @@ import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/auth/forgot_password_view.dart';
 import 'package:boiler_time/views/auth/login_view.dart';
+import 'package:boiler_time/views/boiler/profile_edit.dart';
 import 'package:boiler_time/views/main_view.dart';
 import 'package:boiler_time/views/auth/register_view.dart';
 import 'package:boiler_time/views/auth/verify_email_view.dart';
@@ -24,6 +25,7 @@ void main() {
       mainRoute: (context) => const MainView(),
       verifyEmailRoute: (context) => const VerifyEmailView(),
       forgotPasswordRoute: ((context) => const ForgotPasswordView()),
+      editprofileRoute: ((context) => const Profile()),
     },
   ));
 }
