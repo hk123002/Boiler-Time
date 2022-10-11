@@ -1,6 +1,9 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:async';
+import 'dart:io';
 
 class Home extends StatefulWidget {
   @override
@@ -8,6 +11,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  File file;
+
+  handleTakePhoto() async {
+    Navigator.pop(context);
+    File file = await ImagePicker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 675,
+      maxWidth: 960,
+    );
+    setState(() {
+      this.file = file;
+    });
+  }
+
   selectImage(parentContext) {
     return showDialog(
         context: parentContext,
@@ -17,6 +34,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               const SimpleDialogOption(
                 child: Text("Photo with Camera"),
+                onPressed: handleTakePhoto(),
               ),
               const SimpleDialogOption(child: Text("Image from Gallery")),
               SimpleDialogOption(
@@ -48,7 +66,11 @@ class _HomeState extends State<Home> {
         ));
   }
 
+  buildUploadForm() {
+    return Text("File loaded");
+  }
+
   Widget build(BuildContext context) {
-    return buildSplashScreen();
+    return file == null ? buildSplashScreen() : buildUploadForm();
   }
 }
