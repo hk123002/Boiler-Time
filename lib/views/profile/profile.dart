@@ -1,3 +1,8 @@
+
+import 'package:boiler_time/constants/routes.dart';
+import 'package:boiler_time/services/auth/auth_exceptions.dart';
+import 'package:boiler_time/services/auth/auth_service.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
@@ -68,30 +73,19 @@ class _ProfileState extends State<Profile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: Text("CANCEL",
-                        style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.black)),
-                    style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text("SAVE",
-                        style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.amber,
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                  Container(
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 4, color: Colors.white),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1))
+                      ],
+                      shape: BoxShape.circle,
+                    ),
                   )
                 ],
               )

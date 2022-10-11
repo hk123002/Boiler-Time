@@ -14,7 +14,6 @@ abstract class AuthProvider {
     required String email,
     required String password,
     required String displayName,
-    required String phoneNumber,
   });
 
   Future<void> logOut();

@@ -13,13 +13,11 @@ class AuthService implements AuthProvider {
     required String email,
     required String password,
     required String displayName,
-    required String phoneNumber,
   }) =>
       provider.createUser(
         email: email,
         password: password,
         displayName: displayName,
-        phoneNumber: phoneNumber,
       );
 
   @override

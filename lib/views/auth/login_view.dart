@@ -1,8 +1,12 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_exceptions.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/services/auth/firebase_auth_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../utilities/show_error_dialog.dart';
 
@@ -63,8 +67,18 @@ class _LoginViewState extends State<LoginView> {
                   email: email,
                   password: password,
                 );
-                final user = AuthService.firebase().currentUser;
+                final user = FirebaseAuthProvider().currentUser;
                 if (user?.isEmailVerified ?? false) {
+                  final doc = await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
+                      .set({
+                    "name": FirebaseAuth.instance.currentUser?.displayName,
+                    "email": FirebaseAuth.instance.currentUser?.email,
+                    "phone": FirebaseAuth.instance.currentUser?.phoneNumber,
+                    "id": FirebaseAuth.instance.currentUser?.uid,
+                  });
+
                   // if user is verified
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     mainRoute,

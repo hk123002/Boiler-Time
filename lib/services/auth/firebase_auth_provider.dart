@@ -14,7 +14,6 @@ class FirebaseAuthProvider implements AuthProvider {
     required String email,
     required String password,
     required String displayName,
-    required String phoneNumber,
   }) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -23,6 +22,7 @@ class FirebaseAuthProvider implements AuthProvider {
       );
 
       final user = currentUser;
+      FirebaseAuth.instance.currentUser?.updateDisplayName(displayName);
 
       if (user != null) {
         return user;
