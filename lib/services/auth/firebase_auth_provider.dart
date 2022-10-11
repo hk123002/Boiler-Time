@@ -1,6 +1,6 @@
-import 'package:corn_market/services/auth/auth_user.dart';
-import 'package:corn_market/services/auth/auth_provider.dart';
-import 'package:corn_market/services/auth/auth_exceptions.dart';
+import 'package:boiler_time/services/auth/auth_user.dart';
+import 'package:boiler_time/services/auth/auth_provider.dart';
+import 'package:boiler_time/services/auth/auth_exceptions.dart';
 
 import 'package:firebase_auth/firebase_auth.dart'
     show FirebaseAuth, FirebaseAuthException;
@@ -14,7 +14,6 @@ class FirebaseAuthProvider implements AuthProvider {
     required String email,
     required String password,
     required String displayName,
-    required String phoneNumber,
   }) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -23,7 +22,7 @@ class FirebaseAuthProvider implements AuthProvider {
       );
 
       final user = currentUser;
-      user?.updateProfile(displayName: displayName, phoneNumber: phoneNumber);
+      FirebaseAuth.instance.currentUser?.updateDisplayName(displayName);
 
       if (user != null) {
         return user;
@@ -129,11 +128,5 @@ class FirebaseAuthProvider implements AuthProvider {
     } catch (_) {
       throw GenericAuthException();
     }
-  }
-
-  @override
-  Future<void> updateProfile() {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
   }
 }

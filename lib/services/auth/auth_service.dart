@@ -1,6 +1,6 @@
-import 'package:corn_market/services/auth/auth_provider.dart';
-import 'package:corn_market/services/auth/auth_user.dart';
-import 'package:corn_market/services/auth/firebase_auth_provider.dart';
+import 'package:boiler_time/services/auth/auth_provider.dart';
+import 'package:boiler_time/services/auth/auth_user.dart';
+import 'package:boiler_time/services/auth/firebase_auth_provider.dart';
 
 class AuthService implements AuthProvider {
   final AuthProvider provider;
@@ -13,13 +13,11 @@ class AuthService implements AuthProvider {
     required String email,
     required String password,
     required String displayName,
-    required String phoneNumber,
   }) =>
       provider.createUser(
         email: email,
         password: password,
         displayName: displayName,
-        phoneNumber: phoneNumber,
       );
 
   @override
@@ -47,7 +45,4 @@ class AuthService implements AuthProvider {
   @override
   Future<void> sendPasswordReset({required String toEmail}) =>
       provider.sendPasswordReset(toEmail: toEmail);
-
-  @override
-  Future<void> updateProfile() => provider.updateProfile();
 }

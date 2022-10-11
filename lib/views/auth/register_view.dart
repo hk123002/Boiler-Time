@@ -1,6 +1,6 @@
-import 'package:corn_market/constants/routes.dart';
-import 'package:corn_market/services/auth/auth_exceptions.dart';
-import 'package:corn_market/services/auth/auth_service.dart';
+import 'package:boiler_time/constants/routes.dart';
+import 'package:boiler_time/services/auth/auth_exceptions.dart';
+import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
@@ -19,7 +19,6 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _password;
   late final TextEditingController _checkpassword;
   late final TextEditingController _name;
-  late final TextEditingController _phonenumber;
 
   @override
   void initState() {
@@ -27,7 +26,6 @@ class _RegisterViewState extends State<RegisterView> {
     _password = TextEditingController();
     _checkpassword = TextEditingController();
     _name = TextEditingController();
-    _phonenumber = TextEditingController();
 
     super.initState();
   }
@@ -38,7 +36,6 @@ class _RegisterViewState extends State<RegisterView> {
     _password.dispose();
     _checkpassword.dispose();
     _name.dispose();
-    _phonenumber.dispose();
     super.dispose();
   }
 
@@ -64,13 +61,6 @@ class _RegisterViewState extends State<RegisterView> {
             decoration: const InputDecoration(hintText: 'Email'),
           ),
           TextField(
-            controller: _phonenumber,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.phone,
-            decoration: const InputDecoration(hintText: 'Phone Number'),
-          ),
-          TextField(
             controller: _password,
             obscureText: true,
             enableSuggestions: false,
@@ -90,7 +80,6 @@ class _RegisterViewState extends State<RegisterView> {
               final email = _email.text;
               final password = _password.text;
               final name = _name.text;
-              final phonenumber = _phonenumber.text;
               final checkpassword = _checkpassword.text;
 
               if (checkpassword != password) {
@@ -103,7 +92,6 @@ class _RegisterViewState extends State<RegisterView> {
                   await AuthService.firebase().createUser(
                     email: email,
                     password: password,
-                    phoneNumber: phonenumber,
                     displayName: name,
                   );
                   await AuthService.firebase().logIn(
