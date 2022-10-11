@@ -23,6 +23,7 @@ class FirebaseAuthProvider implements AuthProvider {
       );
 
       final user = currentUser;
+      user?.updateProfile(displayName: displayName, phoneNumber: phoneNumber);
 
       if (user != null) {
         return user;
@@ -128,5 +129,11 @@ class FirebaseAuthProvider implements AuthProvider {
     } catch (_) {
       throw GenericAuthException();
     }
+  }
+
+  @override
+  Future<void> updateProfile() {
+    // TODO: implement updateProfile
+    throw UnimplementedError();
   }
 }

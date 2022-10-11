@@ -19,4 +19,7 @@ class AuthUser {
         email: user.email!,
         isEmailVerified: user.emailVerified,
       );
+
+  void updateProfile(
+      {required String displayName, required String phoneNumber}) {}
 }

@@ -63,8 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '286476221066',
     projectId: 'corn-market-24cdf',
     storageBucket: 'corn-market-24cdf.appspot.com',
-    iosClientId:
-        '286476221066-diaev6lbujnotot80qeuh1frthh7hdf6.apps.googleusercontent.com',
+    iosClientId: '286476221066-diaev6lbujnotot80qeuh1frthh7hdf6.apps.googleusercontent.com',
     iosBundleId: 'com.example.cornMarket',
   );
 }
