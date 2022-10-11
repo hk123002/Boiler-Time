@@ -31,7 +31,7 @@ class MainView extends StatelessWidget {
       return [
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.add_business),
-          title: ("Market"),
+          title: ("Home"),
           activeColorPrimary: Colors.amber,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -43,7 +43,7 @@ class MainView extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.message),
-          title: ("Chat"),
+          title: ("Calendar"),
           activeColorPrimary: Colors.amber,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -61,7 +61,7 @@ class MainView extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Corn Market'),
+          title: const Text('Boiler Time'),
           actions: [
             PopupMenuButton(
               onSelected: (value) async {
