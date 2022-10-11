@@ -13,6 +13,8 @@ class FirebaseAuthProvider implements AuthProvider {
   Future<AuthUser> createUser({
     required String email,
     required String password,
+    required String displayName,
+    required String phoneNumber,
   }) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
