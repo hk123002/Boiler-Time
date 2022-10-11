@@ -1,7 +1,12 @@
 import 'package:boiler_time/views/boiler/boiler.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
+
+import '../../services/auth/auth_service.dart';
+import '../../utilities/show_error_dialog.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -11,6 +16,22 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  late final TextEditingController _newname;
+  late final TextEditingController _newemail;
+  @override
+  void initState() {
+    _newname = TextEditingController();
+    _newemail = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _newname.dispose();
+    _newemail.dispose();
+    super.dispose();
+  }
+
   bool isObscurePassword = true;
   @override
   Widget build(BuildContext context) {
@@ -63,9 +84,9 @@ class _ProfileState extends State<Profile> {
               ),
               const SizedBox(height: 30),
               buildTextField("Full Name", "Type your name", false),
-              buildTextField("Email", "Type your email address", false),
-              buildTextField("Phone Number", "Type your phone number", false),
-              buildTextField("Location", "Type your location", false),
+              // buildTextField("Email", "Type your email address", false),
+              // buildTextField("Phone Number", "Type your phone number", false),
+              // buildTextField("Location", "Type your location", false),
               const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,7 +114,38 @@ class _ProfileState extends State<Profile> {
                             borderRadius: BorderRadius.circular(20))),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final newname = _newname.text;
+
+                      if (newname.isEmpty) {
+                        await showErrorDialog(
+                          context,
+                          'name cant be blank',
+                        );
+                      } else {
+                        await FirebaseAuth.instance.currentUser
+                            ?.updateDisplayName(newname);
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(FirebaseAuth.instance.currentUser?.uid)
+                            .set({
+                          "name": newname,
+                          "email": FirebaseAuth.instance.currentUser?.email,
+                          "id": FirebaseAuth.instance.currentUser?.uid,
+                          // "image": FirebaseAuth.instance.currentUser?.image,
+                        });
+
+                        //then goes to boiler page
+                        Navigator.of(context).pushAndRemoveUntil(
+                          CupertinoPageRoute(
+                            builder: (BuildContext context) {
+                              return const Boiler();
+                            },
+                          ),
+                          (route) => false,
+                        );
+                      }
+                    },
                     // ignore: sort_child_properties_last
                     child: const Text("SAVE",
                         style: TextStyle(
@@ -120,6 +172,7 @@ class _ProfileState extends State<Profile> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: TextField(
+        controller: _newname,
         obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField

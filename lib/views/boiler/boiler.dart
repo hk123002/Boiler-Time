@@ -2,6 +2,8 @@ import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_exceptions.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/boiler/profile_edit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +20,25 @@ class _BoilerState extends State<Boiler> {
   bool isObscurePassword = true;
   @override
   Widget build(BuildContext context) {
+    // CollectionReference _collectionRef =
+    //     FirebaseFirestore.instance.collection('users');
+
+    // Future<void> getData() async {
+    //   // Get docs from collection reference
+    //   QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    //   // Get data from docs and convert map to List
+    //   final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    //   print(allData);
+    // }
+
+    // var user = getData();
+    // print("===================================");
+    // getData();
+
+    //하다가 맘.. 유저 정보 불러와서 입력하는거 해야함
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
