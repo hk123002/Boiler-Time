@@ -23,7 +23,7 @@ void main() {
       registerRoute: (context) => const RegisterView(),
       mainRoute: (context) => const MainView(),
       verifyEmailRoute: (context) => const VerifyEmailView(),
-      forgotPasswordRoute: ((context) => const ForgotPasswordView())
+      forgotPasswordRoute: ((context) => const ForgotPasswordView()),
     },
   ));
 }
