@@ -4,7 +4,7 @@ import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/Home/home.dart';
 import 'package:boiler_time/views/auth/login_view.dart';
 import 'package:boiler_time/views/boiler/boiler.dart';
-import 'package:boiler_time/views/calendar/chat.dart';
+import 'package:boiler_time/views/calendar/calendar.dart';
 import 'package:boiler_time/views/community/community.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

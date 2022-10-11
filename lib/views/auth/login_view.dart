@@ -69,15 +69,20 @@ class _LoginViewState extends State<LoginView> {
                 );
                 final user = FirebaseAuthProvider().currentUser;
                 if (user?.isEmailVerified ?? false) {
-                  final doc = await FirebaseFirestore.instance
+                  //write to users document
+                  await FirebaseFirestore.instance
                       .collection('users')
                       .doc(FirebaseAuth.instance.currentUser?.uid)
                       .set({
                     "name": FirebaseAuth.instance.currentUser?.displayName,
                     "email": FirebaseAuth.instance.currentUser?.email,
-                    "phone": FirebaseAuth.instance.currentUser?.phoneNumber,
                     "id": FirebaseAuth.instance.currentUser?.uid,
                   });
+
+                  await FirebaseFirestore.instance
+                      .collection('calendar')
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
+                      .set({});
 
                   // if user is verified
                   Navigator.of(context).pushNamedAndRemoveUntil(
