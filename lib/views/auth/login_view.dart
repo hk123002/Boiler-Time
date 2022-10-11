@@ -2,6 +2,7 @@ import 'package:corn_market/constants/routes.dart';
 import 'package:corn_market/services/auth/auth_exceptions.dart';
 import 'package:corn_market/services/auth/auth_service.dart';
 import 'package:corn_market/services/auth/firebase_auth_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -67,12 +68,15 @@ class _LoginViewState extends State<LoginView> {
                 );
                 final user = FirebaseAuthProvider().currentUser;
                 if (user?.isEmailVerified ?? false) {
-                  CollectionReference users =
-                      FirebaseFirestore.instance.collection('users');
-
-                  if (checkIfuserexist(user?.id) == false) {
-                    devtools.log("user doesn't exist, writing on database");
-                  }
+                  final doc = await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser?.uid)
+                      .set({
+                    "name": FirebaseAuth.instance.currentUser?.displayName,
+                    "email": FirebaseAuth.instance.currentUser?.email,
+                    "phone": FirebaseAuth.instance.currentUser?.phoneNumber,
+                    "id": FirebaseAuth.instance.currentUser?.uid,
+                  });
 
                   // if user is verified
                   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -125,18 +129,5 @@ class _LoginViewState extends State<LoginView> {
         ],
       ),
     );
-  }
-}
-
-/// Check If user Exists in the databsae
-Future<bool> checkIfuserexist(String? uid) async {
-  // Get reference to Firestore collection
-  var collectionRef = FirebaseFirestore.instance.collection('users');
-
-  var doc = await collectionRef.doc(uid).get();
-  if (doc.exists) {
-    return true;
-  } else {
-    return false;
   }
 }
