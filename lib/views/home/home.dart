@@ -5,14 +5,14 @@ import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
 
-class Market extends StatefulWidget {
-  const Market({super.key});
+class home extends StatefulWidget {
+  const home({super.key});
 
   @override
-  State<Market> createState() => _martketViewState();
+  State<home> createState() => _homeViewState();
 }
 
-class _martketViewState extends State<Market> {
+class _homeViewState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

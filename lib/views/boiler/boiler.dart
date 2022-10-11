@@ -7,14 +7,14 @@ import 'dart:developer' as devtools show log;
 
 import '../../utilities/show_error_dialog.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class Boiler extends StatefulWidget {
+  const Boiler({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<Boiler> createState() => _BoilerState();
 }
 
-class _ProfileState extends State<Profile> {
+class _BoilerState extends State<Boiler> {
   bool isObscurePassword = true;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +30,8 @@ class _ProfileState extends State<Profile> {
                 child: Stack(
                   children: [
                     Container(
-                      width: 130,
-                      height: 130,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
                           border: Border.all(width: 4, color: Colors.white),
                           boxShadow: [
@@ -46,21 +46,21 @@ class _ProfileState extends State<Profile> {
                               image: NetworkImage(
                                   'https://cdn.pixabay.com/photo/2015/04/08/07/25/fat-712246_1280.png'))),
                     ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(width: 4, color: Colors.white),
-                              color: Colors.amber),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                        ))
+                    // Positioned(
+                    //     bottom: 0,
+                    //     right: 0,
+                    //     child: Container(
+                    //       height: 40,
+                    //       width: 40,
+                    //       decoration: BoxDecoration(
+                    //           shape: BoxShape.circle,
+                    //           border: Border.all(width: 4, color: Colors.white),
+                    //           color: Colors.amber),
+                    //       child: Icon(
+                    //         Icons.edit,
+                    //         color: Colors.white,
+                    //       ),
+                    //     ))
                   ],
                 ),
               ),

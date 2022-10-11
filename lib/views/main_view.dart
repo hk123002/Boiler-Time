@@ -1,11 +1,11 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/Home/home.dart';
 import 'package:boiler_time/views/auth/login_view.dart';
-import 'package:boiler_time/views/chat/chat.dart';
+import 'package:boiler_time/views/boiler/boiler.dart';
+import 'package:boiler_time/views/calendar/chat.dart';
 import 'package:boiler_time/views/community/community.dart';
-import 'package:boiler_time/views/market/market.dart';
-import 'package:boiler_time/views/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -42,14 +42,14 @@ class MainView extends StatelessWidget {
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.message),
+          icon: const Icon(Icons.calendar_month),
           title: ("Calendar"),
           activeColorPrimary: Colors.amber,
           inactiveColorPrimary: Colors.grey,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.people),
-          title: ("Profile"),
+          title: ("Boilers"),
           activeColorPrimary: Colors.amber,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -119,7 +119,7 @@ class MainView extends StatelessWidget {
             duration: Duration(milliseconds: 200),
           ),
           navBarStyle: NavBarStyle
-              .style1, // Choose the nav bar style with this property.
+              .style6, // Choose the nav bar style with this property.
         ));
   }
 }
@@ -129,7 +129,7 @@ class marketscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Market();
+    return const home();
   }
 }
 
@@ -147,7 +147,7 @@ class chatscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Chat();
+    return const Calendar();
   }
 }
 
@@ -156,7 +156,7 @@ class profilescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Profile();
+    return const Boiler();
   }
 }
 

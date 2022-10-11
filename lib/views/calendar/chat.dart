@@ -5,14 +5,14 @@ import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
 
-class Chat extends StatefulWidget {
-  const Chat({super.key});
+class Calendar extends StatefulWidget {
+  const Calendar({super.key});
 
   @override
-  State<Chat> createState() => _chatViewState();
+  State<Calendar> createState() => _CalendarViewState();
 }
 
-class _chatViewState extends State<Chat> {
+class _CalendarViewState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
