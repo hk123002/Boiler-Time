@@ -33,25 +33,25 @@ class MainView extends StatelessWidget {
           icon: const Icon(Icons.add_business),
           title: ("Home"),
           activeColorPrimary: Colors.amber,
-          inactiveColorPrimary: Colors.grey,
+          inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.monitor_sharp),
           title: ("Community"),
           activeColorPrimary: Colors.amber,
-          inactiveColorPrimary: Colors.grey,
+          inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.calendar_month),
           title: ("Calendar"),
           activeColorPrimary: Colors.amber,
-          inactiveColorPrimary: Colors.grey,
+          inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.people),
           title: ("Boilers"),
           activeColorPrimary: Colors.amber,
-          inactiveColorPrimary: Colors.grey,
+          inactiveColorPrimary: Colors.black,
         ),
       ];
     }

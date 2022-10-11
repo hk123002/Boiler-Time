@@ -20,11 +20,6 @@ class Calendar extends StatefulWidget {
 class _CalendarViewState extends State<Calendar> {
   List<TimePlannerTask> tasks = [];
 
-  final _firestore = FirebaseFirestore.instance
-      .collection('calendar')
-      .doc(FirebaseAuth.instance.currentUser?.uid)
-      .snapshots();
-
   //add new schedule
   void _addObject(BuildContext context) {
     List<Color?> colors = [
@@ -57,11 +52,18 @@ class _CalendarViewState extends State<Calendar> {
 
   @override
   Widget build(BuildContext context) {
-    print("----------------------");
-
-    print(_firestore.toString());
-
-    print("----------------------");
+    // FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(FirebaseAuth.instance.currentUser?.uid)
+    //     .snapshots()
+    //     .get()
+    //     .then((DocumentSnapshot documentSnapshot) {
+    //   if (documentSnapshot.exists) {
+    //     print('Document data: ${documentSnapshot.data()}');
+    //   } else {
+    //     print('Document does not exist on the database');
+    //   }
+    // });
     return Scaffold(
       body: Center(
         child: TimePlanner(

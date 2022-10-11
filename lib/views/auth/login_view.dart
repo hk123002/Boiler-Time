@@ -79,10 +79,23 @@ class _LoginViewState extends State<LoginView> {
                     "id": FirebaseAuth.instance.currentUser?.uid,
                   });
 
-                  await FirebaseFirestore.instance
-                      .collection('calendar')
-                      .doc(FirebaseAuth.instance.currentUser?.uid)
-                      .set({});
+                  Future getCalendar() async {
+                    var a = await FirebaseFirestore.instance
+                        .collection('calendar')
+                        .doc(FirebaseAuth.instance.currentUser?.uid)
+                        .get();
+                    if (a.exists) {
+                      print('Exists');
+                    }
+                    if (!a.exists) {
+                      await FirebaseFirestore.instance
+                          .collection('calendar')
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .set({"schedule": []});
+                    }
+                  }
+
+                  getCalendar();
 
                   // if user is verified
                   Navigator.of(context).pushNamedAndRemoveUntil(
