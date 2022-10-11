@@ -85,4 +85,12 @@ Add Firebase to your Flutter app
 
     
     ├── user
+    │   ├──email
+    │   ├──id
+    │   ├──name
+    
+    
+    ## resources
+    https://pub.dev/packages/persistent_bottom_nav_bar
+    https://pub.dev/packages/syncfusion_flutter_calendar#-installing-tab-
     
