@@ -66,8 +66,8 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               }
             },
             child: emailSent
-                ? Text('Haven\'t got the code yet? Resend')
-                : Text('Send password reset link to your email'),
+                ? const Text('Haven\'t got the code yet? Resend')
+                : const Text('Send password reset link to your email'),
           ),
           TextButton(
               onPressed: () async {

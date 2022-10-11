@@ -85,7 +85,7 @@ class _LoginViewState extends State<LoginView> {
                         .doc(FirebaseAuth.instance.currentUser?.uid)
                         .get();
                     if (a.exists) {
-                      print('Exists');
+                      devtools.log('Exists');
                     }
                     if (!a.exists) {
                       await FirebaseFirestore.instance
@@ -98,11 +98,13 @@ class _LoginViewState extends State<LoginView> {
                   getCalendar();
 
                   // if user is verified
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     mainRoute,
                     (route) => false,
                   );
                 } else {
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     verifyEmailRoute,
                     (route) => false,
