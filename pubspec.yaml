@@ -38,8 +38,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.22.0
   firebase_auth: ^3.9.0
+<<<<<<< Updated upstream
   image_picker: ^0.8.6
   permission_handler: ^10.1.0
+=======
+  cloud_firestore: ^3.5.1
+>>>>>>> Stashed changes
 
 dev_dependencies:
   flutter_test:
