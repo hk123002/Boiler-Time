@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:corn_market/constants/routes.dart';
-import 'package:corn_market/services/auth/auth_service.dart';
+import 'package:boiler_time/constants/routes.dart';
+import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 

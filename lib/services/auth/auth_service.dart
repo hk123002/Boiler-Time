@@ -1,6 +1,6 @@
-import 'package:corn_market/services/auth/auth_provider.dart';
-import 'package:corn_market/services/auth/auth_user.dart';
-import 'package:corn_market/services/auth/firebase_auth_provider.dart';
+import 'package:boiler_time/services/auth/auth_provider.dart';
+import 'package:boiler_time/services/auth/auth_user.dart';
+import 'package:boiler_time/services/auth/firebase_auth_provider.dart';
 
 class AuthService implements AuthProvider {
   final AuthProvider provider;

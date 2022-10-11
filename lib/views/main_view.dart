@@ -1,17 +1,17 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'package:corn_market/services/auth/auth_service.dart';
-import 'package:corn_market/views/auth/login_view.dart';
-import 'package:corn_market/views/chat/chat.dart';
-import 'package:corn_market/views/community/community.dart';
-import 'package:corn_market/views/market/market.dart';
-import 'package:corn_market/views/profile/profile.dart';
+import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/auth/login_view.dart';
+import 'package:boiler_time/views/chat/chat.dart';
+import 'package:boiler_time/views/community/community.dart';
+import 'package:boiler_time/views/market/market.dart';
+import 'package:boiler_time/views/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../enums/menu_action.dart';
-import 'package:corn_market/constants/routes.dart';
+import 'package:boiler_time/constants/routes.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -31,7 +31,7 @@ class MainView extends StatelessWidget {
       return [
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.add_business),
-          title: ("Market"),
+          title: ("Home"),
           activeColorPrimary: Colors.amber,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -43,7 +43,7 @@ class MainView extends StatelessWidget {
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.message),
-          title: ("Chat"),
+          title: ("Calendar"),
           activeColorPrimary: Colors.amber,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -61,7 +61,7 @@ class MainView extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Corn Market'),
+          title: const Text('Boiler Time'),
           actions: [
             PopupMenuButton(
               onSelected: (value) async {
