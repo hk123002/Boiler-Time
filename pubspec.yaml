@@ -39,10 +39,18 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.22.0
   firebase_auth: ^3.9.0
+
   cloud_firestore: ^3.5.1
   syncfusion_flutter_calendar: ^20.3.49
   flutter_week_view: ^1.2.2
   time_planner: ^0.1.1
+
+
+  image_picker: ^0.8.6
+  permission_handler: ^10.1.0
+
+  cloud_firestore: ^3.5.1
+
 
 dev_dependencies:
   flutter_test:
