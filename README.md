@@ -54,7 +54,7 @@ Add Firebase to your Flutter app
     ├── community
     │   ├── post list via popularity
     │   │   ├── community
-    ├── Calenar 
+    ├── Calendar 
     ├── Boiler
     │   ├── view & edit my profile
     │   ├── all community
