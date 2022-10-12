@@ -1,4 +1,4 @@
-# Corn Market
+# Boiler Time
 
 <a href="https://flutter.dev/">
   <h1 align="center">
@@ -42,26 +42,25 @@ Add Firebase to your Flutter app
 ## what we need
 
     
-    ├── market                  
-    │   ├── post using floating button (+)
-    │   │   ├── camera function
-    │   ├── view item (categorize & filter, search)
-    │   │   ├──route to chat page with the user
-    │   ├── view & edit my post (via filter my post functionality) 
+    ├── Home  
+    │   ├── icons
+    |   │   ├── bus schedule
+    |   │   ├── brightspace
+    |   │   ├── Academic schedule
+    |   │   ├── dining menu
+    |   │   ├── library time
+    │   ├── advertisement
+    │   ├── pineed comunity
     ├── community
-    │   ├── post using floating button (+)
-    │   ├── view item 
-    │   │   ├──comment
-    │   ├── view & edit my post (via filter my post functionality) 
-    ├── chat (new chat starts via market)
-    │   ├── view existing chat (as a list)
-    │   ├── basic chat functionality
-    ├── profile
+    │   ├── post list via popularity
+    │   │   ├── community
+    ├── Calendar 
+    ├── Boiler
     │   ├── view & edit my profile
-    │   ├── transaction history (those that are marked as sold)
+    │   ├── all community
     ├── side menu                 
     │   ├── log out
-    │   ├── contact us
+
     
    ## project structure
 
