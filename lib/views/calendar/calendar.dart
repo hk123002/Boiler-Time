@@ -532,10 +532,6 @@ class _CalendarViewState extends State<Calendar> {
                             onPressed: () async {
                               //this is to make sure user's start time is before the end time
 
-                              _className.text == "" ||
-                                  selectedDay == null ||
-                                  selectedEndTime == null ||
-                                  selectedStartTime == null;
                               var startHourminStr;
                               if (selectedStartTime == null) {
                                 startHourminStr =
@@ -569,7 +565,15 @@ class _CalendarViewState extends State<Calendar> {
 
                               //
 
-                              if ((endHourmin[0] * 60 + endHourmin[1]) <
+                              if (_className.text == "" ||
+                                  selectedDay == null ||
+                                  selectedEndTime == null ||
+                                  selectedStartTime == null) {
+                                await showErrorDialog(
+                                  context,
+                                  '아무것도 안바뀜 병신아',
+                                );
+                              } else if ((endHourmin[0] * 60 + endHourmin[1]) <
                                   (startHourmin[0] * 60 + startHourmin[1])) {
                                 await showErrorDialog(
                                   context,
