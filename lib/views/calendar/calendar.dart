@@ -17,7 +17,7 @@ import '../../utilities/show_error_dialog.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
-
+  // Duration get transitionDuration => const Duration(milliseconds: 0);
   @override
   State<Calendar> createState() => _CalendarViewState();
 }
@@ -588,6 +588,7 @@ class _CalendarViewState extends State<Calendar> {
 
                                 _editObject(context, classNameHint, day,
                                     startTimeHint, endTimeHint);
+
                                 Navigator.of(context).pushAndRemoveUntil(
                                   CupertinoPageRoute(
                                     builder: (BuildContext context) {

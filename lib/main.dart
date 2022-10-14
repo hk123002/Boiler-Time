@@ -5,6 +5,7 @@ import 'package:boiler_time/views/auth/login_view.dart';
 import 'package:boiler_time/views/main_view.dart';
 import 'package:boiler_time/views/auth/register_view.dart';
 import 'package:boiler_time/views/auth/verify_email_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
