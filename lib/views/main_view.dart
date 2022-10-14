@@ -14,7 +14,8 @@ import '../enums/menu_action.dart';
 import 'package:boiler_time/constants/routes.dart';
 
 class MainView extends StatelessWidget {
-  const MainView({super.key});
+  final int index;
+  const MainView({required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class MainView extends StatelessWidget {
     }
 
     PersistentTabController controller;
-    controller = PersistentTabController(initialIndex: 0);
+    controller = PersistentTabController(initialIndex: index);
 
     return Scaffold(
         appBar: AppBar(
