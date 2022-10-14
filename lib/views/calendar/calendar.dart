@@ -565,13 +565,13 @@ class _CalendarViewState extends State<Calendar> {
 
                               //
 
-                              if (_className.text == "" ||
-                                  selectedDay == null ||
-                                  selectedEndTime == null ||
+                              if (_className.text == "" &&
+                                  selectedDay == null &&
+                                  selectedEndTime == null &&
                                   selectedStartTime == null) {
                                 await showErrorDialog(
                                   context,
-                                  '아무것도 안바뀜 병신아',
+                                  'nothing changed',
                                 );
                               } else if ((endHourmin[0] * 60 + endHourmin[1]) <
                                   (startHourmin[0] * 60 + startHourmin[1])) {
@@ -834,31 +834,3 @@ class _CalendarViewState extends State<Calendar> {
     );
   }
 }
-
-// class DialogExample extends StatelessWidget {
-//   const DialogExample({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TextButton(
-//       onPressed: () => showDialog<String>(
-//         context: context,
-//         builder: (BuildContext context) => AlertDialog(
-//           title: const Text('AlertDialog Title'),
-//           content: const Text('AlertDialog description'),
-//           actions: <Widget>[
-//             TextButton(
-//               onPressed: () => Navigator.pop(context, 'Cancel'),
-//               child: const Text('Cancel'),
-//             ),
-//             TextButton(
-//               onPressed: () => Navigator.pop(context, 'OK'),
-//               child: const Text('OK'),
-//             ),
-//           ],
-//         ),
-//       ),
-//       child: const Text('Show Dialog'),
-//     );
-//   }
-// }
