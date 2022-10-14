@@ -184,6 +184,7 @@ class _CalendarViewState extends State<Calendar> {
 
   void _editObject(
     BuildContext context,
+    String classNameHint,
     int dayHint,
     String startTimeHint,
     String endTimeHint,
@@ -203,6 +204,7 @@ class _CalendarViewState extends State<Calendar> {
     late List<String> endHourminStr;
     late int duration;
 
+    // if selectedday is null, it is set to hint
     if (selectedDay == 'monday') {
       day = 0;
     } else if (selectedDay == 'tuesday') {
@@ -219,6 +221,7 @@ class _CalendarViewState extends State<Calendar> {
 
     devtools.log(day.toString());
 
+    // if selected is null, set to hint
     if (selectedStartTime != null) {
       startHourminStr = selectedStartTime.toString().split(":");
     } else {
@@ -243,6 +246,17 @@ class _CalendarViewState extends State<Calendar> {
     duration = (endHourmin[0] * 60 + endHourmin[1]) -
         (startHourmin[0] * 60 + startHourmin[1]);
 
+    devtools
+        .log("class name text in _editOBject-----------------------------\n");
+    devtools.log(_className.text);
+    devtools
+        .log("class name text in _editOBject-----------------------------\n");
+
+    if (_className.text == "") {
+      devtools.log("class name empty in editobject");
+      _className.text = classNameHint;
+    }
+
     String dbData =
         "${_className.text}: $day:${startHourmin[0]}:${startHourmin[1]}:$duration";
 
@@ -253,21 +267,21 @@ class _CalendarViewState extends State<Calendar> {
       "schedule": FieldValue.arrayUnion([dbData])
     });
 
-    setState(() {
-      tasks.add(
-        TimePlannerTask(
-          color: colors[Random().nextInt(colors.length)],
-          dateTime: TimePlannerDateTime(
-              day: day, hour: startHourmin[0], minutes: startHourmin[1]),
-          minutesDuration: duration,
-          onTap: () => {},
-          child: Text(
-            _className.text,
-            // style: TextStyle(color: Colors.grey[350], fontSize: 12),
-          ),
-        ),
-      );
-    });
+    // setState(() {
+    //   tasks.add(
+    //     TimePlannerTask(
+    //       color: colors[Random().nextInt(colors.length)],
+    //       dateTime: TimePlannerDateTime(
+    //           day: day, hour: startHourmin[0], minutes: startHourmin[1]),
+    //       minutesDuration: duration,
+    //       onTap: () => {},
+    //       child: Text(
+    //         _className.text,
+    //         // style: TextStyle(color: Colors.grey[350], fontSize: 12),
+    //       ),
+    //     ),
+    //   );
+    // });
 
     _className.text = "";
     selectedDay = null;
@@ -324,6 +338,7 @@ class _CalendarViewState extends State<Calendar> {
         }
         String startTimeHint;
         int modifiedStartHour = 0;
+
         if (hour > 12) {
           modifiedStartHour = hour - 12;
           devtools.log(hour.toString());
@@ -345,7 +360,7 @@ class _CalendarViewState extends State<Calendar> {
         int endTimeHintInt = hour * 60 + minute + duration;
 
         String endTimeHint;
-        if (hour > 12) {
+        if (((endTimeHintInt / 60).floor()) > 12) {
           endTimeHint = ((endTimeHintInt / 60).floor() - 12).toString() + ":";
           if ((endTimeHintInt % 60).toString() == "0") {
             endTimeHint += "0" + "0";
@@ -514,27 +529,74 @@ class _CalendarViewState extends State<Calendar> {
                               textStyle: Theme.of(context).textTheme.labelLarge,
                             ),
                             child: const Text('Update'),
-                            onPressed: () {
-                              //delete
-                              FirebaseFirestore.instance
-                                  .collection('calendar')
-                                  .doc(FirebaseAuth.instance.currentUser?.uid)
-                                  .update({
-                                "schedule": FieldValue.arrayRemove([item])
-                              });
+                            onPressed: () async {
+                              //this is to make sure user's start time is before the end time
 
-                              //add
+                              _className.text == "" ||
+                                  selectedDay == null ||
+                                  selectedEndTime == null ||
+                                  selectedStartTime == null;
+                              var startHourminStr;
+                              if (selectedStartTime == null) {
+                                startHourminStr =
+                                    startTimeHint.toString().split(":");
+                              } else {
+                                startHourminStr =
+                                    selectedStartTime.toString().split(":");
+                              }
+                              var startHourmin =
+                                  startHourminStr.map(int.parse).toList();
 
-                              _editObject(
-                                  context, day, startTimeHint, endTimeHint);
-                              Navigator.of(context).pushAndRemoveUntil(
-                                CupertinoPageRoute(
-                                  builder: (BuildContext context) {
-                                    return const MainView(index: 2);
-                                  },
-                                ),
-                                (route) => false,
-                              );
+                              if (startHourmin[0] < 7) {
+                                startHourmin[0] += 12;
+                              }
+
+                              var endHourminStr;
+                              if (selectedEndTime == null) {
+                                endHourminStr =
+                                    endTimeHint.toString().split(":");
+                              } else {
+                                endHourminStr =
+                                    selectedEndTime.toString().split(":");
+                              }
+
+                              var endHourmin =
+                                  endHourminStr.map(int.parse).toList();
+
+                              if (endHourmin[0] < 7) {
+                                endHourmin[0] += 12;
+                              }
+
+                              //
+
+                              if ((endHourmin[0] * 60 + endHourmin[1]) <
+                                  (startHourmin[0] * 60 + startHourmin[1])) {
+                                await showErrorDialog(
+                                  context,
+                                  'start time cant be after end time',
+                                );
+                              } else {
+                                //delete
+                                FirebaseFirestore.instance
+                                    .collection('calendar')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .update({
+                                  "schedule": FieldValue.arrayRemove([item])
+                                });
+
+                                //edit
+
+                                _editObject(context, classNameHint, day,
+                                    startTimeHint, endTimeHint);
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  CupertinoPageRoute(
+                                    builder: (BuildContext context) {
+                                      return const MainView(index: 2);
+                                    },
+                                  ),
+                                  (route) => false,
+                                );
+                              }
                             },
                           ),
                         ],
@@ -705,16 +767,55 @@ class _CalendarViewState extends State<Calendar> {
                       textStyle: Theme.of(context).textTheme.labelLarge,
                     ),
                     child: const Text('Save'),
-                    onPressed: () {
-                      _addObject(context);
-                      Navigator.of(context).pushAndRemoveUntil(
-                        CupertinoPageRoute(
-                          builder: (BuildContext context) {
-                            return const MainView(index: 2);
-                          },
-                        ),
-                        (route) => false,
-                      );
+                    onPressed: () async {
+                      if (_className.text == "" ||
+                          selectedDay == null ||
+                          selectedEndTime == null ||
+                          selectedStartTime == null) {
+                        await showErrorDialog(
+                          context,
+                          'fields cant be empty',
+                        );
+                      } else {
+                        //this is to make sure user's start time is before the end time
+                        var startHourminStr =
+                            selectedStartTime.toString().split(":");
+
+                        var startHourmin =
+                            startHourminStr.map(int.parse).toList();
+
+                        if (startHourmin[0] < 7) {
+                          startHourmin[0] += 12;
+                        }
+
+                        var endHourminStr =
+                            selectedEndTime.toString().split(":");
+
+                        var endHourmin = endHourminStr.map(int.parse).toList();
+
+                        if (endHourmin[0] < 7) {
+                          endHourmin[0] += 12;
+                        }
+
+                        //
+                        if ((endHourmin[0] * 60 + endHourmin[1]) <
+                            (startHourmin[0] * 60 + startHourmin[1])) {
+                          await showErrorDialog(
+                            context,
+                            'start time cant be after end time',
+                          );
+                        } else {
+                          _addObject(context);
+                          Navigator.of(context).pushAndRemoveUntil(
+                            CupertinoPageRoute(
+                              builder: (BuildContext context) {
+                                return const MainView(index: 2);
+                              },
+                            ),
+                            (route) => false,
+                          );
+                        }
+                      }
                     },
                   ),
                 ],
