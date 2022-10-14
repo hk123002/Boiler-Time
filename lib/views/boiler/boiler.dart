@@ -18,27 +18,45 @@ class Boiler extends StatefulWidget {
 
 class _BoilerState extends State<Boiler> {
   bool isObscurePassword = true;
+  String? name;
+  String? email;
+
+  @override
+  void initState() {
+    _getUserData(context);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future<void> _getUserData(BuildContext context) async {
+    setState(() async {
+      var collection = FirebaseFirestore.instance.collection('users');
+
+      var docSnapshot =
+          await collection.doc(FirebaseAuth.instance.currentUser?.uid).get();
+
+      if (docSnapshot.exists) {
+        Map<String, dynamic> data = docSnapshot.data()!;
+
+        // You can then retrieve the value from the Map like this:
+        name = data['name'] as String;
+
+        email = data['email'] as String;
+
+        devtools.log(name.toString());
+        devtools.log(email.toString());
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // CollectionReference _collectionRef =
-    //     FirebaseFirestore.instance.collection('users');
-
-    // Future<void> getData() async {
-    //   // Get docs from collection reference
-    //   QuerySnapshot querySnapshot = await _collectionRef.get();
-
-    //   // Get data from docs and convert map to List
-    //   final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-
-    //   print(allData);
-    // }
-
-    // var user = getData();
-    // print("===================================");
-    // getData();
-
-    //하다가 맘.. 유저 정보 불러와서 입력하는거 해야함
-
+    _getUserData(context);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
@@ -89,9 +107,8 @@ class _BoilerState extends State<Boiler> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Text("Name"),
-              const Text("Name"),
-              const Text("Name"),
+              Text(name.toString()),
+              Text(email.toString()),
               const SizedBox(height: 30),
               TextButton(
                 onPressed: () {
@@ -120,27 +137,29 @@ class _BoilerState extends State<Boiler> {
     );
   }
 
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: TextField(
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
-                  )
-                : null,
-            contentPadding: const EdgeInsets.only(bottom: 5),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            // ignore: prefer_const_constructors
-            hintStyle: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)),
-      ),
-    );
-  }
+//   Widget buildTextField(
+
+//       String labelText, String placeholder, bool isPasswordTextField) {
+//     return Padding(
+//       padding: const EdgeInsets.only(bottom: 30),
+//       child: TextField(
+//         obscureText: isPasswordTextField ? isObscurePassword : false,
+//         decoration: InputDecoration(
+//             suffixIcon: isPasswordTextField
+//                 ? IconButton(
+//                     onPressed: () {},
+//                     icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
+//                   )
+//                 : null,
+//             contentPadding: const EdgeInsets.only(bottom: 5),
+//             labelText: labelText,
+//             floatingLabelBehavior: FloatingLabelBehavior.always,
+//             hintText: placeholder,
+//             // ignore: prefer_const_constructors
+//             hintStyle: TextStyle(
+//                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)),
+//       ),
+//     );
+//   }
+// }
 }
