@@ -15,10 +15,116 @@ class home extends StatefulWidget {
 class _homeViewState extends State<home> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('chat'),
+    return Scaffold(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(
+            icon: Icon(Icons.bus_alert),
+            iconSize: 50.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BusSchedule()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.school),
+            iconSize: 50.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LibraryTime()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.dining),
+            iconSize: 50.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DiningMenue()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.schedule),
+            iconSize: 50.0,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const AcademicSchedule()),
+              );
+            },
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class BusSchedule extends StatelessWidget {
+  const BusSchedule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Bus Schedule'),
+      ),
+      body: Center(
+        child: Text('bus schedule'),
+      ),
+    );
+  }
+}
+
+class LibraryTime extends StatelessWidget {
+  const LibraryTime({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Library Time'),
+      ),
+      body: Center(
+        child: Text('Library Time'),
+      ),
+    );
+  }
+}
+
+class DiningMenue extends StatelessWidget {
+  const DiningMenue({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Dining Menue'),
+      ),
+      body: Center(
+        child: Text('Dining Menue'),
+      ),
+    );
+  }
+}
+
+class AcademicSchedule extends StatelessWidget {
+  const AcademicSchedule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Academic Schedule'),
+      ),
+      body: Center(
+        child: Text('Academic Schedule'),
       ),
     );
   }
