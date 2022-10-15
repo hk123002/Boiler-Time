@@ -19,6 +19,7 @@ class _homeViewState extends State<home> {
       body: Center(
         child: Text('chat'),
       ),
+      ),
     );
   }
 }
