@@ -7,7 +7,6 @@ class DiningMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Dinning Courts Menu')),
       body: Container(
         color: Colors.grey[200],
         padding: EdgeInsets.all(10),
