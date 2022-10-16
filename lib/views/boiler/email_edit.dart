@@ -1,3 +1,4 @@
+import 'package:boiler_time/views/auth/login_view.dart';
 import 'package:boiler_time/views/boiler/boiler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,29 +6,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import '../../constants/routes.dart';
+import '../../services/auth/auth_exceptions.dart';
 import '../../services/auth/auth_service.dart';
 import '../../utilities/show_error_dialog.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class EmailEdit extends StatefulWidget {
+  const EmailEdit({super.key});
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<EmailEdit> createState() => _nameEditState();
 }
 
-class _ProfileState extends State<Profile> {
-  late final TextEditingController _newname;
+class _nameEditState extends State<EmailEdit> {
   late final TextEditingController _newemail;
+  bool emailChangeFailed = true;
   @override
   void initState() {
-    _newname = TextEditingController();
     _newemail = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _newname.dispose();
     _newemail.dispose();
     super.dispose();
   }
@@ -83,7 +84,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const SizedBox(height: 30),
-              buildTextField("Full Name", "Type your name", false),
+              buildTextField("Email", "Type your new email", false),
               // buildTextField("Email", "Type your email address", false),
               // buildTextField("Phone Number", "Type your phone number", false),
               // buildTextField("Location", "Type your location", false),
@@ -115,35 +116,57 @@ class _ProfileState extends State<Profile> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      final newname = _newname.text;
-
-                      if (newname.isEmpty) {
+                      final newemail = _newemail.text;
+                      if (newemail.isEmpty) {
                         await showErrorDialog(
                           context,
-                          'name cant be blank',
+                          'email cant be blank',
                         );
                       } else {
-                        await FirebaseAuth.instance.currentUser
-                            ?.updateDisplayName(newname);
-                        await FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(FirebaseAuth.instance.currentUser?.uid)
-                            .set({
-                          "name": newname,
-                          "email": FirebaseAuth.instance.currentUser?.email,
-                          "id": FirebaseAuth.instance.currentUser?.uid,
-                          // "image": FirebaseAuth.instance.currentUser?.image,
-                        });
+                        try {
+                          await FirebaseAuth.instance.currentUser
+                              ?.updateEmail(newemail.trim());
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(FirebaseAuth.instance.currentUser?.uid)
+                              .set({
+                            "name":
+                                FirebaseAuth.instance.currentUser?.displayName,
+                            "email": newemail.trim(),
+                            "id": FirebaseAuth.instance.currentUser?.uid,
+                            // "image": FirebaseAuth.instance.currentUser?.image,
+                          });
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'email-already-in-use') {
+                            await showErrorDialog(
+                              context,
+                              'The email is already in use',
+                            );
+                            emailChangeFailed = true;
+                          } else if (e.code == 'invalid-email') {
+                            await showErrorDialog(
+                              context,
+                              'invalid email',
+                            );
+                            emailChangeFailed = true;
+                          } else {
+                            await showErrorDialog(
+                              context,
+                              'email change failed',
+                            );
 
-                        //then goes to boiler page
-                        Navigator.of(context).pushAndRemoveUntil(
-                          CupertinoPageRoute(
-                            builder: (BuildContext context) {
-                              return const Boiler();
-                            },
-                          ),
-                          (route) => false,
-                        );
+                            emailChangeFailed = true;
+                          }
+                        }
+
+                        if (emailChangeFailed == false) {
+                          //then goes to boiler page
+                          await AuthService.firebase().logOut();
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            loginRoute,
+                            (route) => false,
+                          );
+                        }
                       }
                     },
                     // ignore: sort_child_properties_last
@@ -172,7 +195,8 @@ class _ProfileState extends State<Profile> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: TextField(
-        controller: _newname,
+        controller: _newemail,
+        keyboardType: TextInputType.emailAddress,
         obscureText: isPasswordTextField ? isObscurePassword : false,
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
