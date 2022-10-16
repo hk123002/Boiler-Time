@@ -5,6 +5,7 @@ import 'dart:developer' as devtools show log;
 import 'package:boiler_time/views/widgets/postcards.dart';
 
 import '../../enums/menu_action.dart';
+import '../main_view.dart';
 
 class Community extends StatefulWidget {
   const Community({super.key});
@@ -17,6 +18,9 @@ class _communityState extends State<Community> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Community'),
+      ),
       body: ListView.builder(
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
@@ -44,3 +48,4 @@ class _communityState extends State<Community> {
 //     );
 //   }
 // }
+
