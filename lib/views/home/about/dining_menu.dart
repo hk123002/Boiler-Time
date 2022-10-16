@@ -24,7 +24,7 @@ class DiningMenu extends StatelessWidget {
                 subtitle: Text('Example Sub Title'),
                 trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.restaurant_menu,
                   size: 30,
                 ),
                 contentPadding: EdgeInsets.all(10),
@@ -41,7 +41,7 @@ class DiningMenu extends StatelessWidget {
                 subtitle: Text('Example Sub Title'),
                 trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.restaurant_menu,
                   size: 30,
                 ),
                 contentPadding: EdgeInsets.all(10),
@@ -58,7 +58,7 @@ class DiningMenu extends StatelessWidget {
                 subtitle: Text('Example Sub Title'),
                 trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.restaurant_menu,
                   size: 30,
                 ),
                 contentPadding: EdgeInsets.all(10),
@@ -75,7 +75,7 @@ class DiningMenu extends StatelessWidget {
                 subtitle: Text('Example Sub Title'),
                 trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.restaurant_menu,
                   size: 30,
                 ),
                 contentPadding: EdgeInsets.all(10),
@@ -92,7 +92,7 @@ class DiningMenu extends StatelessWidget {
                 subtitle: Text('Example Sub Title'),
                 trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.restaurant_menu,
                   size: 30,
                 ),
                 contentPadding: EdgeInsets.all(10),
