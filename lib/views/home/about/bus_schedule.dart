@@ -8,7 +8,6 @@ class BusSchedule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bus Schedule')),
       body: Container(
         color: Colors.grey[200],
         padding: EdgeInsets.all(10),
