@@ -103,3 +103,5 @@ https://pub.dev/packages/time_planner
 https://pub.dev/packages/dropdown_button2
 
 https://pub.dev/packages/url_launcher
+
+https://pub.dev/packages/flat_banners/example
