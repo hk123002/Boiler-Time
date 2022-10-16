@@ -21,7 +21,7 @@ class _communityState extends State<Community> {
   final TextEditingController _content = TextEditingController();
 
   final CollectionReference _post =
-      FirebaseFirestore.instance.collection('post').doc('330C4wwRtL1Cj3e3ta9c');
+      FirebaseFirestore.instance.collection('post');
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     await showModalBottomSheet(
@@ -128,7 +128,6 @@ class _communityState extends State<Community> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
           title: const Text('Community'),
         ),
@@ -179,30 +178,5 @@ class _communityState extends State<Community> {
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
-
   }
 }
-
-
-
-
-// class Community extends StatelessWidget {
-//   const Community({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Community"),
-//       ),
-//       body: ListView.builder(
-//         itemCount: 5,
-//         itemBuilder: (BuildContext context, int index) {
-//           return PostCard();
-//         },
-//       ),
-//     );
-//   }
-// }
-
-
