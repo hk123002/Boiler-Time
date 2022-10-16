@@ -625,6 +625,9 @@ class _CalendarViewState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Calendar'),
+      ),
       // resizeToAvoidBottomInset: false,
       body: Center(
         child: TimePlanner(

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import '../../enums/menu_action.dart';
 import '../../services/auth/auth_service.dart';
 import '../../utilities/show_error_dialog.dart';
 
@@ -33,6 +34,50 @@ class _nameEditState extends State<NameEdit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit name'),
+        leading: InkWell(
+          onTap: () {
+            Navigator.of(context).pushAndRemoveUntil(
+              CupertinoPageRoute(
+                builder: (BuildContext context) {
+                  return const Boiler();
+                },
+              ),
+              (route) => false,
+            );
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black54,
+          ),
+        ),
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) async {
+              // switch (value) {
+              //   case MenuAction.logout:
+              //     final shouldLogout = await showLogOutDialog(context);
+              //     if (shouldLogout) {
+              //       await AuthService.firebase().logOut();
+              //       Navigator.of(context).pushNamedAndRemoveUntil(
+              //         loginRoute,
+              //         (route) => false,
+              //       );
+              //     }
+              // }
+            },
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text("Log out"),
+                )
+              ];
+            },
+          )
+        ],
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
         child: GestureDetector(
