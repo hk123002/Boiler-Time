@@ -1,7 +1,8 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_exceptions.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
-import 'package:boiler_time/views/boiler/profile_edit.dart';
+import 'package:boiler_time/views/boiler/email_edit.dart';
+import 'package:boiler_time/views/boiler/name_edit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,27 +19,45 @@ class Boiler extends StatefulWidget {
 
 class _BoilerState extends State<Boiler> {
   bool isObscurePassword = true;
+  String? name;
+  String? email;
+
+  void _getUserData() async {
+    var collection = FirebaseFirestore.instance.collection('users');
+
+    var docSnapshot =
+        await collection.doc(FirebaseAuth.instance.currentUser?.uid).get();
+
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()!;
+
+      // You can then retrieve the value from the Map like this:
+
+      setState(() {
+        name = data['name'];
+
+        email = data['email'];
+      });
+
+      devtools.log(name.toString());
+      devtools.log(email.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _getUserData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // CollectionReference _collectionRef =
-    //     FirebaseFirestore.instance.collection('users');
-
-    // Future<void> getData() async {
-    //   // Get docs from collection reference
-    //   QuerySnapshot querySnapshot = await _collectionRef.get();
-
-    //   // Get data from docs and convert map to List
-    //   final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-
-    //   print(allData);
-    // }
-
-    // var user = getData();
-    // print("===================================");
-    // getData();
-
-    //하다가 맘.. 유저 정보 불러와서 입력하는거 해야함
-
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
@@ -68,6 +87,9 @@ class _BoilerState extends State<Boiler> {
                               fit: BoxFit.cover,
                               image: const NetworkImage(
                                   'https://cdn.pixabay.com/photo/2015/04/08/07/25/fat-712246_1280.png'))),
+
+                      // button for image edit button
+
                       // ),
                       // Positioned(
                       //     bottom: 0,
@@ -89,16 +111,15 @@ class _BoilerState extends State<Boiler> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Text("Name"),
-              const Text("Name"),
-              const Text("Name"),
+              Text("Hello, World!    " + name.toString()),
+              Text(email.toString()),
               const SizedBox(height: 30),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     CupertinoPageRoute(
                       builder: (BuildContext context) {
-                        return const Profile();
+                        return const NameEdit();
                       },
                     ),
                     (route) => false,
@@ -108,38 +129,34 @@ class _BoilerState extends State<Boiler> {
                   //   (route) => false,
                   // );
                 },
-                child: const Text("Edit profile"),
+                child: const Text("Edit name"),
               ),
+
+              //edit email button on development
+
+              // TextButton(
+              //   onPressed: () {
+              //     Navigator.of(context).pushAndRemoveUntil(
+              //       CupertinoPageRoute(
+              //         builder: (BuildContext context) {
+              //           return const EmailEdit();
+              //         },
+              //       ),
+              //       (route) => false,
+              //     );
+              //     // Navigator.of(context).pushNamedAndRemoveUntil(
+              //     //   editprofileRoute,
+              //     //   (route) => false,
+              //     // );
+              //   },
+              //   child: const Text("Edit email"),
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               )
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildTextField(
-      String labelText, String placeholder, bool isPasswordTextField) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: TextField(
-        obscureText: isPasswordTextField ? isObscurePassword : false,
-        decoration: InputDecoration(
-            suffixIcon: isPasswordTextField
-                ? IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
-                  )
-                : null,
-            contentPadding: const EdgeInsets.only(bottom: 5),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            // ignore: prefer_const_constructors
-            hintStyle: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey)),
       ),
     );
   }
