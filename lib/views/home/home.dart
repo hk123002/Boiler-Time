@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
+import '../main_view.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -20,6 +21,9 @@ class _homeViewState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
       body: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,14 +1,19 @@
 import 'package:boiler_time/constants/routes.dart';
+import 'package:boiler_time/main.dart';
 import 'package:boiler_time/services/auth/auth_exceptions.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/auth/login_view.dart';
 import 'package:boiler_time/views/boiler/email_edit.dart';
 import 'package:boiler_time/views/boiler/name_edit.dart';
+import 'package:boiler_time/views/main_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
+
+import '../../enums/menu_action.dart';
 
 class Boiler extends StatefulWidget {
   const Boiler({super.key});
@@ -59,6 +64,9 @@ class _BoilerState extends State<Boiler> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Boiler Time'),
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
         child: GestureDetector(
@@ -131,6 +139,24 @@ class _BoilerState extends State<Boiler> {
                 },
                 child: const Text("Edit name"),
               ),
+              TextButton(
+                onPressed: () async {
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LoginView();
+                        },
+                      ),
+                      (_) => false,
+                    );
+                  }
+                },
+                child: const Text("log out"),
+              ),
 
               //edit email button on development
 
@@ -160,4 +186,27 @@ class _BoilerState extends State<Boiler> {
       ),
     );
   }
+}
+
+Future<bool> showLogOutDialog(BuildContext context) {
+  return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Sign out'),
+          content: const Text('Are you sure you want to sign out?'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: const Text('Cancel')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: const Text('Log out'))
+          ],
+        );
+      }).then((value) => value ?? false);
 }
