@@ -7,8 +7,99 @@ class DiningMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('dining'),
+      appBar: AppBar(title: Text('Dinning Courts Menu')),
+      body: Container(
+        color: Colors.grey[200],
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.amber,
+              ),
+              child: ListTile(
+                title: Text('Earhart'),
+                subtitle: Text('Example Sub Title'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                leading: Icon(
+                  Icons.library_books,
+                  size: 30,
+                ),
+                contentPadding: EdgeInsets.all(10),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.amber,
+              ),
+              child: ListTile(
+                title: Text('Hillenbrand'),
+                subtitle: Text('Example Sub Title'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                leading: Icon(
+                  Icons.library_books,
+                  size: 30,
+                ),
+                contentPadding: EdgeInsets.all(10),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.amber,
+              ),
+              child: ListTile(
+                title: Text('Windsor'),
+                subtitle: Text('Example Sub Title'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                leading: Icon(
+                  Icons.library_books,
+                  size: 30,
+                ),
+                contentPadding: EdgeInsets.all(10),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.amber,
+              ),
+              child: ListTile(
+                title: Text('Wiley'),
+                subtitle: Text('Example Sub Title'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                leading: Icon(
+                  Icons.library_books,
+                  size: 30,
+                ),
+                contentPadding: EdgeInsets.all(10),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.amber,
+              ),
+              child: ListTile(
+                title: Text('Ford'),
+                subtitle: Text('Example Sub Title'),
+                trailing: Icon(Icons.arrow_forward_ios),
+                leading: Icon(
+                  Icons.library_books,
+                  size: 30,
+                ),
+                contentPadding: EdgeInsets.all(10),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
