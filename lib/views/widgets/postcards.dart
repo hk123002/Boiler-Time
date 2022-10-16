@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:boiler_time/helper/demoValues.dart';
 import 'package:boiler_time/views/community/postPage.dart';
+import 'package:boiler_time/views/community/community.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({super.key});
+  const PostCard({super.key, required CircularProgressIndicator child});
 
   @override
   Widget build(BuildContext context) {
@@ -21,29 +22,9 @@ class PostCard extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.all(4.0),
-            child: Column(
-              children: <Widget>[
-                _Post(),
-                Divider(color: Colors.grey),
-                _PostDetails(),
-              ],
-            ),
+            child: Column(),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _Post extends StatelessWidget {
-  const _Post({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: Row(
-        children: <Widget>[_PostImage(), _PostTitleAndSummary()],
       ),
     );
   }
@@ -54,41 +35,16 @@ class _PostTitleAndSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? titleTheme = Theme.of(context).textTheme.titleMedium;
-    final TextStyle? summaryTheme = Theme.of(context).textTheme.bodyMedium;
-    final String title = DemoValues.postTitle;
-    final String summary = DemoValues.postSummary;
+    final TextEditingController _title = TextEditingController();
+    final TextEditingController _content = TextEditingController();
 
     return Expanded(
       flex: 3,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Text(title, style: titleTheme),
-          Text(summary, style: summaryTheme),
-        ],
+        children: const <Widget>[],
       ),
-    );
-  }
-}
-
-class _PostImage extends StatelessWidget {
-  const _PostImage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(flex: 2, child: Image.asset(DemoValues.postImage));
-  }
-}
-
-class _PostDetails extends StatelessWidget {
-  const _PostDetails({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[_UserImage(), _UserNameAndEmail()],
     );
   }
 }
@@ -104,23 +60,9 @@ class _UserNameAndEmail extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(DemoValues.userName),
-          Text(DemoValues.userEmail),
+          //Text(DemoValues.userName),
+          //Text(DemoValues.userEmail),
         ],
-      ),
-    );
-  }
-}
-
-class _UserImage extends StatelessWidget {
-  const _UserImage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: CircleAvatar(
-        backgroundImage: AssetImage(DemoValues.userImage),
       ),
     );
   }
