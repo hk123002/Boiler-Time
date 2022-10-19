@@ -1,11 +1,13 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/community/postPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
-import 'package:boiler_time/views/widgets/postcards.dart';
 
 import '../../enums/menu_action.dart';
+import '../main_view.dart';
 
 class Community extends StatefulWidget {
   const Community({super.key});
@@ -14,13 +16,12 @@ class Community extends StatefulWidget {
   State<Community> createState() => _communityState();
 }
 
+final _post = FirebaseFirestore.instance.collection('post');
+
 class _communityState extends State<Community> {
 // text fields' controllers
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
-
-  final CollectionReference _post =
-      FirebaseFirestore.instance.collection('post').doc('330C4wwRtL1Cj3e3ta9c');
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     await showModalBottomSheet(
@@ -32,7 +33,7 @@ class _communityState extends State<Community> {
                 top: 20,
                 left: 20,
                 right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 50),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +47,7 @@ class _communityState extends State<Community> {
                   decoration: const InputDecoration(labelText: 'Content'),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 ElevatedButton(
                   child: const Text('Create'),
@@ -96,7 +97,7 @@ class _communityState extends State<Community> {
                   decoration: const InputDecoration(labelText: 'Content'),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 ElevatedButton(
                   child: const Text('Update'),
@@ -117,8 +118,8 @@ class _communityState extends State<Community> {
         });
   }
 
-  Future<void> _delete(String productId) async {
-    await _post.doc(productId).delete();
+  Future<void> _delete(String postID) async {
+    await _post.doc(postID).delete();
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('You have successfully deleted a product')));
@@ -165,8 +166,7 @@ class _communityState extends State<Community> {
                 },
               );
             }
-
-            return const PostCard(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           },
