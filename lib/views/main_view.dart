@@ -14,7 +14,8 @@ import '../enums/menu_action.dart';
 import 'package:boiler_time/constants/routes.dart';
 
 class MainView extends StatelessWidget {
-  const MainView({super.key});
+  final int index;
+  const MainView({required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -57,70 +58,79 @@ class MainView extends StatelessWidget {
     }
 
     PersistentTabController controller;
-    controller = PersistentTabController(initialIndex: 0);
+    controller = PersistentTabController(initialIndex: index);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Boiler Time'),
-          actions: [
-            PopupMenuButton(
-              onSelected: (value) async {
-                switch (value) {
-                  case MenuAction.logout:
-                    final shouldLogout = await showLogOutDialog(context);
-                    if (shouldLogout) {
-                      await AuthService.firebase().logOut();
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        loginRoute,
-                        (route) => false,
-                      );
-                    }
-                }
-              },
-              itemBuilder: (context) {
-                return const [
-                  PopupMenuItem<MenuAction>(
-                    value: MenuAction.logout,
-                    child: Text("Log out"),
-                  )
-                ];
-              },
-            )
-          ],
-        ),
+        // appBar: AppBar(
+        //   title: const Text('Boiler Time'),
+        //   leading: InkWell(
+        //     onTap: () {
+        //       // Navigator.pop(context);
+        //     },
+        //     child: Icon(
+        //       Icons.arrow_back_ios,
+        //       color: Colors.black54,
+        //     ),
+        //   ),
+        //   actions: [
+        //     PopupMenuButton(
+        //       onSelected: (value) async {
+        //         switch (value) {
+        //           case MenuAction.logout:
+        //             final shouldLogout = await showLogOutDialog(context);
+        //             if (shouldLogout) {
+        //               await AuthService.firebase().logOut();
+        //               Navigator.of(context).pushNamedAndRemoveUntil(
+        //                 loginRoute,
+        //                 (route) => false,
+        //               );
+        //             }
+        //         }
+        //       },
+        //       itemBuilder: (context) {
+        //         return const [
+        //           PopupMenuItem<MenuAction>(
+        //             value: MenuAction.logout,
+        //             child: Text("Log out"),
+        //           )
+        //         ];
+        //       },
+        //     )
+        //   ],
+        // ),
         body: PersistentTabView(
-          context,
-          controller: controller,
-          screens: _buildScreens(),
-          items: _navBarsItems(),
-          confineInSafeArea: true,
-          backgroundColor: Colors.white, // Default is Colors.white.
-          handleAndroidBackButtonPress: true, // Default is true.
-          // resizeToAvoidBottomInset:
-          //     true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-          stateManagement: true, // Default is true.
-          hideNavigationBarWhenKeyboardShows:
-              true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-          decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            colorBehindNavBar: Colors.white,
-          ),
-          popAllScreensOnTapOfSelectedTab: true,
-          popActionScreens: PopActionScreensType.all,
-          itemAnimationProperties: const ItemAnimationProperties(
-            // Navigation Bar's items animation properties.
-            duration: Duration(milliseconds: 200),
-            curve: Curves.ease,
-          ),
-          screenTransitionAnimation: const ScreenTransitionAnimation(
-            // Screen transition animation on change of selected tab.
-            animateTabTransition: true,
-            curve: Curves.ease,
-            duration: Duration(milliseconds: 200),
-          ),
-          navBarStyle: NavBarStyle
-              .style6, // Choose the nav bar style with this property.
-        ));
+      context,
+      controller: controller,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      // resizeToAvoidBottomInset:
+      //     true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows:
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: const ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle:
+          NavBarStyle.style6, // Choose the nav bar style with this property.
+    ));
   }
 }
 
@@ -268,26 +278,3 @@ class profilescreen extends StatelessWidget {
 //     );
 //   }
 // }
-
-Future<bool> showLogOutDialog(BuildContext context) {
-  return showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Sign out'),
-          content: const Text('Are you sure you want to sign out?'),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text('Cancel')),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: const Text('Log out'))
-          ],
-        );
-      }).then((value) => value ?? false);
-}

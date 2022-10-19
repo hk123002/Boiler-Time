@@ -5,6 +5,7 @@ import 'package:boiler_time/views/auth/login_view.dart';
 import 'package:boiler_time/views/main_view.dart';
 import 'package:boiler_time/views/auth/register_view.dart';
 import 'package:boiler_time/views/auth/verify_email_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
@@ -21,7 +22,7 @@ void main() {
     routes: {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      mainRoute: (context) => const MainView(),
+      mainRoute: (context) => const MainView(index: 0),
       verifyEmailRoute: (context) => const VerifyEmailView(),
       forgotPasswordRoute: ((context) => const ForgotPasswordView()),
     },
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
             if (user != null) {
               devtools.log(user.toString());
               if (user.isEmailVerified) {
-                return const MainView();
+                return const MainView(index: 0);
               } else {
                 return const VerifyEmailView();
               }
