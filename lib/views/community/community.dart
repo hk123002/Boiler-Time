@@ -16,19 +16,14 @@ class Community extends StatefulWidget {
   State<Community> createState() => _communityState();
 }
 
-final _post = FirebaseFirestore.instance.collection('post');
+//final _post = FirebaseFirestore.instance.collection('post');
+final CollectionReference _post = FirebaseFirestore.instance.collection('post');
 
 class _communityState extends State<Community> {
 // text fields' controllers
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
 
-<<<<<<< HEAD
-=======
-  final CollectionReference _post =
-      FirebaseFirestore.instance.collection('post');
-
->>>>>>> 3eeffd4a987d834bc49627d3bd591ba3d2393ec4
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     await showModalBottomSheet(
         isScrollControlled: true,
@@ -39,7 +34,7 @@ class _communityState extends State<Community> {
                 top: 20,
                 left: 20,
                 right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 50),
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,3 +180,27 @@ class _communityState extends State<Community> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
 }
+
+
+
+
+// class Community extends StatelessWidget {
+//   const Community({Key key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Community"),
+//       ),
+//       body: ListView.builder(
+//         itemCount: 5,
+//         itemBuilder: (BuildContext context, int index) {
+//           return PostCard();
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
