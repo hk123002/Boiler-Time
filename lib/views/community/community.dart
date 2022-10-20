@@ -1,11 +1,13 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
-import 'package:boiler_time/widgets/postcards.dart';
+import 'package:boiler_time/views/community/postPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
+import '../main_view.dart';
 
 class Community extends StatefulWidget {
   const Community({super.key});
@@ -16,11 +18,25 @@ class Community extends StatefulWidget {
 
 class _communityState extends State<Community> {
 // text fields' controllers
-  final TextEditingController _title = TextEditingController();
-  final TextEditingController _content = TextEditingController();
 
-  final CollectionReference _post =
-      FirebaseFirestore.instance.collection('post');
+  late final TextEditingController _title;
+  late final TextEditingController _content;
+  final _post = FirebaseFirestore.instance.collection('post');
+
+  @override
+  void initState() {
+    _title = TextEditingController();
+    _content = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _title.dispose();
+    _content.dispose();
+    super.dispose();
+  }
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     await showModalBottomSheet(
@@ -32,7 +48,7 @@ class _communityState extends State<Community> {
                 top: 20,
                 left: 20,
                 right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 50),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +62,7 @@ class _communityState extends State<Community> {
                   decoration: const InputDecoration(labelText: 'Content'),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 ElevatedButton(
                   child: const Text('Create'),
@@ -96,7 +112,7 @@ class _communityState extends State<Community> {
                   decoration: const InputDecoration(labelText: 'Content'),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 ElevatedButton(
                   child: const Text('Update'),
@@ -117,8 +133,8 @@ class _communityState extends State<Community> {
         });
   }
 
-  Future<void> _delete(String productId) async {
-    await _post.doc(productId).delete();
+  Future<void> _delete(String postID) async {
+    await _post.doc(postID).delete();
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('You have successfully deleted a product')));
@@ -138,7 +154,7 @@ class _communityState extends State<Community> {
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return ListView.builder(
-                itemCount: 5,
+                itemCount: streamSnapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];
@@ -165,8 +181,7 @@ class _communityState extends State<Community> {
                 },
               );
             }
-
-            return const PostCard(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           },
@@ -179,26 +194,3 @@ class _communityState extends State<Community> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
 }
-
-
-
-
-// class Community extends StatelessWidget {
-//   const Community({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Community"),
-//       ),
-//       body: ListView.builder(
-//         itemCount: 5,
-//         itemBuilder: (BuildContext context, int index) {
-//           return PostCard();
-//         },
-//       ),
-//     );
-//   }
-// }
-
