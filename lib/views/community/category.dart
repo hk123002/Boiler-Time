@@ -10,39 +10,44 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Community"),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(
-              child: const Text('Exam'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Exam()),
-                );
-              }),
-          ElevatedButton(
-              child: const Text('Rate My Professor'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RateMyProfessor()),
-                );
-              }),
-          ElevatedButton(
-              child: const Text('Miscellaneous'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Miscellaneous()),
-                );
-              })
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text("Community"),
+        ),
+        body: Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  child: const Text('Exam'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Exam()),
+                    );
+                  }),
+              ElevatedButton(
+                  child: const Text('Rate My Professor'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RateMyProfessor()),
+                    );
+                  }),
+              ElevatedButton(
+                  child: const Text('Miscellaneous'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Miscellaneous()),
+                    );
+                  })
+            ],
+          ),
+        ));
   }
 }
