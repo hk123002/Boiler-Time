@@ -1,6 +1,6 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
-import 'package:boiler_time/views/community/community.dart';
+import 'package:boiler_time/views/community/exam.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 

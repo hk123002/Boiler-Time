@@ -9,17 +9,17 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../main_view.dart';
 
-class Community extends StatefulWidget {
-  const Community({super.key});
+class RateMyProfessor extends StatefulWidget {
+  const RateMyProfessor({super.key});
 
   @override
-  State<Community> createState() => _communityState();
+  State<RateMyProfessor> createState() => _communityState();
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
 final CollectionReference _post = FirebaseFirestore.instance.collection('post');
 
-class _communityState extends State<Community> {
+class _communityState extends State<RateMyProfessor> {
 // text fields' controllers
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
@@ -130,7 +130,7 @@ class _communityState extends State<Community> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Community'),
+          title: const Text('Rate My Professor'),
         ),
         //body: ListView.builder(
         //itemCount: 5,
@@ -180,27 +180,3 @@ class _communityState extends State<Community> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
 }
-
-
-
-
-// class Community extends StatelessWidget {
-//   const Community({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Community"),
-//       ),
-//       body: ListView.builder(
-//         itemCount: 5,
-//         itemBuilder: (BuildContext context, int index) {
-//           return PostCard();
-//         },
-//       ),
-//     );
-//   }
-// }
-
-
