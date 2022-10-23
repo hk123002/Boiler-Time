@@ -34,25 +34,25 @@ class MainView extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.add_business),
           title: ("Home"),
-          activeColorPrimary: Colors.amber,
+          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.monitor_sharp),
           title: ("Community"),
-          activeColorPrimary: Colors.amber,
+          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.calendar_month),
           title: ("Calendar"),
-          activeColorPrimary: Colors.amber,
+          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.people),
           title: ("Boilers"),
-          activeColorPrimary: Colors.amber,
+          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
       ];
@@ -62,43 +62,6 @@ class MainView extends StatelessWidget {
     controller = PersistentTabController(initialIndex: index);
 
     return Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Boiler Time'),
-        //   leading: InkWell(
-        //     onTap: () {
-        //       // Navigator.pop(context);
-        //     },
-        //     child: Icon(
-        //       Icons.arrow_back_ios,
-        //       color: Colors.black54,
-        //     ),
-        //   ),
-        //   actions: [
-        //     PopupMenuButton(
-        //       onSelected: (value) async {
-        //         switch (value) {
-        //           case MenuAction.logout:
-        //             final shouldLogout = await showLogOutDialog(context);
-        //             if (shouldLogout) {
-        //               await AuthService.firebase().logOut();
-        //               Navigator.of(context).pushNamedAndRemoveUntil(
-        //                 loginRoute,
-        //                 (route) => false,
-        //               );
-        //             }
-        //         }
-        //       },
-        //       itemBuilder: (context) {
-        //         return const [
-        //           PopupMenuItem<MenuAction>(
-        //             value: MenuAction.logout,
-        //             child: Text("Log out"),
-        //           )
-        //         ];
-        //       },
-        //     )
-        //   ],
-        // ),
         body: PersistentTabView(
       context,
       controller: controller,
@@ -170,112 +133,3 @@ class profilescreen extends StatelessWidget {
     return const Boiler();
   }
 }
-
-// class MainView extends StatefulWidget {
-//   const MainView({super.key});
-
-//   @override
-//   State<MainView> createState() => _MainViewState();
-// }
-
-// class _MainViewState extends State<MainView> {
-//   int _selectedIndex = 0;
-//   static const TextStyle optionStyle =
-//       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-//   static const List<Widget> _widgetOptions = <Widget>[
-//     Text(
-//       'Index 0: Market',
-//       style: optionStyle,
-//     ),
-//     Text(
-//       'Index 1: Community',
-//       style: optionStyle,
-//     ),
-//     Text(
-//       'Index 2: Chat',
-//       style: optionStyle,
-//     ),
-//     Text(
-//       'Index 3: Profile',
-//       style: optionStyle,
-//     ),
-//   ];
-
-// void _onItemTapped(int index) {
-//   setState(() {
-//     _selectedIndex = index;
-//   });
-// }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Main UI'),
-//         actions: [
-//           PopupMenuButton(
-//             onSelected: (value) async {
-//               switch (value) {
-//                 case MenuAction.logout:
-//                   final shouldLogout = await showLogOutDialog(context);
-//                   if (shouldLogout) {
-//                     await AuthService.firebase().logOut();
-//                     Navigator.of(context).pushNamedAndRemoveUntil(
-//                       loginRoute,
-//                       (route) => false,
-//                     );
-//                   }
-//               }
-//             },
-//             itemBuilder: (context) {
-//               return const [
-//                 PopupMenuItem<MenuAction>(
-//                   value: MenuAction.logout,
-//                   child: Text("Log out"),
-//                 )
-//               ];
-//             },
-//           )
-//         ],
-//       ),
-//       body: Center(
-//         child: _widgetOptions.elementAt(_selectedIndex),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: () {
-//           // Add your onPressed code here!
-//         },
-//         backgroundColor: Colors.amber,
-//         child: const Icon(Icons.add),
-//       ),
-//       bottomNavigationBar: BottomNavigationBar(
-//         items: const <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(
-//             backgroundColor: Colors.amber,
-//             icon: Icon(Icons.add_business),
-//             label: 'Market',
-//           ),
-//           BottomNavigationBarItem(
-//             backgroundColor: Colors.amber,
-//             icon: Icon(Icons.monitor_sharp),
-//             label: 'Community',
-//           ),
-//           BottomNavigationBarItem(
-//             backgroundColor: Colors.amber,
-//             icon: Icon(Icons.message),
-//             label: 'Chat',
-//           ),
-//           BottomNavigationBarItem(
-//             backgroundColor: Colors.amber,
-//             icon: Icon(Icons.people),
-//             label: 'Profile',
-//           ),
-//         ],
-//         currentIndex: _selectedIndex,
-//         selectedItemColor: Colors.black,
-//         onTap: _onItemTapped,
-//       ),
-//     );
-//   }
-// }

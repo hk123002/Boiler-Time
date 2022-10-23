@@ -42,6 +42,7 @@ class Category extends StatelessWidget {
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Color(0x00000000),
+
                   ),
                   child: const ListTile(
                     title: Text('Rate My Professor'),
