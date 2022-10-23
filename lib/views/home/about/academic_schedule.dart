@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:time_planner/time_planner.dart';
 
 class AcademicSchedule extends StatelessWidget {
   const AcademicSchedule({super.key});
