@@ -27,6 +27,9 @@ class Category extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Exam'),
                   ),
@@ -37,6 +40,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Rate My Professor'),
                   ),
@@ -48,6 +54,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Miscellaneous'),
                   ),
@@ -59,6 +68,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Alumni'),
                   ),
@@ -69,6 +81,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Senior'),
                   ),
@@ -79,6 +94,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Junior'),
                   ),
@@ -89,6 +107,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Sophomore'),
                   ),
@@ -100,6 +121,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Freshman'),
                   ),
@@ -110,6 +134,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Job Search'),
                   ),
@@ -121,6 +148,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Internship'),
                   ),
