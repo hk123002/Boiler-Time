@@ -105,11 +105,7 @@ class _CalendarViewState extends State<Calendar> {
   //add new schedule
   void _addObject(BuildContext context) {
     List<Color?> colors = [
-      Colors.purple,
-      Colors.blue,
-      Colors.green,
-      Colors.orange,
-      Colors.lime[600]
+      Color.fromARGB(255, 193, 155, 200),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -191,11 +187,7 @@ class _CalendarViewState extends State<Calendar> {
     String endTimeHint,
   ) {
     List<Color?> colors = [
-      Colors.purple,
-      Colors.blue,
-      Colors.green,
-      Colors.orange,
-      Colors.lime[600]
+      Color.fromARGB(255, 193, 155, 200),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -293,11 +285,7 @@ class _CalendarViewState extends State<Calendar> {
   Future<void> _intialize(BuildContext context) async {
     tasks.clear();
     List<Color?> colors = [
-      Colors.purple,
-      Colors.blue,
-      Colors.green,
-      Colors.orange,
-      Colors.lime[600]
+      Color.fromARGB(255, 193, 155, 200),
     ];
 
     devtools.log("--------------------------");
