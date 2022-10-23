@@ -23,7 +23,7 @@ class AcademicSchedule extends StatelessWidget {
       title: 'Time planner Demo',
       scrollBehavior: MyCustomScrollBehavior(),
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const MyHomePage(title: 'Time planner'),
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: Text(
             'this is a demo',
-            style: TextStyle(color: Colors.grey[350], fontSize: 12),
+            style: TextStyle(color: Colors.grey[250], fontSize: 5),
           ),
         ),
       );
