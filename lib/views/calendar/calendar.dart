@@ -625,6 +625,7 @@ class _CalendarViewState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         title: const Text('Calendar'),
       ),

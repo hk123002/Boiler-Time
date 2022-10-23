@@ -26,7 +26,6 @@ class _homeViewState extends State<home> {
         title: const Text('Home'),
       ),
       body: Wrap(children: [
-        Image.asset('logo.png'),
         Center(
           child: Container(
             child: FlatBanners(
@@ -86,12 +85,16 @@ class _homeViewState extends State<home> {
                 );
               },
             ),
-            IconButton(
-              icon: Icon(Icons.ad_units),
-              iconSize: 50.0,
-              onPressed: () async {
-                //brightspace
-              },
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(
+              child: ListTile(
+                title: Text('One-line with leading widget'),
+              ),
+              onPressed: () => {},
             ),
           ],
         ),

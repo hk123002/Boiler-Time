@@ -8,34 +8,20 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../main_view.dart';
 
-class Community extends StatefulWidget {
-  const Community({super.key});
+class Exam extends StatefulWidget {
+  const Exam({super.key});
 
   @override
-  State<Community> createState() => _communityState();
+  State<Exam> createState() => _communityState();
 }
 
-class _communityState extends State<Community> {
+//final _post = FirebaseFirestore.instance.collection('post');
+final CollectionReference _post = FirebaseFirestore.instance.collection('post');
+
+class _communityState extends State<Exam> {
 // text fields' controllers
-
-  late final TextEditingController _title;
-  late final TextEditingController _content;
-  final _post = FirebaseFirestore.instance.collection('post');
-
-  @override
-  void initState() {
-    _title = TextEditingController();
-    _content = TextEditingController();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _title.dispose();
-    _content.dispose();
-    super.dispose();
-  }
+  final TextEditingController _title = TextEditingController();
+  final TextEditingController _content = TextEditingController();
 
   Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
     await showModalBottomSheet(
@@ -47,7 +33,7 @@ class _communityState extends State<Community> {
                 top: 20,
                 left: 20,
                 right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 50),
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +129,7 @@ class _communityState extends State<Community> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Community'),
+          title: const Text('Exam'),
         ),
         //body: ListView.builder(
         //itemCount: 5,
