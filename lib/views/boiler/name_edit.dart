@@ -37,22 +37,6 @@ class _nameEditState extends State<NameEdit> {
       appBar: AppBar(
         toolbarHeight: 40,
         title: const Text('Edit name'),
-        leading: InkWell(
-          onTap: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              CupertinoPageRoute(
-                builder: (BuildContext context) {
-                  return const Boiler();
-                },
-              ),
-              (route) => false,
-            );
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black54,
-          ),
-        ),
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
