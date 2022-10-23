@@ -8,6 +8,7 @@ class LibraryTime extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         title: const Text('library'),
         leading: InkWell(
           onTap: () {
@@ -28,7 +29,7 @@ class LibraryTime extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: const ExpansionTile(
                 title: Text('Wilmeth Active Learning Center (WALC)'),
@@ -50,7 +51,7 @@ class LibraryTime extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: const ExpansionTile(
                 title: Text('Hicks Undergraduate Library'),
@@ -72,7 +73,7 @@ class LibraryTime extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: const ExpansionTile(
                 title: Text('Parrish Library of Management & Economics'),
@@ -94,7 +95,7 @@ class LibraryTime extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: const ExpansionTile(
                 title: Text('West Lafayette LIbrary'),

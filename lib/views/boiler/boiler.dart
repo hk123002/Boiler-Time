@@ -65,7 +65,12 @@ class _BoilerState extends State<Boiler> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Boiler Time'),
+        toolbarHeight: 40,
+        leading: Icon(Icons.stop_circle_outlined),
+        // title: Text(
+        //   "Purdue Univ",
+        //   style: TextStyle(fontStyle: FontStyle.italic),
+        // ),
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
@@ -100,7 +105,10 @@ class _BoilerState extends State<Boiler> {
                 ),
               ),
               const SizedBox(height: 30),
-              Text("Hello, World!    " + name.toString()),
+              Text(
+                "Hello, World!    " + name.toString(),
+                style: TextStyle(fontSize: 20),
+              ),
               Text(email.toString()),
               const SizedBox(height: 30),
               TextButton(

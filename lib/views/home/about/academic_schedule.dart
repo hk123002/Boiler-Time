@@ -19,6 +19,7 @@ class AcademicSchedule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Time planner Demo',
       scrollBehavior: MyCustomScrollBehavior(),
