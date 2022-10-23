@@ -162,7 +162,7 @@ class _CalendarViewState extends State<Calendar> {
         TimePlannerTask(
           color: colors[Random().nextInt(colors.length)],
           dateTime: TimePlannerDateTime(
-              day: day, hour: startHourmin[0], minutes: startHourmin[1]),
+              day: day, hour: startHourmin[0] + 1, minutes: startHourmin[1]),
           minutesDuration: duration,
           onTap: () => {},
           child: Text(
@@ -356,8 +356,8 @@ class _CalendarViewState extends State<Calendar> {
           tasks.add(
             TimePlannerTask(
               color: colors[Random().nextInt(colors.length)],
-              dateTime:
-                  TimePlannerDateTime(day: day, hour: hour, minutes: minute),
+              dateTime: TimePlannerDateTime(
+                  day: day, hour: hour + 1, minutes: minute),
               minutesDuration: duration,
               onTap: () async {
                 await showDialog<void>(
