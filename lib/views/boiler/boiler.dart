@@ -95,25 +95,6 @@ class _BoilerState extends State<Boiler> {
                               fit: BoxFit.cover,
                               image: const NetworkImage(
                                   'https://cdn.pixabay.com/photo/2015/04/08/07/25/fat-712246_1280.png'))),
-
-                      // button for image edit button
-
-                      // ),
-                      // Positioned(
-                      //     bottom: 0,
-                      //     right: 0,
-                      //     child: Container(
-                      //       height: 40,
-                      //       width: 40,
-                      //       decoration: BoxDecoration(
-                      //           shape: BoxShape.circle,
-                      //           border: Border.all(width: 4, color: Colors.white),
-                      //           color: Colors.amber),
-                      //       child: Icon(
-                      //         Icons.edit,
-                      //         color: Colors.white,
-                      //       ),
-                      //     ))
                     )
                   ],
                 ),
@@ -132,10 +113,6 @@ class _BoilerState extends State<Boiler> {
                     ),
                     (route) => false,
                   );
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //   editprofileRoute,
-                  //   (route) => false,
-                  // );
                 },
                 child: const Text("Edit name"),
               ),
@@ -157,26 +134,6 @@ class _BoilerState extends State<Boiler> {
                 },
                 child: const Text("log out"),
               ),
-
-              //edit email button on development
-
-              // TextButton(
-              //   onPressed: () {
-              //     Navigator.of(context).pushAndRemoveUntil(
-              //       CupertinoPageRoute(
-              //         builder: (BuildContext context) {
-              //           return const EmailEdit();
-              //         },
-              //       ),
-              //       (route) => false,
-              //     );
-              //     // Navigator.of(context).pushNamedAndRemoveUntil(
-              //     //   editprofileRoute,
-              //     //   (route) => false,
-              //     // );
-              //   },
-              //   child: const Text("Edit email"),
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               )
@@ -197,10 +154,11 @@ Future<bool> showLogOutDialog(BuildContext context) {
           content: const Text('Are you sure you want to sign out?'),
           actions: [
             TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text('Cancel')),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('Cancel'),
+            ),
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(true);
