@@ -123,8 +123,8 @@ class _communityState extends State<Intern> {
   Future<void> _delete(String internID) async {
     await _intern.doc(internID).delete();
 
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('You have successfully deleted a product')));
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You have successfully deleted a post')));
   }
 
   @override
