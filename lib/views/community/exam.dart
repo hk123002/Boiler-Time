@@ -17,7 +17,7 @@ class Exam extends StatefulWidget {
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
-final CollectionReference _post = FirebaseFirestore.instance.collection('post');
+final CollectionReference _exam = FirebaseFirestore.instance.collection('exam');
 
 class _communityState extends State<Exam> {
 // text fields' controllers
@@ -56,7 +56,7 @@ class _communityState extends State<Exam> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _post.add({"Title": title, "Content": content});
+                    await _exam.add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -106,7 +106,7 @@ class _communityState extends State<Exam> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _post.add({"Title": title, "Content": content});
+                    await _exam.add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -119,8 +119,8 @@ class _communityState extends State<Exam> {
         });
   }
 
-  Future<void> _delete(String postID) async {
-    await _post.doc(postID).delete();
+  Future<void> _delete(String examID) async {
+    await _exam.doc(examID).delete();
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('You have successfully deleted a product')));
@@ -136,7 +136,7 @@ class _communityState extends State<Exam> {
         //itemCount: 5,
         //itemBuilder: (BuildContext context, int index) {
         body: StreamBuilder(
-          stream: _post.snapshots(),
+          stream: _exam.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return ListView.builder(

@@ -17,7 +17,8 @@ class RateMyProfessor extends StatefulWidget {
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
-final CollectionReference _post = FirebaseFirestore.instance.collection('post');
+final CollectionReference _ratemyprofessor =
+    FirebaseFirestore.instance.collection("ratemyprofessor");
 
 class _communityState extends State<RateMyProfessor> {
 // text fields' controllers
@@ -56,7 +57,8 @@ class _communityState extends State<RateMyProfessor> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _post.add({"Title": title, "Content": content});
+                    await _ratemyprofessor
+                        .add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -106,7 +108,8 @@ class _communityState extends State<RateMyProfessor> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _post.add({"Title": title, "Content": content});
+                    await _ratemyprofessor
+                        .add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -119,8 +122,8 @@ class _communityState extends State<RateMyProfessor> {
         });
   }
 
-  Future<void> _delete(String postID) async {
-    await _post.doc(postID).delete();
+  Future<void> _delete(String ratemyprofessorID) async {
+    await _ratemyprofessor.doc(ratemyprofessorID).delete();
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('You have successfully deleted a product')));
@@ -136,7 +139,7 @@ class _communityState extends State<RateMyProfessor> {
         //itemCount: 5,
         //itemBuilder: (BuildContext context, int index) {
         body: StreamBuilder(
-          stream: _post.snapshots(),
+          stream: _ratemyprofessor.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return ListView.builder(

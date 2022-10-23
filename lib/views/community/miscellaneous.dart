@@ -17,7 +17,8 @@ class Miscellaneous extends StatefulWidget {
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
-final CollectionReference _post = FirebaseFirestore.instance.collection('post');
+final CollectionReference _miscellaneous =
+    FirebaseFirestore.instance.collection("miscellaneous");
 
 class _communityState extends State<Miscellaneous> {
 // text fields' controllers
@@ -56,7 +57,8 @@ class _communityState extends State<Miscellaneous> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _post.add({"Title": title, "Content": content});
+                    await _miscellaneous
+                        .add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -106,7 +108,8 @@ class _communityState extends State<Miscellaneous> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _post.add({"Title": title, "Content": content});
+                    await _miscellaneous
+                        .add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -119,8 +122,8 @@ class _communityState extends State<Miscellaneous> {
         });
   }
 
-  Future<void> _delete(String postID) async {
-    await _post.doc(postID).delete();
+  Future<void> _delete(String miscellaneousID) async {
+    await _miscellaneous.doc(miscellaneousID).delete();
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('You have successfully deleted a product')));
@@ -136,7 +139,7 @@ class _communityState extends State<Miscellaneous> {
         //itemCount: 5,
         //itemBuilder: (BuildContext context, int index) {
         body: StreamBuilder(
-          stream: _post.snapshots(),
+          stream: _miscellaneous.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return ListView.builder(
