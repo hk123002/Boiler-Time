@@ -29,7 +29,7 @@ class DiningMenu extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.amber,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: ListTile(
                 title: Text('Earhart'),
@@ -52,7 +52,7 @@ class DiningMenu extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.amber,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: ListTile(
                 title: Text('Hillenbrand'),
@@ -76,7 +76,7 @@ class DiningMenu extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.amber,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: ListTile(
                 title: Text('Windsor'),
@@ -99,7 +99,7 @@ class DiningMenu extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.amber,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: ListTile(
                 title: Text('Wiley'),
@@ -122,7 +122,7 @@ class DiningMenu extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.amber,
+                color: Color.fromARGB(169, 52, 45, 53),
               ),
               child: ListTile(
                 title: Text('Ford'),
