@@ -134,6 +134,7 @@ class _communityState extends State<RateMyProfessor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 40,
           title: const Text('Rate My Professor'),
         ),
         //body: ListView.builder(

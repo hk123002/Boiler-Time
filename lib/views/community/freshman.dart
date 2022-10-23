@@ -131,6 +131,7 @@ class _communityState extends State<Freshman> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 40,
           title: const Text('Freshman'),
         ),
         //body: ListView.builder(

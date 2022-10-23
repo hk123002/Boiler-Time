@@ -134,6 +134,7 @@ class _communityState extends State<Miscellaneous> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 40,
           title: const Text('Miscellaneous'),
         ),
         //body: ListView.builder(

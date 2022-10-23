@@ -19,149 +19,171 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Community"),
+          toolbarHeight: 40,
+          leading: Icon(Icons.stop_circle_outlined),
+          // title: Text(
+          //   "Purdue Univ",
+          //   style: TextStyle(fontStyle: FontStyle.italic),
+          // ),
         ),
-        body: Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Exam'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Exam()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-
-                  ),
-                  child: const ListTile(
-                    title: Text('Rate My Professor'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const RateMyProfessor()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Miscellaneous'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Miscellaneous()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Alumni'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Alumni()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Senior'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Senior()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Junior'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Junior()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Sophomore'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Sophomore()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Freshman'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Freshman()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Job Search'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const JobSearch()),
-                    );
-                  }),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0x00000000),
-                  ),
-                  child: const ListTile(
-                    title: Text('Internship'),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Intern()),
-                    );
-                  }),
-            ],
+        body: SingleChildScrollView(
+          child: Align(
+            alignment: Alignment.center,
+            child: Container(
+              margin: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(3.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Color.fromARGB(255, 131, 124, 132)),
+                borderRadius: BorderRadius.all(Radius.circular(
+                        5.0) //                 <--- border radius here
+                    ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text("community"),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Exam'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Exam()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Rate My Professor'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RateMyProfessor()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Miscellaneous'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Miscellaneous()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Alumni'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Alumni()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Senior'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Senior()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Junior'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Junior()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Sophomore'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Sophomore()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Freshman'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Freshman()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Job Search'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const JobSearch()),
+                        );
+                      }),
+                  TextButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0x00000000),
+                      ),
+                      child: const ListTile(
+                        title: Text('Internship'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Intern()),
+                        );
+                      }),
+                ],
+              ),
+            ),
           ),
         ));
   }

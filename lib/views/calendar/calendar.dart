@@ -260,21 +260,7 @@ class _CalendarViewState extends State<Calendar> {
       "schedule": FieldValue.arrayUnion([dbData])
     });
 
-    // setState(() {
-    //   tasks.add(
-    //     TimePlannerTask(
-    //       color: colors[Random().nextInt(colors.length)],
-    //       dateTime: TimePlannerDateTime(
-    //           day: day, hour: startHourmin[0], minutes: startHourmin[1]),
-    //       minutesDuration: duration,
-    //       onTap: () => {},
-    //       child: Text(
-    //         _className.text,
-    //         // style: TextStyle(color: Colors.grey[350], fontSize: 12),
-    //       ),
-    //     ),
-    //   );
-    // });
+    // setStat
 
     _className.text = "";
     selectedDay = null;
@@ -615,7 +601,12 @@ class _CalendarViewState extends State<Calendar> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        title: const Text('Calendar'),
+        toolbarHeight: 40,
+        leading: Icon(Icons.stop_circle_outlined),
+        // title: Text(
+        //   "Purdue Univ",
+        //   style: TextStyle(fontStyle: FontStyle.italic),
+        // ),
       ),
       // resizeToAvoidBottomInset: false,
       body: Center(
