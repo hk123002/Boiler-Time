@@ -1,7 +1,6 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/community/postPage.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,18 +9,18 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../main_view.dart';
 
-class Miscellaneous extends StatefulWidget {
-  const Miscellaneous({super.key});
+class Alumni extends StatefulWidget {
+  const Alumni({super.key});
 
   @override
-  State<Miscellaneous> createState() => _communityState();
+  State<Alumni> createState() => _communityState();
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
-final CollectionReference _miscellaneous =
-    FirebaseFirestore.instance.collection("miscellaneous");
+final CollectionReference _alumni =
+    FirebaseFirestore.instance.collection('alumni');
 
-class _communityState extends State<Miscellaneous> {
+class _communityState extends State<Alumni> {
 // text fields' controllers
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
@@ -58,8 +57,7 @@ class _communityState extends State<Miscellaneous> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _miscellaneous
-                        .add({"Title": title, "Content": content});
+                    await _alumni.add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -109,8 +107,7 @@ class _communityState extends State<Miscellaneous> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _miscellaneous
-                        .add({"Title": title, "Content": content});
+                    await _alumni.add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -123,24 +120,24 @@ class _communityState extends State<Miscellaneous> {
         });
   }
 
-  Future<void> _delete(String miscellaneousID) async {
-    await _miscellaneous.doc(miscellaneousID).delete();
+  Future<void> _delete(String alumniID) async {
+    await _alumni.doc(alumniID).delete();
 
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('You have successfully deleted a product')));
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('You have successfully deleted a post')));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Miscellaneous'),
+          title: const Text('Alumni'),
         ),
         //body: ListView.builder(
         //itemCount: 5,
         //itemBuilder: (BuildContext context, int index) {
         body: StreamBuilder(
-          stream: _miscellaneous.snapshots(),
+          stream: _alumni.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return ListView.builder(

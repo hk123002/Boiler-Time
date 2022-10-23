@@ -115,7 +115,7 @@ class _nameEditState extends State<NameEdit> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(width: 4, color: Colors.white),
-                              color: Colors.amber),
+                              color: Color.fromARGB(255, 193, 155, 200)),
                           child: const Icon(
                             Icons.edit,
                             color: Colors.white,
@@ -195,7 +195,7 @@ class _nameEditState extends State<NameEdit> {
                             letterSpacing: 2,
                             color: Colors.white)),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amber,
+                        backgroundColor: Color.fromARGB(255, 193, 155, 200),
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),

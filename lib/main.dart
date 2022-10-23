@@ -16,7 +16,22 @@ void main() {
   runApp(MaterialApp(
     title: 'Corn Market Demo',
     theme: ThemeData(
-      primarySwatch: Colors.amber,
+      colorScheme: const ColorScheme(
+        brightness: Brightness.dark,
+        surface: Color.fromARGB(169, 52, 45, 53),
+        onSurface: Colors.white,
+        // Colors that are not relevant to AppBar in DARK mode:
+        primary: Color.fromARGB(169, 52, 45, 53),
+        onPrimary: Colors.black,
+        primaryVariant: Colors.blue,
+        secondary: Color.fromARGB(255, 193, 155, 200),
+        secondaryVariant: Colors.orange,
+        onSecondary: Colors.black,
+        background: Colors.green,
+        onBackground: Colors.grey,
+        error: Colors.purple,
+        onError: Colors.black,
+      ),
     ),
     home: const HomePage(),
     routes: {

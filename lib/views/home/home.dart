@@ -23,24 +23,10 @@ class _homeViewState extends State<home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Boiler Time'),
       ),
       body: Wrap(children: [
-        Center(
-          child: Container(
-            child: FlatBanners(
-              imageWidth: 50,
-              gradientColors: [
-                Color.fromARGB(255, 2, 2, 3).withOpacity(0.9),
-                Color.fromARGB(255, 11, 12, 15).withOpacity(0.7),
-              ],
-              title: 'Gen.G Esports',
-              subtitle: 'CHOOOOVY',
-              btnText: 'find out more',
-              image: 'geng.png',
-            ),
-          ),
-        ),
+        Text("hi"),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -86,6 +72,21 @@ class _homeViewState extends State<home> {
               },
             ),
           ],
+        ),
+        Center(
+          child: Container(
+            child: FlatBanners(
+              imageWidth: 50,
+              gradientColors: [
+                Color.fromARGB(255, 2, 2, 3).withOpacity(0.9),
+                Color.fromARGB(255, 11, 12, 15).withOpacity(0.7),
+              ],
+              title: 'Gen.G Esports',
+              subtitle: 'CHOOOOVY',
+              btnText: 'find out more',
+              image: 'geng.png',
+            ),
+          ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
