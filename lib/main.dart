@@ -16,7 +16,7 @@ void main() {
   runApp(MaterialApp(
     title: 'Corn Market Demo',
     theme: ThemeData(
-      primarySwatch: Colors.amber,
+      primarySwatch: Colors.grey,
     ),
     home: const HomePage(),
     routes: {
