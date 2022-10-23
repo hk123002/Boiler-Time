@@ -35,6 +35,7 @@ class _nameEditState extends State<NameEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         title: const Text('Edit name'),
         leading: InkWell(
           onTap: () {
@@ -52,31 +53,6 @@ class _nameEditState extends State<NameEdit> {
             color: Colors.black54,
           ),
         ),
-        actions: [
-          PopupMenuButton(
-            onSelected: (value) async {
-              // switch (value) {
-              //   case MenuAction.logout:
-              //     final shouldLogout = await showLogOutDialog(context);
-              //     if (shouldLogout) {
-              //       await AuthService.firebase().logOut();
-              //       Navigator.of(context).pushNamedAndRemoveUntil(
-              //         loginRoute,
-              //         (route) => false,
-              //       );
-              //     }
-              // }
-            },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<MenuAction>(
-                  value: MenuAction.logout,
-                  child: Text("Log out"),
-                )
-              ];
-            },
-          )
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),

@@ -8,6 +8,7 @@ class DiningMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         title: const Text('dining'),
         leading: InkWell(
           onTap: () {

@@ -131,6 +131,7 @@ class _communityState extends State<Junior> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 40,
           title: const Text('Junior'),
         ),
         //body: ListView.builder(

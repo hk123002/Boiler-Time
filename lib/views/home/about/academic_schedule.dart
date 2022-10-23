@@ -8,6 +8,7 @@ class AcademicSchedule extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         title: const Text('academic schedule'),
         leading: InkWell(
           onTap: () {
