@@ -35,6 +35,15 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       appBar: AppBar(
         toolbarHeight: 40,
         title: const Text('Forgot Password'),
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black54,
+          ),
+        ),
       ),
       body: Column(
         children: [

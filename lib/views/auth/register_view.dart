@@ -45,14 +45,25 @@ class _RegisterViewState extends State<RegisterView> {
       appBar: AppBar(
         toolbarHeight: 40,
         title: const Text('Register'),
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black54,
+          ),
+        ),
       ),
       body: Column(
         children: [
-          TextField(
-            controller: _name,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration: const InputDecoration(hintText: 'Name'),
+          Container(
+            child: TextField(
+              controller: _name,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: const InputDecoration(hintText: 'Name'),
+            ),
           ),
           TextField(
             controller: _email,
