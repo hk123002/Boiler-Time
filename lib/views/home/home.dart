@@ -4,6 +4,7 @@ import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
 import 'package:boiler_time/views/home/about/dining_menu.dart';
 import 'package:boiler_time/views/home/about/library_schedule.dart';
+import 'package:flat_banners/flat_banners.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
@@ -24,7 +25,23 @@ class _homeViewState extends State<home> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Column(children: [
+      body: Wrap(children: [
+        Image.asset('logo.png'),
+        Center(
+          child: Container(
+            child: FlatBanners(
+              imageWidth: 50,
+              gradientColors: [
+                Color.fromARGB(255, 2, 2, 3).withOpacity(0.9),
+                Color.fromARGB(255, 11, 12, 15).withOpacity(0.7),
+              ],
+              title: 'Gen.G Esports',
+              subtitle: 'CHOOOOVY',
+              btnText: 'find out more',
+              image: 'geng.png',
+            ),
+          ),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

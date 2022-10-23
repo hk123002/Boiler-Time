@@ -67,17 +67,18 @@ Add Firebase to your Flutter app
     
     ├── constants
     |  ├── routes
-    ├── enums    
+    ├── enums  
+    |  ├── menu_action
     ├── services
     |  ├── auth
     ├── utility
     |   ├── show_error_dialog
     ├── views    
     │   ├── auth
-    │   ├── chat
     │   ├── community
-    │   ├── market
-    │   ├── profile
+    │   ├── calendar
+    │   ├── boiler
+    │   ├── home
     ├── main    
     
    ## Data base structure
@@ -87,13 +88,20 @@ Add Firebase to your Flutter app
     │   ├──email
     │   ├──id
     │   ├──name
+    ├── calendar
+    │   ├──schedule
     
     
-## resources
+## dependecy
+
+flutter pub add cloud_firestore
+
 https://pub.dev/packages/persistent_bottom_nav_bar
 
 https://pub.dev/packages/time_planner   
 
-flutter pub add cloud_firestore
-
 https://pub.dev/packages/dropdown_button2
+
+https://pub.dev/packages/url_launcher
+
+https://pub.dev/packages/flat_banners/example
