@@ -27,6 +27,9 @@ class Category extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0x00000000),
+                  ),
                   child: const ListTile(
                     title: Text('Exam'),
                   ),
@@ -37,6 +40,9 @@ class Category extends StatelessWidget {
                     );
                   }),
               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black.withOpacity(0),
+                  ),
                   child: const ListTile(
                     title: Text('Rate My Professor'),
                   ),

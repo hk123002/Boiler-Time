@@ -149,7 +149,7 @@ class _nameEditState extends State<NameEdit> {
                         style: TextStyle(
                             fontSize: 15,
                             letterSpacing: 2,
-                            color: Colors.black)),
+                            color: Colors.white)),
                     style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
