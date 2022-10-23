@@ -7,7 +7,7 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 
 class PostPage extends StatefulWidget {
-  const PostPage({super.key});
+  const PostPage(child, {super.key, required CircularProgressIndicator});
 
   @override
   State<PostPage> createState() => _postPageViewState();

@@ -5,13 +5,14 @@ import 'package:boiler_time/views/Home/home.dart';
 import 'package:boiler_time/views/auth/login_view.dart';
 import 'package:boiler_time/views/boiler/boiler.dart';
 import 'package:boiler_time/views/calendar/calendar.dart';
-import 'package:boiler_time/views/community/community.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../enums/menu_action.dart';
 import 'package:boiler_time/constants/routes.dart';
+
+import 'community/category.dart';
 
 class MainView extends StatelessWidget {
   final int index;
@@ -148,7 +149,7 @@ class communityscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Community();
+    return const Category();
   }
 }
 
