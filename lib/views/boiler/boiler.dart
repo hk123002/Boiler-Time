@@ -163,15 +163,9 @@ class _BoilerState extends State<Boiler> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              CupertinoPageRoute(
-                                builder: (BuildContext context) {
-                                  return const NameEdit();
-                                },
-                              ),
-                              (route) => false,
-                            );
+                          onPressed: () async {
+                            // await AuthService.firebase()
+                            //     .sendPasswordReset(toEmail: email);
                           },
                           child: Text(
                             "Edit Password",

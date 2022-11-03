@@ -3,6 +3,9 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/community/freshman.dart';
+import 'package:boiler_time/views/community/intern.dart';
+import 'package:boiler_time/views/community/ratemyprofessor.dart';
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
 import 'package:boiler_time/views/home/about/dining_menu.dart';
@@ -463,7 +466,7 @@ class _homeViewState extends State<home> {
                           width: 25,
                         ),
                         Text(
-                          "Most Viewed",
+                          "Hot Community",
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
                               fontSize: 18,
@@ -475,7 +478,7 @@ class _homeViewState extends State<home> {
                     ),
                   ),
                   SizedBox(
-                    height: 0,
+                    height: 50,
                     child: TextButton(
                       child: ListTile(
                         title: Text(
@@ -500,7 +503,7 @@ class _homeViewState extends State<home> {
                     child: TextButton(
                       child: ListTile(
                         title: Text(
-                          'Exam',
+                          'Internship',
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
                               fontSize: 15,
@@ -508,7 +511,13 @@ class _homeViewState extends State<home> {
                           ),
                         ),
                       ),
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Intern()),
+                        )
+                      },
                     ),
                   ),
                   SizedBox(
@@ -516,7 +525,7 @@ class _homeViewState extends State<home> {
                     child: TextButton(
                       child: ListTile(
                         title: Text(
-                          'Exam',
+                          'Freshman',
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
                               fontSize: 15,
@@ -524,7 +533,13 @@ class _homeViewState extends State<home> {
                           ),
                         ),
                       ),
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Freshman()),
+                        )
+                      },
                     ),
                   ),
                   SizedBox(
@@ -532,7 +547,7 @@ class _homeViewState extends State<home> {
                     child: TextButton(
                       child: ListTile(
                         title: Text(
-                          'Exam',
+                          'Rate My Professor',
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
                               fontSize: 15,
@@ -540,23 +555,13 @@ class _homeViewState extends State<home> {
                           ),
                         ),
                       ),
-                      onPressed: () => {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          'Exam',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {},
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RateMyProfessor()),
+                        )
+                      },
                     ),
                   ),
                   SizedBox(
