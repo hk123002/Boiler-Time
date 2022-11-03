@@ -62,12 +62,12 @@ class _LoginViewState extends State<LoginView> {
                     padding: const EdgeInsets.only(top: 60.0),
                     child: Center(
                       child: Container(
-                          width: 200,
+                          width: 300,
                           height: 150,
                           /*decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(50.0)),*/
-                          child: Image.asset('assets/geng.png')),
+                          child: Image.asset('assets/boilertime_banner.png')),
                     ),
                   ),
                 ),

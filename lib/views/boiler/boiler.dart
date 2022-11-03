@@ -9,6 +9,7 @@ import 'package:boiler_time/views/main_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
@@ -80,6 +81,9 @@ class _BoilerState extends State<Boiler> {
           },
           child: ListView(
             children: [
+              SizedBox(
+                height: 50,
+              ),
               Center(
                 child: Stack(
                   children: [
@@ -105,43 +109,142 @@ class _BoilerState extends State<Boiler> {
                 ),
               ),
               const SizedBox(height: 30),
-              Text(
-                "Hello, World!    " + name.toString(),
-                style: TextStyle(fontSize: 20),
+              Center(
+                child: Text(
+                  name.toString(),
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              Text(email.toString()),
+              const SizedBox(height: 20),
+              Center(child: Text(email.toString())),
               const SizedBox(height: 30),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    CupertinoPageRoute(
-                      builder: (BuildContext context) {
-                        return const NameEdit();
-                      },
-                    ),
-                    (route) => false,
-                  );
-                },
-                child: const Text("Edit name"),
-              ),
-              TextButton(
-                onPressed: () async {
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout) {
-                    await AuthService.firebase().logOut();
-                    Navigator.of(context, rootNavigator: true)
-                        .pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LoginView();
-                        },
-                      ),
-                      (_) => false,
-                    );
-                  }
-                },
-                child: const Text("log out"),
-              ),
+              Container(
+                  margin: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        // color: Color.fromARGB(255, 131, 124, 132),
+                        ),
+                    borderRadius: BorderRadius.all(Radius.circular(
+                            5.0) //                 <--- border radius here
+                        ),
+                  ),
+                  child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Account",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              CupertinoPageRoute(
+                                builder: (BuildContext context) {
+                                  return const NameEdit();
+                                },
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          child: Text(
+                            "Edit Name",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              CupertinoPageRoute(
+                                builder: (BuildContext context) {
+                                  return const NameEdit();
+                                },
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          child: Text(
+                            "Edit Password",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            final shouldLogout =
+                                await showLogOutDialog(context);
+                            if (shouldLogout) {
+                              await AuthService.firebase().logOut();
+                              Navigator.of(context, rootNavigator: true)
+                                  .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return LoginView();
+                                  },
+                                ),
+                                (_) => false,
+                              );
+                            }
+                          },
+                          child: const Text("log out"),
+                        ),
+                      ])),
+              Container(
+                  margin: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        // color: Color.fromARGB(255, 131, 124, 132),
+                        ),
+                    borderRadius: BorderRadius.all(Radius.circular(
+                            5.0) //                 <--- border radius here
+                        ),
+                  ),
+                  child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Developers",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "App version",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "About",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ])),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               )

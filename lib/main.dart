@@ -16,23 +16,23 @@ void main() {
   runApp(MaterialApp(
     title: 'Corn Market Demo',
     theme: ThemeData(
-      colorScheme: const ColorScheme(
-        brightness: Brightness.dark,
-        surface: Color.fromARGB(169, 52, 45, 53),
-        onSurface: Colors.white,
-        // Colors that are not relevant to AppBar in DARK mode:
-        primary: Color.fromARGB(255, 193, 155, 200),
-        onPrimary: Colors.white,
-        primaryVariant: Colors.blue,
-        secondary: Color.fromARGB(255, 193, 155, 200),
-        secondaryVariant: Colors.orange,
-        onSecondary: Colors.white,
-        background: Colors.green,
-        onBackground: Colors.grey,
-        error: Colors.purple,
-        onError: Colors.white,
-      ),
-    ),
+        // colorScheme: const ColorScheme(
+        //   brightness: Brightness.dark,
+        //   surface: Color.fromARGB(169, 52, 45, 53),
+        //   onSurface: Colors.white,
+        //   // Colors that are not relevant to AppBar in DARK mode:
+        //   primary: Color.fromARGB(255, 193, 155, 200),
+        //   onPrimary: Colors.white,
+        //   primaryVariant: Colors.blue,
+        //   secondary: Color.fromARGB(255, 168, 130, 176),
+        //   secondaryVariant: Colors.orange,
+        //   onSecondary: Colors.white,
+        //   background: Colors.green,
+        //   onBackground: Colors.grey,
+        //   error: Colors.purple,
+        //   onError: Colors.white,
+        // ),
+        ),
     home: const HomePage(),
     routes: {
       loginRoute: (context) => const LoginView(),
