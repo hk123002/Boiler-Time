@@ -21,7 +21,7 @@ class Developers extends StatelessWidget {
         ),
       ),
       body: Container(
-        child: Text("Developed by HK"),
+        child: Text("Developed by..."),
       ),
     );
   }

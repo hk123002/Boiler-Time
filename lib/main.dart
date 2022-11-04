@@ -26,7 +26,7 @@ void main() {
         primary: Color.fromARGB(255, 204, 170, 210),
         onPrimary: Colors.white,
         primaryVariant: Colors.black,
-        secondary: Color.fromARGB(255, 168, 130, 176),
+        secondary: Color.fromARGB(255, 204, 170, 210),
         secondaryVariant: Colors.orange,
         onSecondary: Colors.white,
         background: Colors.green,
@@ -68,7 +68,16 @@ class HomePage extends StatelessWidget {
               return const LoginView();
             }
           default:
-            return const Text("loading");
+            return Scaffold(
+              body: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  'assets/splash.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
         }
       },
     );
