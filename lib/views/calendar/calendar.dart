@@ -16,6 +16,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utilities/show_error_dialog.dart';
+import '../auth/login_view.dart';
+import '../boiler/boiler.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -623,11 +625,56 @@ class _CalendarViewState extends State<Calendar> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         toolbarHeight: 40,
-        leading: Icon(Icons.stop_circle_outlined),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: Image(
+              image: AssetImage('assets/bt_logo_white.png'),
+            ),
+          ),
+        ),
+        // backgroundColor: Color(0x44000000),
+        // elevation: 0,
         // title: Text(
-        //   "Purdue Univ",
-        //   style: TextStyle(fontStyle: FontStyle.italic),
+        //   "Boiler Time",
+        //   // style: TextStyle(fontSize: 15),
         // ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(5),
+          ),
+        ),
+
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LoginView();
+                        },
+                      ),
+                      (route) => false,
+                    );
+                  }
+              }
+            },
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text("Log out"),
+                )
+              ];
+            },
+          )
+        ],
       ),
       // resizeToAvoidBottomInset: false,
       body: Center(
@@ -638,6 +685,7 @@ class _CalendarViewState extends State<Calendar> {
             cellHeight: 40,
             cellWidth: 59,
             showScrollBar: false,
+            dividerColor: Colors.black.withOpacity(0.5),
           ),
           headers: const [
             TimePlannerTitle(

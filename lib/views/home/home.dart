@@ -188,17 +188,24 @@ class _homeViewState extends State<home> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 50,
-        // leading: Icon(Icons.stop_circle_outlined),
+        toolbarHeight: 40,
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: Image(
+              image: AssetImage('assets/bt_logo_white.png'),
+            ),
+          ),
+        ),
         // backgroundColor: Color(0x44000000),
         // elevation: 0,
-        title: Text(
-          "Purdue Univ",
-          style: TextStyle(fontSize: 15),
-        ),
+        // title: Text(
+        //   "Boiler Time",
+        //   // style: TextStyle(fontSize: 15),
+        // ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(3),
+            bottom: Radius.circular(5),
           ),
         ),
 

@@ -14,26 +14,27 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MaterialApp(
-    title: 'Corn Market Demo',
+    title: 'Boiler Time Demo',
     theme: ThemeData(
+      //   primary: Color.fromARGB(255, 193, 155, 200),
 
-        // colorScheme: const ColorScheme(
-        //   brightness: Brightness.light,
-        //   surface: Color.fromARGB(169, 52, 45, 53),
-        //   onSurface: Colors.black,
-        //   // Colors that are not relevant to AppBar in DARK mode:
-        //   primary: Color.fromARGB(255, 193, 155, 200),
-        //   onPrimary: Colors.black,
-        //   primaryVariant: Colors.black,
-        //   secondary: Color.fromARGB(255, 168, 130, 176),
-        //   secondaryVariant: Colors.orange,
-        //   onSecondary: Colors.black,
-        //   background: Colors.green,
-        //   onBackground: Colors.grey,
-        //   error: Colors.purple,
-        //   onError: Colors.black,
-        // ),
-        ),
+      colorScheme: const ColorScheme(
+        brightness: Brightness.light,
+        surface: Color.fromARGB(169, 52, 45, 53),
+        onSurface: Colors.black,
+        // Colors that are not relevant to AppBar in DARK mode:
+        primary: Color.fromARGB(255, 204, 170, 210),
+        onPrimary: Colors.white,
+        primaryVariant: Colors.black,
+        secondary: Color.fromARGB(255, 168, 130, 176),
+        secondaryVariant: Colors.orange,
+        onSecondary: Colors.white,
+        background: Colors.green,
+        onBackground: Colors.grey,
+        error: Colors.purple,
+        onError: Colors.black,
+      ),
+    ),
     home: const HomePage(),
     routes: {
       loginRoute: (context) => const LoginView(),
