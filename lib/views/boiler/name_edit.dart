@@ -95,21 +95,14 @@ class _nameEditState extends State<NameEdit> {
                 children: [
                   OutlinedButton(
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                        CupertinoPageRoute(
-                          builder: (BuildContext context) {
-                            return const Boiler();
-                          },
-                        ),
-                        (route) => false,
-                      );
+                      Navigator.of(context).pop(context);
                     },
                     // ignore: sort_child_properties_last
                     child: const Text("CANCEL",
                         style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.white)),
+                          fontSize: 15,
+                          letterSpacing: 2,
+                        )),
                     style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
@@ -151,11 +144,11 @@ class _nameEditState extends State<NameEdit> {
                     // ignore: sort_child_properties_last
                     child: const Text("SAVE",
                         style: TextStyle(
-                            fontSize: 15,
-                            letterSpacing: 2,
-                            color: Colors.white)),
+                          fontSize: 15,
+                          letterSpacing: 2,
+                        )),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 193, 155, 200),
+                        // backgroundColor: Color.fromARGB(255, 193, 155, 200),
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),

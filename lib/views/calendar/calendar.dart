@@ -13,6 +13,7 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import 'package:time_planner/time_planner.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utilities/show_error_dialog.dart';
 
@@ -167,6 +168,9 @@ class _CalendarViewState extends State<Calendar> {
           onTap: () => {},
           child: Text(
             _className.text,
+            style: GoogleFonts.lato(
+              textStyle: TextStyle(),
+            ),
             // style: TextStyle(color: Colors.grey[350], fontSize: 12),
           ),
         ),
@@ -365,7 +369,12 @@ class _CalendarViewState extends State<Calendar> {
                   builder: (BuildContext context) {
                     return StatefulBuilder(builder: (context, setState) {
                       return AlertDialog(
-                        title: const Text('Edit schedule'),
+                        title: Text(
+                          'Edit schedule',
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(),
+                          ),
+                        ),
                         content: ListView(shrinkWrap: true, children: [
                           TextFormField(
                             controller: _className,
@@ -376,15 +385,20 @@ class _CalendarViewState extends State<Calendar> {
                           ),
                           DropdownButtonHideUnderline(
                               child: DropdownButton2(
-                            hint: Text(dayHint),
+                            hint: Text(
+                              dayHint,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(),
+                              ),
+                            ),
                             items: dayConstant
                                 .map((item) => DropdownMenuItem<String>(
                                       value: item,
                                       child: Text(
                                         item,
-                                        style: const TextStyle(
-                                            // fontSize: 14,
-                                            ),
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(),
+                                        ),
                                       ),
                                     ))
                                 .toList(),
@@ -403,8 +417,8 @@ class _CalendarViewState extends State<Calendar> {
                               child: DropdownButton2(
                             hint: Text(
                               startTimeHint,
-                              style: TextStyle(
-                                // fontSize: 14,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(),
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
@@ -587,7 +601,11 @@ class _CalendarViewState extends State<Calendar> {
               },
               child: Text(
                 schedule,
-                // style: TextStyle(color: Colors.grey[350], fontSize: 12),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(),
+                  color: Theme.of(context).hintColor,
+                ),
               ),
             ),
           );

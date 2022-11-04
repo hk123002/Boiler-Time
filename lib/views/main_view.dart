@@ -83,14 +83,14 @@ class MainView extends StatelessWidget {
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 1000),
+        duration: Duration(milliseconds: 100),
         curve: Curves.ease,
       ),
       screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
         animateTabTransition: true,
         curve: Curves.ease,
-        duration: Duration(milliseconds: 100),
+        duration: Duration(milliseconds: 300),
       ),
       navBarStyle:
           NavBarStyle.style6, // Choose the nav bar style with this property.

@@ -12,9 +12,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
+import '../../utilities/show_error_dialog.dart';
 
 class Boiler extends StatefulWidget {
   const Boiler({super.key});
@@ -112,19 +114,32 @@ class _BoilerState extends State<Boiler> {
               Center(
                 child: Text(
                   name.toString(),
-                  style: TextStyle(fontSize: 20),
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
-              Center(child: Text(email.toString())),
+              Center(
+                child: Text(email.toString(),
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontSize: 15,
+                      ),
+                    )),
+              ),
               const SizedBox(height: 30),
               Container(
-                  margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.all(3.0),
+                  // width: 10000,
+                  // margin: const EdgeInsets.all(15.0),
+                  // padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        // color: Color.fromARGB(255, 131, 124, 132),
-                        ),
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(
                             5.0) //                 <--- border radius here
                         ),
@@ -132,52 +147,53 @@ class _BoilerState extends State<Boiler> {
                   child: Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          "Account",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 18,
+                        ListTile(
+                          title: Text(
+                            'Account',
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              CupertinoPageRoute(
-                                builder: (BuildContext context) {
-                                  return const NameEdit();
-                                },
-                              ),
-                              (route) => false,
-                            );
-                          },
-                          child: Text(
-                            "Edit Name",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
                             ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            // await AuthService.firebase()
-                            //     .sendPasswordReset(toEmail: email);
-                          },
-                          child: Text(
-                            "Edit Password",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: const ListTile(
+                              title: Text('Edit Name'),
                             ),
-                          ),
-                        ),
+                            onPressed: () {
+                              PersistentNavBarNavigator.pushNewScreen(
+                                context,
+                                screen: NameEdit(),
+                                withNavBar:
+                                    false, // OPTIONAL VALUE. True by default.
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.cupertino,
+                              );
+                            }),
                         TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
+                            ),
+                            child: const ListTile(
+                              title: Text('Edit Password'),
+                            ),
+                            onPressed: () async {
+                              editEmailDialog(context);
+
+                              var email =
+                                  FirebaseAuth.instance.currentUser?.email;
+                              await AuthService.firebase()
+                                  .sendPasswordReset(toEmail: email.toString());
+                            }),
+                        TextButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0x00000000),
+                          ),
+                          child: const ListTile(
+                            title: Text('Log out'),
+                          ),
                           onPressed: () async {
                             final shouldLogout =
                                 await showLogOutDialog(context);
@@ -194,16 +210,22 @@ class _BoilerState extends State<Boiler> {
                               );
                             }
                           },
-                          child: const Text("log out"),
+                        ),
+                        SizedBox(
+                          height: 15,
                         ),
                       ])),
+              SizedBox(
+                height: 10,
+              ),
               Container(
-                  margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.all(3.0),
+                  // width: 10000,
+                  // margin: const EdgeInsets.all(15.0),
+                  // padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                     border: Border.all(
-                        // color: Color.fromARGB(255, 131, 124, 132),
-                        ),
+                      color: Colors.black.withOpacity(0.2),
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(
                             5.0) //                 <--- border radius here
                         ),
@@ -211,34 +233,46 @@ class _BoilerState extends State<Boiler> {
                   child: Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          "Developers",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 18,
+                        ListTile(
+                          title: Text(
+                            'About',
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        Text(
-                          "App version",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                        TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
                             ),
+                            child: const ListTile(
+                              title: Text('App version'),
+                            ),
+                            onPressed: () {}),
+                        TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
+                            ),
+                            child: const ListTile(
+                              title: Text('Developers'),
+                            ),
+                            onPressed: () {}),
+                        TextButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0x00000000),
                           ),
+                          child: const ListTile(
+                            title: Text('Github'),
+                          ),
+                          onPressed: () {},
                         ),
-                        Text(
-                          "About",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        SizedBox(
+                          height: 15,
                         ),
                       ])),
+              SizedBox(
+                height: 40,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               )
@@ -256,7 +290,9 @@ Future<bool> showLogOutDialog(BuildContext context) {
       builder: (context) {
         return AlertDialog(
           title: const Text('Sign out'),
-          content: const Text('Are you sure you want to sign out?'),
+          content: const Text(
+            'Do you want to sign out?',
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -269,6 +305,26 @@ Future<bool> showLogOutDialog(BuildContext context) {
                   Navigator.of(context).pop(true);
                 },
                 child: const Text('Log out'))
+          ],
+        );
+      }).then((value) => value ?? false);
+}
+
+Future<bool> editEmailDialog(BuildContext context) {
+  return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          // title: const Text('Sign out'),
+          content: const Text(
+              'Password reset email has been sent to the email, Please check your email'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('close'),
+            ),
           ],
         );
       }).then((value) => value ?? false);

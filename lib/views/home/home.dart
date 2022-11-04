@@ -15,6 +15,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flat_banners/flat_banners.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
@@ -154,22 +155,21 @@ class _homeViewState extends State<home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        toolbarHeight: 40,
-        centerTitle: true,
-        // elevation: 0,
+        toolbarHeight: 50,
+        // leading: Icon(Icons.stop_circle_outlined),
         // backgroundColor: Color(0x44000000),
-        // title: const Text(
-        //   "Boiler Time",
-        //   style: TextStyle(fontSize: 15),
-        // ),
-
-        // leading: Icon(Icons.menu),
-        // title: Text(
-        //   "Purdue Univ",
-        //   style: TextStyle(fontStyle: FontStyle.italic),
-        // ),
+        // elevation: 0,
+        title: Text(
+          "Purdue Univ",
+          style: TextStyle(fontSize: 15),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(3),
+          ),
+        ),
       ),
       body: ListView(
         children: [
@@ -182,25 +182,39 @@ class _homeViewState extends State<home> {
                   SizedBox(
                     height: 50,
                   ),
-                  Text(
-                    "Hello World !",
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
+                      Text(
+                        "Hello World !",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    name.toString(),
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: 15,
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
+                      Text(
+                        name.toString(),
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 20,
@@ -312,6 +326,9 @@ class _homeViewState extends State<home> {
                 },
               ),
             ),
+            SizedBox(
+              height: 160,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -321,10 +338,12 @@ class _homeViewState extends State<home> {
                       icon: Icon(Icons.bus_alert),
                       iconSize: 30.0,
                       onPressed: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const BusSchedule()),
+                          screen: BusSchedule(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
                       },
                     ),
@@ -344,10 +363,12 @@ class _homeViewState extends State<home> {
                       icon: Icon(Icons.school),
                       iconSize: 30.0,
                       onPressed: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const LibraryTime()),
+                          screen: LibraryTime(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
                       },
                     ),
@@ -367,10 +388,12 @@ class _homeViewState extends State<home> {
                       icon: Icon(Icons.dining),
                       iconSize: 30.0,
                       onPressed: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const DiningMenu()),
+                          screen: DiningMenu(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
                       },
                     ),
@@ -390,10 +413,12 @@ class _homeViewState extends State<home> {
                       icon: Icon(Icons.schedule),
                       iconSize: 30.0,
                       onPressed: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const AcademicSchedule()),
+                          screen: AcademicSchedule(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
                       },
                     ),
@@ -417,7 +442,7 @@ class _homeViewState extends State<home> {
                 /// Carousel FullScreen
                 BannerCarousel.fullScreen(
                   banners: BannerImages.listBanners,
-                  height: 130,
+                  height: 100,
                   animation: false,
                   initialPage: 1,
                   indicatorBottom: false,
@@ -425,29 +450,13 @@ class _homeViewState extends State<home> {
                 ),
               ],
             ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: 30.0),
-                child: FlatBanners(
-                  imageWidth: 50,
-                  gradientColors: [
-                    Color.fromARGB(255, 2, 3, 2).withOpacity(0.9),
-                    Color.fromARGB(255, 65, 69, 42).withOpacity(0.7),
-                  ],
-                  title: 'Gen.G Esports',
-                  subtitle: 'CHOOOOVY',
-                  btnText: 'find out more',
-                  image: 'geng.png',
-                ),
-              ),
-            ),
             Container(
               margin: const EdgeInsets.all(15.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                    // color: Color.fromARGB(255, 131, 124, 132),
-                    ),
+                  color: Colors.black.withOpacity(0.2),
+                ),
                 borderRadius: BorderRadius.all(Radius.circular(
                         5.0) //                 <--- border radius here
                     ),
@@ -456,27 +465,84 @@ class _homeViewState extends State<home> {
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Text(
-                          "Hot Community",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                  Row(children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 13,
+                          ),
+                          Icon(
+                            Icons.view_agenda,
+                            size: 15,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Most viewed",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                    Row(children: [
+                      SizedBox(
+                        width: 60,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0.0,
+                          primary: Colors.red.withOpacity(0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(2),
+                              ),
+                              side:
+                                  BorderSide(color: Colors.red.withOpacity(0))),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context, rootNavigator: true)
+                              .pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return MainView(
+                                  index: 1,
+                                );
+                              },
+                            ),
+                            (_) => false,
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'see more',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 193, 155, 200),
+                              ),
+                            ), // <-- Text
+
+                            Icon(
+                              // <-- Icon
+                              Icons.navigate_next_outlined,
+                              size: 24.0,
+                              color: Color.fromARGB(255, 193, 155, 200),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ]),
                   SizedBox(
                     height: 50,
                     child: TextButton(
@@ -491,9 +557,12 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       onPressed: () => {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(builder: (context) => const Exam()),
+                          screen: Exam(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         )
                       },
                     ),
@@ -512,10 +581,12 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       onPressed: () => {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const Intern()),
+                          screen: Intern(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         )
                       },
                     ),
@@ -534,10 +605,12 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       onPressed: () => {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const Freshman()),
+                          screen: Freshman(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         )
                       },
                     ),
@@ -556,20 +629,38 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       onPressed: () => {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const RateMyProfessor()),
+                          screen: RateMyProfessor(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         )
                       },
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                 ],
               ),
             ),
+            // Center(
+            //   child: Container(
+            //     margin: const EdgeInsets.only(top: 30.0),
+            //     child: FlatBanners(
+            //       imageWidth: 50,
+            //       gradientColors: [
+            //         Color.fromARGB(255, 2, 3, 2).withOpacity(0.9),
+            //         Color.fromARGB(255, 65, 69, 42).withOpacity(0.7),
+            //       ],
+            //       title: 'Gen.G Esports',
+            //       subtitle: 'CHOOOOVY',
+            //       btnText: 'find out more',
+            //       image: 'geng.png',
+            //     ),
+            //   ),
+            // ),
           ]),
         ],
       ),
