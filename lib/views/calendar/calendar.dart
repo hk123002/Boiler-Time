@@ -380,7 +380,9 @@ class _CalendarViewState extends State<Calendar> {
                             controller: _className,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(),
-                              labelText: classNameHint,
+                              hintText: classNameHint,
+                              // floatingLabelBehavior:
+                              // FloatingLabelBehavior.always,
                             ),
                           ),
                           DropdownButtonHideUnderline(
@@ -484,6 +486,7 @@ class _CalendarViewState extends State<Calendar> {
                             child: const Text('Cancel'),
                             onPressed: () {
                               _className.text = "";
+
                               selectedDay = null;
                               selectedEndTime = null;
                               selectedStartTime = null;

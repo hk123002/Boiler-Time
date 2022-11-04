@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
@@ -19,6 +21,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
+import '../auth/login_view.dart';
+import '../boiler/boiler.dart';
 import '../community/exam.dart';
 import '../main_view.dart';
 import 'package:intl/intl.dart';
@@ -35,9 +39,36 @@ class _homeViewState extends State<home> {
   List<String> classList = [];
   List<String> hourList = [];
 
+  // List<String> hotPostTitle = ["hi", "hi1", "hi2", "hi3"];
+  // List<String> hotPostContent = [];
+  // List<String> hotPostID = [];
+
   String? name;
   var date;
   var dayHint;
+
+  // void _getTodayPost() async {
+  //   var usercollection = FirebaseFirestore.instance.collection('hotPost');
+
+  //   var docSnapshot =
+  //       await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
+
+  //   if (docSnapshot.exists) {
+  //     Map<String, dynamic> data = docSnapshot.data()!;
+
+  //     // You can then retrieve the value from the Map like this:
+
+  //     setState(() {
+  //       name = data['name'];
+  //     });
+  //     devtools.log(name.toString());
+  //   }
+
+  //   //fetch data for calendar
+  //   setState(() {
+  //     date = DateTime.now();
+  //   });
+  // }
 
   void _getUserData() async {
     var usercollection = FirebaseFirestore.instance.collection('users');
@@ -170,6 +201,37 @@ class _homeViewState extends State<home> {
             bottom: Radius.circular(3),
           ),
         ),
+
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LoginView();
+                        },
+                      ),
+                      (route) => false,
+                    );
+                  }
+              }
+            },
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text("Log out"),
+                )
+              ];
+            },
+          )
+        ],
       ),
       body: ListView(
         children: [
@@ -496,7 +558,7 @@ class _homeViewState extends State<home> {
                     ),
                     Row(children: [
                       SizedBox(
-                        width: 60,
+                        width: 65,
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -637,6 +699,170 @@ class _homeViewState extends State<home> {
                               PageTransitionAnimation.cupertino,
                         )
                       },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+              margin: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(3.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black.withOpacity(0.2),
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(
+                        5.0) //                 <--- border radius here
+                    ),
+              ),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 13,
+                          ),
+                          Icon(
+                            Icons.thumb_up,
+                            size: 15,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Today's post",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(children: [
+                      SizedBox(
+                        width: 65,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0.0,
+                          primary: Colors.red.withOpacity(0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(2),
+                              ),
+                              side:
+                                  BorderSide(color: Colors.red.withOpacity(0))),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context, rootNavigator: true)
+                              .pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return MainView(
+                                  index: 1,
+                                );
+                              },
+                            ),
+                            (_) => false,
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'see more',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 193, 155, 200),
+                              ),
+                            ), // <-- Text
+
+                            Icon(
+                              // <-- Icon
+                              Icons.navigate_next_outlined,
+                              size: 24.0,
+                              color: Color.fromARGB(255, 193, 155, 200),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ]),
+                  SizedBox(
+                    height: 50,
+                    child: TextButton(
+                      child: ListTile(
+                        title: Text(
+                          "example",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onPressed: () => {},
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    child: TextButton(
+                      child: ListTile(
+                        title: Text(
+                          "example",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onPressed: () => {},
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    child: TextButton(
+                      child: ListTile(
+                        title: Text(
+                          "example",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onPressed: () => {},
+                    ),
+                  ),
+                  SizedBox(
+                    height: 50,
+                    child: TextButton(
+                      child: ListTile(
+                        title: Text(
+                          "example",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      onPressed: () => {},
                     ),
                   ),
                   SizedBox(

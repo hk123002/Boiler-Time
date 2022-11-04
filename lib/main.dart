@@ -16,6 +16,7 @@ void main() {
   runApp(MaterialApp(
     title: 'Corn Market Demo',
     theme: ThemeData(
+
         // colorScheme: const ColorScheme(
         //   brightness: Brightness.light,
         //   surface: Color.fromARGB(169, 52, 45, 53),
@@ -66,7 +67,7 @@ class HomePage extends StatelessWidget {
               return const LoginView();
             }
           default:
-            return const CircularProgressIndicator();
+            return const Text("loading");
         }
       },
     );

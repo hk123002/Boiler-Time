@@ -3,6 +3,7 @@ import 'package:boiler_time/main.dart';
 import 'package:boiler_time/services/auth/auth_exceptions.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/auth/login_view.dart';
+import 'package:boiler_time/views/boiler/developers.dart';
 import 'package:boiler_time/views/boiler/email_edit.dart';
 import 'package:boiler_time/views/boiler/name_edit.dart';
 import 'package:boiler_time/views/main_view.dart';
@@ -147,72 +148,100 @@ class _BoilerState extends State<Boiler> {
                   child: Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ListTile(
-                          title: Text(
-                            'Account',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        SizedBox(
+                          height: 20,
                         ),
-                        TextButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0x00000000),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 22,
                             ),
-                            child: const ListTile(
-                              title: Text('Edit Name'),
-                            ),
-                            onPressed: () {
-                              PersistentNavBarNavigator.pushNewScreen(
-                                context,
-                                screen: NameEdit(),
-                                withNavBar:
-                                    false, // OPTIONAL VALUE. True by default.
-                                pageTransitionAnimation:
-                                    PageTransitionAnimation.cupertino,
-                              );
-                            }),
-                        TextButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0x00000000),
-                            ),
-                            child: const ListTile(
-                              title: Text('Edit Password'),
-                            ),
-                            onPressed: () async {
-                              editEmailDialog(context);
-
-                              var email =
-                                  FirebaseAuth.instance.currentUser?.email;
-                              await AuthService.firebase()
-                                  .sendPasswordReset(toEmail: email.toString());
-                            }),
-                        TextButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0x00000000),
-                          ),
-                          child: const ListTile(
-                            title: Text('Log out'),
-                          ),
-                          onPressed: () async {
-                            final shouldLogout =
-                                await showLogOutDialog(context);
-                            if (shouldLogout) {
-                              await AuthService.firebase().logOut();
-                              Navigator.of(context, rootNavigator: true)
-                                  .pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return LoginView();
-                                  },
+                            Text(
+                              "Account",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                (_) => false,
-                              );
-                            }
-                          },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.person_add,
+                              size: 20,
+                            ),
+                          ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                  title: Text(
+                                'Edit Name',
+                              )),
+                              onPressed: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: NameEdit(),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                title: Text('Edit Password'),
+                              ),
+                              onPressed: () async {
+                                editEmailDialog(context);
+
+                                var email =
+                                    FirebaseAuth.instance.currentUser?.email;
+                                await AuthService.firebase().sendPasswordReset(
+                                    toEmail: email.toString());
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
+                            ),
+                            child: const ListTile(
+                              title: Text('Log out'),
+                            ),
+                            onPressed: () async {
+                              final shouldLogout =
+                                  await showLogOutDialog(context);
+                              if (shouldLogout) {
+                                await AuthService.firebase().logOut();
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return LoginView();
+                                    },
+                                  ),
+                                  (route) => false,
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25,
                         ),
                       ])),
               SizedBox(
@@ -233,38 +262,84 @@ class _BoilerState extends State<Boiler> {
                   child: Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ListTile(
-                          title: Text(
-                            'About',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        SizedBox(
+                          height: 20,
                         ),
-                        TextButton(
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Text(
+                              "About",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.info,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: ListTile(
+                                title: Row(
+                                  children: [
+                                    Text('App version'),
+                                    Text(
+                                      '  v 0.0.0',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          color: Colors.black.withOpacity(0.5)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onPressed: () {}),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                title: Text('Developers'),
+                              ),
+                              onPressed: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: Developers(),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
                             style: ElevatedButton.styleFrom(
                               primary: Color(0x00000000),
                             ),
                             child: const ListTile(
-                              title: Text('App version'),
+                              title: Text('Github'),
                             ),
-                            onPressed: () {}),
-                        TextButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0x00000000),
-                            ),
-                            child: const ListTile(
-                              title: Text('Developers'),
-                            ),
-                            onPressed: () {}),
-                        TextButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0x00000000),
+                            onPressed: () {},
                           ),
-                          child: const ListTile(
-                            title: Text('Github'),
-                          ),
-                          onPressed: () {},
                         ),
                         SizedBox(
                           height: 15,
