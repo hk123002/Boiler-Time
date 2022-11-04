@@ -227,7 +227,28 @@ class _BoilerState extends State<Boiler> {
                               ),
                               child: const ListTile(
                                   title: Text(
-                                'Edit Name',
+                                'My posts',
+                              )),
+                              onPressed: () {
+                                // PersistentNavBarNavigator.pushNewScreen(
+                                //   context,
+                                //   screen: NameEdit(),
+                                //   withNavBar:
+                                //       false, // OPTIONAL VALUE. True by default.
+                                //   pageTransitionAnimation:
+                                //       PageTransitionAnimation.cupertino,
+                                // );
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                  title: Text(
+                                'Edit name',
                               )),
                               onPressed: () {
                                 PersistentNavBarNavigator.pushNewScreen(
@@ -247,7 +268,7 @@ class _BoilerState extends State<Boiler> {
                                 primary: Color(0x00000000),
                               ),
                               child: const ListTile(
-                                title: Text('Edit Password'),
+                                title: Text('Change password'),
                               ),
                               onPressed: () async {
                                 editEmailDialog(context);
