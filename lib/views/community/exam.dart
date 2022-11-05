@@ -153,6 +153,7 @@ class _communityState extends State<Exam> {
                       title: Text(documentSnapshot['Title']),
                       subtitle: Text(documentSnapshot['Content']),
                       onTap: () {
+                        devtools.log(documentSnapshot.id);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

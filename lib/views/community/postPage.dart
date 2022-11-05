@@ -20,8 +20,8 @@ class _postPageViewState extends State<PostPage> {
   String? collectionName;
   @override
   void initState() {
-    documentID = this.documentID;
-    collectionName = this.collectionName;
+    documentID = widget.documentID;
+    collectionName = widget.collectionName;
     super.initState();
   }
 
@@ -34,7 +34,7 @@ class _postPageViewState extends State<PostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(documentID.toString()),
+        child: Text(documentID.toString() + " " + collectionName.toString()),
       ),
     );
   }
