@@ -8,8 +8,6 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import 'package:animated_tree_view/animated_tree_view.dart';
 
-final CollectionReference _exam = FirebaseFirestore.instance.collection('post');
-
 class PostPage extends StatefulWidget {
   final String documentID;
   final String collectionName;
@@ -22,10 +20,14 @@ class PostPage extends StatefulWidget {
 class _postPageViewState extends State<PostPage> {
   String? documentID;
   String? collectionName;
+  late final DocumentReference _exam;
+
   @override
   void initState() {
     documentID = widget.documentID;
     collectionName = widget.collectionName;
+    _exam =
+        FirebaseFirestore.instance.collection(collectionName!).doc(documentID);
     super.initState();
   }
 
@@ -63,50 +65,9 @@ class _postPageViewState extends State<PostPage> {
                   onPressed: () async {
                     final String comment = _comment.text;
 
-                    await _exam.add({"Comment": comment});
-
-                    _comment.text = '';
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ),
-          );
-        });
-  }
-
-  Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
-    if (documentSnapshot != null) {
-      _comment.text = documentSnapshot['Content'].toString();
-    }
-
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext ctx) {
-          return Padding(
-            padding: EdgeInsets.only(
-                top: 20,
-                left: 20,
-                right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextField(
-                  controller: _comment,
-                  decoration: const InputDecoration(labelText: 'Comment'),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                ElevatedButton(
-                  child: const Text('Update'),
-                  onPressed: () async {
-                    final String comment = _comment.text;
-
-                    await _exam.add({"Comment": comment});
+                    await _exam.update({
+                      "Comment": FieldValue.arrayUnion([comment])
+                    });
 
                     _comment.text = '';
                     Navigator.of(context).pop();
@@ -119,7 +80,7 @@ class _postPageViewState extends State<PostPage> {
   }
 
   Future<void> _delete(String examID) async {
-    await _exam.doc(examID).delete();
+    await _exam.delete();
 
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('You have successfully deleted a post')));
