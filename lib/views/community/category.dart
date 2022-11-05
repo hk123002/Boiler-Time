@@ -7,6 +7,7 @@ import 'package:boiler_time/views/community/junior.dart';
 import 'package:boiler_time/views/community/senior.dart';
 import 'package:boiler_time/views/community/sophomore.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../enums/menu_action.dart';
 import '../../services/auth/auth_service.dart';
@@ -112,10 +113,12 @@ class Category extends StatelessWidget {
                         title: Text('Rate My Professor'),
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const RateMyProfessor()),
+                          screen: RateMyProfessor(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
                       }),
                   TextButton(

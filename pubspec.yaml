@@ -47,6 +47,8 @@ dependencies:
   flutter_week_view: ^1.2.2
   time_planner: ^0.1.1
   flat_banners: ^0.0.6
+  comment_tree: ^0.3.0
+  animated_tree_view: ^1.0.0
 
 dev_dependencies:
   flutter_test:
