@@ -3,17 +3,21 @@ import 'package:boiler_time/main.dart';
 import 'package:boiler_time/services/auth/auth_exceptions.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/auth/login_view.dart';
+import 'package:boiler_time/views/boiler/developers.dart';
 import 'package:boiler_time/views/boiler/email_edit.dart';
 import 'package:boiler_time/views/boiler/name_edit.dart';
 import 'package:boiler_time/views/main_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
+import '../../utilities/show_error_dialog.dart';
 
 class Boiler extends StatefulWidget {
   const Boiler({super.key});
@@ -66,11 +70,56 @@ class _BoilerState extends State<Boiler> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
-        leading: Icon(Icons.stop_circle_outlined),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: Image(
+              image: AssetImage('assets/bt_logo_white.png'),
+            ),
+          ),
+        ),
+        // backgroundColor: Color(0x44000000),
+        // elevation: 0,
         // title: Text(
-        //   "Purdue Univ",
-        //   style: TextStyle(fontStyle: FontStyle.italic),
+        //   "Boiler Time",
+        //   // style: TextStyle(fontSize: 15),
         // ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(5),
+          ),
+        ),
+
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LoginView();
+                        },
+                      ),
+                      (route) => false,
+                    );
+                  }
+              }
+            },
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text("Log out"),
+                )
+              ];
+            },
+          )
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
@@ -80,6 +129,9 @@ class _BoilerState extends State<Boiler> {
           },
           child: ListView(
             children: [
+              SizedBox(
+                height: 50,
+              ),
               Center(
                 child: Stack(
                   children: [
@@ -105,42 +157,262 @@ class _BoilerState extends State<Boiler> {
                 ),
               ),
               const SizedBox(height: 30),
-              Text(
-                "Hello, World!    " + name.toString(),
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(email.toString()),
-              const SizedBox(height: 30),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    CupertinoPageRoute(
-                      builder: (BuildContext context) {
-                        return const NameEdit();
-                      },
+              Center(
+                child: Text(
+                  name.toString(),
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    (route) => false,
-                  );
-                },
-                child: const Text("Edit name"),
+                  ),
+                ),
               ),
-              TextButton(
-                onPressed: () async {
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout) {
-                    await AuthService.firebase().logOut();
-                    Navigator.of(context, rootNavigator: true)
-                        .pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LoginView();
-                        },
+              const SizedBox(height: 20),
+              Center(
+                child: Text(email.toString(),
+                    style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontSize: 15,
                       ),
-                      (_) => false,
-                    );
-                  }
-                },
-                child: const Text("log out"),
+                    )),
+              ),
+              const SizedBox(height: 30),
+              Container(
+                  // width: 10000,
+                  // margin: const EdgeInsets.all(15.0),
+                  // padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(
+                            5.0) //                 <--- border radius here
+                        ),
+                  ),
+                  child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Text(
+                              "Account",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.person_add,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                  title: Text(
+                                'My posts',
+                              )),
+                              onPressed: () {
+                                // PersistentNavBarNavigator.pushNewScreen(
+                                //   context,
+                                //   screen: NameEdit(),
+                                //   withNavBar:
+                                //       false, // OPTIONAL VALUE. True by default.
+                                //   pageTransitionAnimation:
+                                //       PageTransitionAnimation.cupertino,
+                                // );
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                  title: Text(
+                                'Edit name',
+                              )),
+                              onPressed: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: NameEdit(),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                title: Text('Change password'),
+                              ),
+                              onPressed: () async {
+                                editEmailDialog(context);
+
+                                var email =
+                                    FirebaseAuth.instance.currentUser?.email;
+                                await AuthService.firebase().sendPasswordReset(
+                                    toEmail: email.toString());
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
+                            ),
+                            child: const ListTile(
+                              title: Text('Log out'),
+                            ),
+                            onPressed: () async {
+                              final shouldLogout =
+                                  await showLogOutDialog(context);
+                              if (shouldLogout) {
+                                await AuthService.firebase().logOut();
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return LoginView();
+                                    },
+                                  ),
+                                  (route) => false,
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                      ])),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  // width: 10000,
+                  // margin: const EdgeInsets.all(15.0),
+                  // padding: const EdgeInsets.all(3.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.2),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(
+                            5.0) //                 <--- border radius here
+                        ),
+                  ),
+                  child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Text(
+                              "About",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.info,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: ListTile(
+                                title: Row(
+                                  children: [
+                                    Text('App version'),
+                                    Text(
+                                      '  v 0.0.0',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          color: Colors.black.withOpacity(0.5)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onPressed: () {}),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0x00000000),
+                              ),
+                              child: const ListTile(
+                                title: Text('Developers'),
+                              ),
+                              onPressed: () {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: Developers(),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
+                              }),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0x00000000),
+                            ),
+                            child: const ListTile(
+                              title: Text('Github'),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ])),
+              SizedBox(
+                height: 40,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,7 +431,9 @@ Future<bool> showLogOutDialog(BuildContext context) {
       builder: (context) {
         return AlertDialog(
           title: const Text('Sign out'),
-          content: const Text('Are you sure you want to sign out?'),
+          content: const Text(
+            'Do you want to sign out?',
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -172,6 +446,26 @@ Future<bool> showLogOutDialog(BuildContext context) {
                   Navigator.of(context).pop(true);
                 },
                 child: const Text('Log out'))
+          ],
+        );
+      }).then((value) => value ?? false);
+}
+
+Future<bool> editEmailDialog(BuildContext context) {
+  return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          // title: const Text('Sign out'),
+          content: const Text(
+              'Password reset email has been sent to the email, Please check your email'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('close'),
+            ),
           ],
         );
       }).then((value) => value ?? false);

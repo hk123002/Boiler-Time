@@ -14,23 +14,25 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MaterialApp(
-    title: 'Corn Market Demo',
+    title: 'Boiler Time Demo',
     theme: ThemeData(
+      //   primary: Color.fromARGB(255, 193, 155, 200),
+
       colorScheme: const ColorScheme(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         surface: Color.fromARGB(169, 52, 45, 53),
-        onSurface: Colors.white,
+        onSurface: Colors.black,
         // Colors that are not relevant to AppBar in DARK mode:
-        primary: Color.fromARGB(255, 193, 155, 200),
+        primary: Color.fromARGB(255, 204, 170, 210),
         onPrimary: Colors.white,
-        primaryVariant: Colors.blue,
-        secondary: Color.fromARGB(255, 193, 155, 200),
+        primaryVariant: Colors.black,
+        secondary: Color.fromARGB(255, 204, 170, 210),
         secondaryVariant: Colors.orange,
         onSecondary: Colors.white,
         background: Colors.green,
         onBackground: Colors.grey,
         error: Colors.purple,
-        onError: Colors.white,
+        onError: Colors.black,
       ),
     ),
     home: const HomePage(),
@@ -66,7 +68,16 @@ class HomePage extends StatelessWidget {
               return const LoginView();
             }
           default:
-            return const CircularProgressIndicator();
+            return Scaffold(
+              body: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: Image.asset(
+                  'assets/splash.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
         }
       },
     );

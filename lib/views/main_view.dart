@@ -32,25 +32,25 @@ class MainView extends StatelessWidget {
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.add_business),
+          icon: const Icon(Icons.home_outlined),
           title: ("Home"),
           activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.monitor_sharp),
+          icon: const Icon(Icons.margin),
           title: ("Community"),
           activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.calendar_month),
+          icon: const Icon(Icons.calendar_month_outlined),
           title: ("Calendar"),
           activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.people),
+          icon: const Icon(Icons.person),
           title: ("Boilers"),
           activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
           inactiveColorPrimary: Colors.black,
@@ -83,14 +83,14 @@ class MainView extends StatelessWidget {
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.
-        duration: Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 100),
         curve: Curves.ease,
       ),
       screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
         animateTabTransition: true,
         curve: Curves.ease,
-        duration: Duration(milliseconds: 100),
+        duration: Duration(milliseconds: 300),
       ),
       navBarStyle:
           NavBarStyle.style6, // Choose the nav bar style with this property.

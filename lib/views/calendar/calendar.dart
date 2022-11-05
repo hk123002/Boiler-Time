@@ -13,8 +13,11 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import 'package:time_planner/time_planner.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utilities/show_error_dialog.dart';
+import '../auth/login_view.dart';
+import '../boiler/boiler.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -105,7 +108,8 @@ class _CalendarViewState extends State<Calendar> {
   //add new schedule
   void _addObject(BuildContext context) {
     List<Color?> colors = [
-      Color.fromARGB(255, 193, 155, 200),
+      // Color.fromARGB(255, 193, 155, 200),
+      Color.fromARGB(255, 233, 213, 237),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -162,11 +166,14 @@ class _CalendarViewState extends State<Calendar> {
         TimePlannerTask(
           color: colors[Random().nextInt(colors.length)],
           dateTime: TimePlannerDateTime(
-              day: day, hour: startHourmin[0], minutes: startHourmin[1]),
+              day: day, hour: startHourmin[0] + 1, minutes: startHourmin[1]),
           minutesDuration: duration,
           onTap: () => {},
           child: Text(
             _className.text,
+            style: GoogleFonts.lato(
+              textStyle: TextStyle(),
+            ),
             // style: TextStyle(color: Colors.grey[350], fontSize: 12),
           ),
         ),
@@ -187,7 +194,8 @@ class _CalendarViewState extends State<Calendar> {
     String endTimeHint,
   ) {
     List<Color?> colors = [
-      Color.fromARGB(255, 193, 155, 200),
+      // Color.fromARGB(255, 193, 155, 200),
+      Color.fromARGB(255, 233, 213, 237),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -271,7 +279,8 @@ class _CalendarViewState extends State<Calendar> {
   Future<void> _intialize(BuildContext context) async {
     tasks.clear();
     List<Color?> colors = [
-      Color.fromARGB(255, 193, 155, 200),
+      // Color.fromARGB(255, 193, 155, 200),
+      Color.fromARGB(255, 233, 213, 237),
     ];
 
     devtools.log("--------------------------");
@@ -356,8 +365,8 @@ class _CalendarViewState extends State<Calendar> {
           tasks.add(
             TimePlannerTask(
               color: colors[Random().nextInt(colors.length)],
-              dateTime:
-                  TimePlannerDateTime(day: day, hour: hour, minutes: minute),
+              dateTime: TimePlannerDateTime(
+                  day: day, hour: hour + 1, minutes: minute),
               minutesDuration: duration,
               onTap: () async {
                 await showDialog<void>(
@@ -365,26 +374,38 @@ class _CalendarViewState extends State<Calendar> {
                   builder: (BuildContext context) {
                     return StatefulBuilder(builder: (context, setState) {
                       return AlertDialog(
-                        title: const Text('Edit schedule'),
+                        title: Text(
+                          'Edit schedule',
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(),
+                          ),
+                        ),
                         content: ListView(shrinkWrap: true, children: [
                           TextFormField(
                             controller: _className,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(),
-                              labelText: classNameHint,
+                              hintText: classNameHint,
+                              // floatingLabelBehavior:
+                              // FloatingLabelBehavior.always,
                             ),
                           ),
                           DropdownButtonHideUnderline(
                               child: DropdownButton2(
-                            hint: Text(dayHint),
+                            hint: Text(
+                              dayHint,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(),
+                              ),
+                            ),
                             items: dayConstant
                                 .map((item) => DropdownMenuItem<String>(
                                       value: item,
                                       child: Text(
                                         item,
-                                        style: const TextStyle(
-                                            // fontSize: 14,
-                                            ),
+                                        style: GoogleFonts.lato(
+                                          textStyle: TextStyle(),
+                                        ),
                                       ),
                                     ))
                                 .toList(),
@@ -403,8 +424,8 @@ class _CalendarViewState extends State<Calendar> {
                               child: DropdownButton2(
                             hint: Text(
                               startTimeHint,
-                              style: TextStyle(
-                                // fontSize: 14,
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(),
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
@@ -470,6 +491,7 @@ class _CalendarViewState extends State<Calendar> {
                             child: const Text('Cancel'),
                             onPressed: () {
                               _className.text = "";
+
                               selectedDay = null;
                               selectedEndTime = null;
                               selectedStartTime = null;
@@ -587,7 +609,11 @@ class _CalendarViewState extends State<Calendar> {
               },
               child: Text(
                 schedule,
-                // style: TextStyle(color: Colors.grey[350], fontSize: 12),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(),
+                  color: Theme.of(context).hintColor,
+                ),
               ),
             ),
           );
@@ -602,11 +628,56 @@ class _CalendarViewState extends State<Calendar> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         toolbarHeight: 40,
-        leading: Icon(Icons.stop_circle_outlined),
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Center(
+            child: Image(
+              image: AssetImage('assets/bt_logo_white.png'),
+            ),
+          ),
+        ),
+        // backgroundColor: Color(0x44000000),
+        // elevation: 0,
         // title: Text(
-        //   "Purdue Univ",
-        //   style: TextStyle(fontStyle: FontStyle.italic),
+        //   "Boiler Time",
+        //   // style: TextStyle(fontSize: 15),
         // ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(5),
+          ),
+        ),
+
+        actions: [
+          PopupMenuButton(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LoginView();
+                        },
+                      ),
+                      (route) => false,
+                    );
+                  }
+              }
+            },
+            itemBuilder: (context) {
+              return const [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text("Log out"),
+                )
+              ];
+            },
+          )
+        ],
       ),
       // resizeToAvoidBottomInset: false,
       body: Center(
@@ -617,6 +688,7 @@ class _CalendarViewState extends State<Calendar> {
             cellHeight: 40,
             cellWidth: 59,
             showScrollBar: false,
+            dividerColor: Colors.black.withOpacity(0.5),
           ),
           headers: const [
             TimePlannerTitle(
@@ -813,7 +885,9 @@ class _CalendarViewState extends State<Calendar> {
           },
         ),
         tooltip: 'Add schedule',
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+        ),
       ),
     );
   }

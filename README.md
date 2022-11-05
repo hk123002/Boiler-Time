@@ -3,8 +3,8 @@
 <a href="https://flutter.dev/">
   <h1 align="center">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://storage.googleapis.com/cms-storage-bucket/6e19fee6b47b36ca613f.png">
-      <img alt="Flutter" src="https://storage.googleapis.com/cms-storage-bucket/c823e53b3a1a7b0d36a9.png">
+      <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/89869612/197655945-524d6f7d-a44d-49c7-8e18-c6348baa05e6.png">
+      <img alt="Flutter" src="https://user-images.githubusercontent.com/89869612/197655945-524d6f7d-a44d-49c7-8e18-c6348baa05e6.png">
     </picture>
   </h1>
 </a>
@@ -39,58 +39,9 @@ Add Firebase to your Flutter app
 
 [Add Firebase](https://firebase.google.com/docs/flutter/setup?platform=ios)
 
-## what we need
 
     
-    ├── Home  
-    │   ├── icons
-    |   │   ├── bus schedule
-    |   │   ├── brightspace
-    |   │   ├── Academic schedule
-    |   │   ├── dining menu
-    |   │   ├── library time
-    │   ├── advertisement
-    │   ├── pineed comunity
-    ├── community
-    │   ├── post list via popularity
-    │   │   ├── community
-    ├── Calendar 
-    ├── Boiler
-    │   ├── view & edit my profile
-    │   ├── all community
-    ├── side menu                 
-    │   ├── log out
 
-    
-   ## project structure
-
-    
-    ├── constants
-    |  ├── routes
-    ├── enums  
-    |  ├── menu_action
-    ├── services
-    |  ├── auth
-    ├── utility
-    |   ├── show_error_dialog
-    ├── views    
-    │   ├── auth
-    │   ├── community
-    │   ├── calendar
-    │   ├── boiler
-    │   ├── home
-    ├── main    
-    
-   ## Data base structure
-
-    
-    ├── user
-    │   ├──email
-    │   ├──id
-    │   ├──name
-    ├── calendar
-    │   ├──schedule
-    
     
 ## dependecy
 

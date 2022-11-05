@@ -62,12 +62,12 @@ class _LoginViewState extends State<LoginView> {
                     padding: const EdgeInsets.only(top: 60.0),
                     child: Center(
                       child: Container(
-                          width: 200,
+                          width: 300,
                           height: 150,
                           /*decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(50.0)),*/
-                          child: Image.asset('assets/geng.png')),
+                          child: Image.asset('assets/boilertime_banner.png')),
                     ),
                   ),
                 ),
@@ -87,7 +87,7 @@ class _LoginViewState extends State<LoginView> {
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Email',
-                          hintText: 'Enter valid email id as hello@gmail.com'),
+                          hintText: 'Enter valid email as hello@gmail.com'),
                     ),
                   ),
                 ),
@@ -113,10 +113,20 @@ class _LoginViewState extends State<LoginView> {
                   height: 50,
                   width: 250,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 204, 170, 210),
                       borderRadius: BorderRadius.circular(20)),
                   child: TextButton(
                     onPressed: () async {
+                      Scaffold(
+                        body: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Image.asset(
+                            'assets/splash.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
                       final email = _email.text;
                       final password = _password.text;
 
@@ -190,7 +200,7 @@ class _LoginViewState extends State<LoginView> {
                     },
                     child: const Text(
                       'Login',
-                      style: TextStyle(color: Colors.black, fontSize: 15),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
                 ),

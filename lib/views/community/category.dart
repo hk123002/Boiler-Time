@@ -9,6 +9,10 @@ import 'package:boiler_time/views/community/sophomore.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../enums/menu_action.dart';
+import '../../services/auth/auth_service.dart';
+import '../auth/login_view.dart';
+import '../boiler/boiler.dart';
 import 'exam.dart';
 import 'miscellaneous.dart';
 import 'ratemyprofessor.dart';
@@ -21,11 +25,56 @@ class Category extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 40,
-          leading: Icon(Icons.stop_circle_outlined),
+          leading: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+              child: Image(
+                image: AssetImage('assets/bt_logo_white.png'),
+              ),
+            ),
+          ),
+          // backgroundColor: Color(0x44000000),
+          // elevation: 0,
           // title: Text(
-          //   "Purdue Univ",
-          //   style: TextStyle(fontStyle: FontStyle.italic),
+          //   "Boiler Time",
+          //   // style: TextStyle(fontSize: 15),
           // ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(5),
+            ),
+          ),
+
+          actions: [
+            PopupMenuButton(
+              onSelected: (value) async {
+                switch (value) {
+                  case MenuAction.logout:
+                    final shouldLogout = await showLogOutDialog(context);
+                    if (shouldLogout) {
+                      await AuthService.firebase().logOut();
+                      Navigator.of(context, rootNavigator: true)
+                          .pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return LoginView();
+                          },
+                        ),
+                        (route) => false,
+                      );
+                    }
+                }
+              },
+              itemBuilder: (context) {
+                return const [
+                  PopupMenuItem<MenuAction>(
+                    value: MenuAction.logout,
+                    child: Text("Log out"),
+                  )
+                ];
+              },
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Align(
