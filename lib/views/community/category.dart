@@ -90,9 +90,12 @@ class Category extends StatelessWidget {
                         title: Text('Exam'),
                       ),
                       onPressed: () {
-                        Navigator.push(
+                        PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          MaterialPageRoute(builder: (context) => const Post()),
+                          screen: Post(),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
                         );
                       }),
                   // TextButton(
