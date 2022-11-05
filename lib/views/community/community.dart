@@ -12,6 +12,8 @@ import '../main_view.dart';
 class Community extends StatefulWidget {
   const Community({super.key});
 
+  get snap => null;
+
   @override
   State<Community> createState() => _communityState();
 }
