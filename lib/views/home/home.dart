@@ -99,8 +99,11 @@ class _homeViewState extends State<home> {
       dayHint = 2;
     } else if (DateFormat('EEEE').format(date) == "Thursday") {
       dayHint = 3;
-    } else {
+    } else if (DateFormat('EEEE').format(date) == "Friday") {
       dayHint = 4;
+    }
+    {
+      dayHint = -1;
     }
     var calenarcollection = FirebaseFirestore.instance.collection('calendar');
 
@@ -186,59 +189,59 @@ class _homeViewState extends State<home> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        toolbarHeight: 40,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Center(
-            child: Image(
-              image: AssetImage('assets/bt_logo_white.png'),
-            ),
-          ),
-        ),
-        // backgroundColor: Color(0x44000000),
-        // elevation: 0,
-        // title: Text(
-        //   "Boiler Time",
-        //   // style: TextStyle(fontSize: 15),
-        // ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(5),
-          ),
-        ),
+      // appBar: AppBar(
+      //   toolbarHeight: 40,
+      //   leading: const Padding(
+      //     padding: EdgeInsets.all(8.0),
+      //     child: Center(
+      //       child: Image(
+      //         image: AssetImage('assets/bt_logo_white.png'),
+      //       ),
+      //     ),
+      //   ),
+      //   // backgroundColor: Color(0x44000000),
+      //   // elevation: 0,
+      //   // title: Text(
+      //   //   "Boiler Time",
+      //   //   // style: TextStyle(fontSize: 15),
+      //   // ),
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.vertical(
+      //       bottom: Radius.circular(5),
+      //     ),
+      //   ),
 
-        actions: [
-          PopupMenuButton(
-            onSelected: (value) async {
-              switch (value) {
-                case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout) {
-                    await AuthService.firebase().logOut();
-                    Navigator.of(context, rootNavigator: true)
-                        .pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LoginView();
-                        },
-                      ),
-                      (route) => false,
-                    );
-                  }
-              }
-            },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<MenuAction>(
-                  value: MenuAction.logout,
-                  child: Text("Log out"),
-                )
-              ];
-            },
-          )
-        ],
-      ),
+      //   actions: [
+      //     PopupMenuButton(
+      //       onSelected: (value) async {
+      //         switch (value) {
+      //           case MenuAction.logout:
+      //             final shouldLogout = await showLogOutDialog(context);
+      //             if (shouldLogout) {
+      //               await AuthService.firebase().logOut();
+      //               Navigator.of(context, rootNavigator: true)
+      //                   .pushAndRemoveUntil(
+      //                 MaterialPageRoute(
+      //                   builder: (BuildContext context) {
+      //                     return LoginView();
+      //                   },
+      //                 ),
+      //                 (route) => false,
+      //               );
+      //             }
+      //         }
+      //       },
+      //       itemBuilder: (context) {
+      //         return const [
+      //           PopupMenuItem<MenuAction>(
+      //             value: MenuAction.logout,
+      //             child: Text("Log out"),
+      //           )
+      //         ];
+      //       },
+      //     )
+      //   ],
+      // ),
       body: ListView(
         children: [
           Wrap(children: [
@@ -290,108 +293,188 @@ class _homeViewState extends State<home> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 150, // card height
-              child: PageView.builder(
-                itemCount: classList.length,
-                controller: PageController(viewportFraction: 0.85),
-                onPageChanged: (int index) => setState(() => _index = index),
-                itemBuilder: (_, i) {
-                  return Transform.scale(
-                    scale: i == _index ? 1 : 0.9,
-                    child: Card(
-                      elevation: 6,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(
-                              height: 20,
+            Visibility(
+              visible: classList.isEmpty,
+              child: Card(
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.schedule),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Today's class",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            Visibility(
-                                // visible: _index == 0,
-                                child: Row(
-                              children: [
-                                Icon(Icons.schedule),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Today's class",
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 35,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 35,
+                          ),
+                          Text(
+                            "You have no class today!",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                                // fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(children: [
+                        SizedBox(
+                          width: 35,
+                        ),
+                      ]),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Visibility(
+              visible: classList.isNotEmpty,
+              child: SizedBox(
+                height: 150, // card height
+                child: PageView.builder(
+                  itemCount: classList.length,
+                  controller: PageController(viewportFraction: 0.85),
+                  onPageChanged: (int index) => setState(() => _index = index),
+                  itemBuilder: (_, i) {
+                    return Transform.scale(
+                      scale: i == _index ? 1 : 0.9,
+                      child: Card(
+                        elevation: 6,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.schedule),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "Today's class",
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 35,
+                                  ),
+                                  Text(
+                                    DateFormat('EEEE').format(date),
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 35,
+                                  ),
+                                  Text(
+                                    classList[i],
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                        fontSize: 15,
+                                        // fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(children: [
                                 SizedBox(
                                   width: 35,
                                 ),
                                 Text(
-                                  DateFormat('EEEE').format(date),
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 35,
-                                ),
-                                Text(
-                                  classList[i],
+                                  hourList[i],
                                   style: GoogleFonts.lato(
                                     textStyle: TextStyle(
                                       fontSize: 15,
-                                      // fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(children: [
-                              SizedBox(
-                                width: 35,
-                              ),
-                              Text(
-                                hourList[i],
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ),
-                            ]),
-                          ],
+                              ]),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             SizedBox(

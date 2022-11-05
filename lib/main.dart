@@ -19,7 +19,7 @@ void main() {
       //   primary: Color.fromARGB(255, 193, 155, 200),
 
       colorScheme: const ColorScheme(
-        brightness: Brightness.light,
+        brightness: Brightness.dark,
         surface: Color.fromARGB(169, 52, 45, 53),
         onSurface: Colors.black,
         // Colors that are not relevant to AppBar in DARK mode:

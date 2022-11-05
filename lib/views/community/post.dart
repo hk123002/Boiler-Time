@@ -46,7 +46,9 @@ class _communityState extends State<Post> {
                 ),
                 TextField(
                   controller: _content,
-                  decoration: const InputDecoration(labelText: 'Content'),
+                  maxLines: 10,
+                  decoration: const InputDecoration(
+                      alignLabelWithHint: true, labelText: 'Content'),
                 ),
                 const SizedBox(
                   height: 40,
@@ -57,7 +59,11 @@ class _communityState extends State<Post> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _exam.add({"Title": title, "Content": content});
+                    await _exam.add({
+                      "Title": title,
+                      "Content": content,
+                      "Author": FirebaseAuth.instance.currentUser?.uid
+                    });
 
                     _title.text = '';
                     _content.text = '';
@@ -95,8 +101,10 @@ class _communityState extends State<Post> {
                   decoration: const InputDecoration(labelText: 'Title'),
                 ),
                 TextField(
+                  maxLines: 10,
                   controller: _content,
-                  decoration: const InputDecoration(labelText: 'Content'),
+                  decoration: const InputDecoration(
+                      alignLabelWithHint: true, labelText: 'Content'),
                 ),
                 const SizedBox(
                   height: 40,
@@ -107,8 +115,11 @@ class _communityState extends State<Post> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _exam.add({"Title": title, "Content": content});
-
+                    await _exam.doc(documentSnapshot?.id).update({
+                      "Title": title,
+                      "Content": content,
+                      "Author": FirebaseAuth.instance.currentUser?.uid
+                    });
                     _title.text = '';
                     _content.text = '';
                     Navigator.of(context).pop();
@@ -150,7 +161,11 @@ class _communityState extends State<Post> {
                     margin: const EdgeInsets.all(10),
                     child: ListTile(
                       title: Text(documentSnapshot['Title']),
-                      subtitle: Text(documentSnapshot['Content']),
+                      subtitle: Text(
+                        documentSnapshot['Content'].length > 12
+                            ? documentSnapshot['Content'].substring(0, 12)
+                            : documentSnapshot['Content'],
+                      ),
                       onTap: () {
                         devtools.log(documentSnapshot.id);
                         Navigator.push(
@@ -161,17 +176,22 @@ class _communityState extends State<Post> {
                                   collectionName: "post")),
                         );
                       },
-                      trailing: SizedBox(
-                        width: 100,
-                        child: Row(
-                          children: [
-                            IconButton(
-                                icon: const Icon(Icons.edit),
-                                onPressed: () => _update(documentSnapshot)),
-                            IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () => _delete(documentSnapshot.id)),
-                          ],
+                      trailing: Visibility(
+                        visible: documentSnapshot["Author"] ==
+                            FirebaseAuth.instance.currentUser?.uid,
+                        child: SizedBox(
+                          width: 100,
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () => _update(documentSnapshot)),
+                              IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () =>
+                                      _delete(documentSnapshot.id)),
+                            ],
+                          ),
                         ),
                       ),
                     ),
