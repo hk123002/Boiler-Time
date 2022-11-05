@@ -5,9 +5,7 @@ import 'dart:math';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
-import 'package:boiler_time/views/community/freshman.dart';
-import 'package:boiler_time/views/community/intern.dart';
-import 'package:boiler_time/views/community/ratemyprofessor.dart';
+
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
 import 'package:boiler_time/views/home/about/dining_menu.dart';
@@ -23,10 +21,11 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../auth/login_view.dart';
 import '../boiler/boiler.dart';
-import '../community/exam.dart';
+import '../community/post.dart';
 import '../main_view.dart';
-import 'package:intl/intl.dart';
+import '../community/post.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -628,7 +627,7 @@ class _homeViewState extends State<home> {
                       onPressed: () => {
                         PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          screen: Exam(),
+                          screen: Post(),
                           withNavBar: false, // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
@@ -652,7 +651,7 @@ class _homeViewState extends State<home> {
                       onPressed: () => {
                         PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          screen: Intern(),
+                          screen: Post(),
                           withNavBar: false, // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
@@ -676,7 +675,7 @@ class _homeViewState extends State<home> {
                       onPressed: () => {
                         PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          screen: Freshman(),
+                          screen: Post(),
                           withNavBar: false, // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
@@ -700,7 +699,7 @@ class _homeViewState extends State<home> {
                       onPressed: () => {
                         PersistentNavBarNavigator.pushNewScreen(
                           context,
-                          screen: RateMyProfessor(),
+                          screen: Post(),
                           withNavBar: false, // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,

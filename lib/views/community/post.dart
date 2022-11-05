@@ -1,6 +1,7 @@
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
 import 'package:boiler_time/views/community/postPage.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,18 +10,17 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../main_view.dart';
 
-class Senior extends StatefulWidget {
-  const Senior({super.key});
+class Post extends StatefulWidget {
+  const Post({super.key});
 
   @override
-  State<Senior> createState() => _communityState();
+  State<Post> createState() => _communityState();
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
-final CollectionReference _senior =
-    FirebaseFirestore.instance.collection('senior');
+final CollectionReference _exam = FirebaseFirestore.instance.collection('post');
 
-class _communityState extends State<Senior> {
+class _communityState extends State<Post> {
 // text fields' controllers
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
@@ -57,7 +57,7 @@ class _communityState extends State<Senior> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _senior.add({"Title": title, "Content": content});
+                    await _exam.add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -107,7 +107,7 @@ class _communityState extends State<Senior> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _senior.add({"Title": title, "Content": content});
+                    await _exam.add({"Title": title, "Content": content});
 
                     _title.text = '';
                     _content.text = '';
@@ -120,8 +120,8 @@ class _communityState extends State<Senior> {
         });
   }
 
-  Future<void> _delete(String seniorID) async {
-    await _senior.doc(seniorID).delete();
+  Future<void> _delete(String examID) async {
+    await _exam.doc(examID).delete();
 
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('You have successfully deleted a post')));
@@ -132,13 +132,13 @@ class _communityState extends State<Senior> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 40,
-          title: const Text('Senior'),
+          title: const Text('Post'),
         ),
         //body: ListView.builder(
         //itemCount: 5,
         //itemBuilder: (BuildContext context, int index) {
         body: StreamBuilder(
-          stream: _senior.snapshots(),
+          stream: _exam.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return ListView.builder(
@@ -151,6 +151,16 @@ class _communityState extends State<Senior> {
                     child: ListTile(
                       title: Text(documentSnapshot['Title']),
                       subtitle: Text(documentSnapshot['Content']),
+                      onTap: () {
+                        devtools.log(documentSnapshot.id);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PostPage(
+                                  documentID: documentSnapshot.id,
+                                  collectionName: "post")),
+                        );
+                      },
                       trailing: SizedBox(
                         width: 100,
                         child: Row(
