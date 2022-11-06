@@ -6,31 +6,24 @@ import 'package:boiler_time/views/main_view.dart';
 import 'package:boiler_time/views/auth/register_view.dart';
 import 'package:boiler_time/views/auth/verify_email_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MaterialApp(
     title: 'Boiler Time Demo',
-    theme: ThemeData(
-      // Define the default brightness and colors.
-      brightness: Brightness.dark,
-
-      // primaryColor: Colors.lightBlue[800],
-
-      // Define the default font family.
-      // fontFamily: 'Georgia',
-
-      // Define the default `TextTheme`. Use this to specify the default
-      // text styling for headlines, titles, bodies of text, and more.
-      // textTheme: const TextTheme(
-      //   headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-      //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-      //   bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-      // ),
+    theme: FlexThemeData.dark(
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 1,
+      // appBarOpacity: 0.90,
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      // To use the playground font, add GoogleFonts package and uncomment
+      fontFamily: GoogleFonts.rubik().fontFamily,
     ),
     home: const HomePage(),
     routes: {

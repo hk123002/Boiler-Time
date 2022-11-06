@@ -18,6 +18,7 @@ import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
 import '../../utilities/show_error_dialog.dart';
+import 'myPost.dart';
 
 class Boiler extends StatefulWidget {
   const Boiler({super.key});
@@ -69,7 +70,7 @@ class _BoilerState extends State<Boiler> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 46, 46, 46),
+        // backgroundColor: Color.fromARGB(255, 46, 46, 46),
         elevation: 0.0,
 
         toolbarHeight: 40,
@@ -163,24 +164,181 @@ class _BoilerState extends State<Boiler> {
               Center(
                 child: Text(
                   name.toString(),
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               const SizedBox(height: 20),
               Center(
-                child: Text(email.toString(),
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: 15,
-                      ),
-                    )),
+                child: Text(
+                  email.toString(),
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
               ),
               const SizedBox(height: 30),
+              Container(
+                // margin: const EdgeInsets.all(15.0),
+                // padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 40, 40, 40),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                          5.0) //                 <--- border radius here
+                      ),
+                ),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 13,
+                            ),
+                            Text(
+                              "\u{2714}    Most viewed",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(children: [
+                        SizedBox(
+                          width: 110,
+                        ),
+                      ]),
+                    ]),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Exam',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () => {
+                          // PersistentNavBarNavigator.pushNewScreen(
+                          //   context,
+                          //   screen: Post(),
+                          //   withNavBar:
+                          //       false, // OPTIONAL VALUE. True by default.
+                          //   pageTransitionAnimation:
+                          //       PageTransitionAnimation.cupertino,
+                          // )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Internship',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () => {
+                          // PersistentNavBarNavigator.pushNewScreen(
+                          //   context,
+                          //   screen: Post(),
+                          //   withNavBar:
+                          //       false, // OPTIONAL VALUE. True by default.
+                          //   pageTransitionAnimation:
+                          //       PageTransitionAnimation.cupertino,
+                          // )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Freshman',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () => {
+                          // PersistentNavBarNavigator.pushNewScreen(
+                          //   context,
+                          //   screen: Post(),
+                          //   withNavBar:
+                          //       false, // OPTIONAL VALUE. True by default.
+                          //   pageTransitionAnimation:
+                          //       PageTransitionAnimation.cupertino,
+                          // )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Rate My Professor',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onPressed: () => {
+                          // PersistentNavBarNavigator.pushNewScreen(
+                          //   context,
+                          //   screen: Post(),
+                          //   withNavBar:
+                          //       false, // OPTIONAL VALUE. True by default.
+                          //   pageTransitionAnimation:
+                          //       PageTransitionAnimation.cupertino,
+                          // )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
+              ),
               Container(
                   // width: 10000,
                   // margin: const EdgeInsets.all(15.0),
@@ -206,11 +364,9 @@ class _BoilerState extends State<Boiler> {
                             ),
                             Text(
                               "Account",
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(
@@ -233,14 +389,14 @@ class _BoilerState extends State<Boiler> {
                                 'My posts',
                               )),
                               onPressed: () {
-                                // PersistentNavBarNavigator.pushNewScreen(
-                                //   context,
-                                //   screen: NameEdit(),
-                                //   withNavBar:
-                                //       false, // OPTIONAL VALUE. True by default.
-                                //   pageTransitionAnimation:
-                                //       PageTransitionAnimation.cupertino,
-                                // );
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: MyPost(),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                );
                               }),
                         ),
                         SizedBox(
@@ -341,11 +497,9 @@ class _BoilerState extends State<Boiler> {
                             ),
                             Text(
                               "About",
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(

@@ -66,7 +66,7 @@ class MainView extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.note),
           // iconSize: 20,
-          title: ("boilers"),
+          title: ("note"),
           textStyle: GoogleFonts.rubik(
             textStyle: TextStyle(fontSize: 10),
           ),
@@ -97,7 +97,7 @@ class MainView extends StatelessWidget {
       items: _navBarsItems(),
       confineInSafeArea: true,
       backgroundColor:
-          Color.fromARGB(255, 42, 42, 42), // Default is Colors.white.
+          Color.fromARGB(255, 29, 29, 29), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       // resizeToAvoidBottomInset:
       //     true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.

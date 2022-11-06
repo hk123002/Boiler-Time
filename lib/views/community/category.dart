@@ -14,7 +14,7 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 46, 46, 46),
+          // backgroundColor: Color.fromARGB(255, 46, 46, 46),
           elevation: 0.0,
 
           toolbarHeight: 40,

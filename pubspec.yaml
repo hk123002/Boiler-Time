@@ -64,6 +64,8 @@ dev_dependencies:
   url_launcher: ^6.1.6
   intl: ^0.17.0 
   google_fonts: ^3.0.1
+  flex_color_scheme: ^4.1.1
+
 
 
 
