@@ -23,7 +23,7 @@ void main() {
       // appBarOpacity: 0.90,
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       // To use the playground font, add GoogleFonts package and uncomment
-      fontFamily: GoogleFonts.rubik().fontFamily,
+      fontFamily: GoogleFonts.quicksand().fontFamily,
     ),
     home: const HomePage(),
     routes: {

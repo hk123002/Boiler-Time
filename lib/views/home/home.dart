@@ -540,7 +540,7 @@ class _homeViewState extends State<home> {
                           child: Icon(
                             size: 20,
                             Icons.my_library_add,
-                            color: Color.fromARGB(255, 51, 255, 51),
+                            color: Color.fromARGB(180, 51, 255, 51),
                           ),
                         ),
                       ),
@@ -578,7 +578,7 @@ class _homeViewState extends State<home> {
                           child: Icon(
                             size: 20,
                             Icons.bus_alert_outlined,
-                            color: Color.fromARGB(255, 255, 255, 0),
+                            color: Color.fromARGB(180, 255, 255, 0),
                           ),
                         ),
                       ),
@@ -616,7 +616,7 @@ class _homeViewState extends State<home> {
                           child: Icon(
                             size: 20,
                             Icons.school,
-                            color: Color.fromARGB(255, 15, 223, 207),
+                            color: Color.fromARGB(180, 15, 223, 207),
                           ),
                         ),
                       ),
@@ -653,7 +653,7 @@ class _homeViewState extends State<home> {
                           child: Icon(
                             size: 20,
                             Icons.dining,
-                            color: Color.fromARGB(255, 223, 15, 135),
+                            color: Color.fromARGB(180, 223, 15, 135),
                           ),
                         ),
                       ),
@@ -690,7 +690,7 @@ class _homeViewState extends State<home> {
                           child: Icon(
                             size: 20,
                             Icons.schedule,
-                            color: Color.fromARGB(255, 103, 15, 223),
+                            color: Color.fromARGB(180, 103, 15, 223),
                           ),
                         ),
                       ),
@@ -749,9 +749,6 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       Row(children: [
-                        SizedBox(
-                          width: 110,
-                        ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0.0,
@@ -961,9 +958,9 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       Row(children: [
-                        SizedBox(
-                          width: 110,
-                        ),
+                        // SizedBox(
+                        //   width: 110,
+                        // ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0.0,
