@@ -69,6 +69,9 @@ class _BoilerState extends State<Boiler> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 46, 46, 46),
+        elevation: 0.0,
+
         toolbarHeight: 40,
         leading: const Padding(
           padding: EdgeInsets.all(8.0),

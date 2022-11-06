@@ -109,7 +109,7 @@ class _CalendarViewState extends State<Calendar> {
   void _addObject(BuildContext context) {
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),
-      Color.fromARGB(255, 233, 213, 237),
+      Color.fromARGB(255, 103, 103, 103),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -195,7 +195,7 @@ class _CalendarViewState extends State<Calendar> {
   ) {
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),
-      Color.fromARGB(255, 233, 213, 237),
+      Color.fromARGB(255, 103, 103, 103),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -280,7 +280,10 @@ class _CalendarViewState extends State<Calendar> {
     tasks.clear();
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),
-      Color.fromARGB(255, 233, 213, 237),
+      Color.fromARGB(255, 137, 60, 60),
+      Color.fromARGB(255, 172, 144, 144),
+      Color.fromARGB(255, 73, 33, 207),
+      Color.fromARGB(255, 218, 20, 53),
     ];
 
     devtools.log("--------------------------");
@@ -627,6 +630,9 @@ class _CalendarViewState extends State<Calendar> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 46, 46, 46),
+        elevation: 0.0,
+
         toolbarHeight: 40,
         leading: const Padding(
           padding: EdgeInsets.all(8.0),

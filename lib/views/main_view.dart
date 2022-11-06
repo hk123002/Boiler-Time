@@ -27,6 +27,7 @@ class MainView extends StatelessWidget {
         const communityscreen(),
         const chatscreen(),
         const profilescreen(),
+        const profilescreen(),
       ];
     }
 
@@ -37,40 +38,50 @@ class MainView extends StatelessWidget {
           // iconSize: 20,
           title: ("home"),
           textStyle: GoogleFonts.rubik(
-            textStyle: TextStyle(fontSize: 12),
+            textStyle: TextStyle(fontSize: 11),
           ),
           activeColorPrimary: Color.fromARGB(255, 255, 255, 255),
-          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
+          inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.margin),
           // iconSize: 20,
           title: ("community"),
           textStyle: GoogleFonts.rubik(
-            textStyle: TextStyle(fontSize: 12),
+            textStyle: TextStyle(fontSize: 10),
           ),
           activeColorPrimary: Color.fromARGB(255, 255, 255, 255),
-          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
+          inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.calendar_month_outlined),
           // iconSize: 20,
           title: ("calendar"),
           textStyle: GoogleFonts.rubik(
-            textStyle: TextStyle(fontSize: 12),
+            textStyle: TextStyle(fontSize: 10),
           ),
           activeColorPrimary: Color.fromARGB(255, 255, 255, 255),
-          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
+          inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.person),
+          icon: const Icon(Icons.note),
           // iconSize: 20,
           title: ("boilers"),
           textStyle: GoogleFonts.rubik(
-            textStyle: TextStyle(fontSize: 12),
+            textStyle: TextStyle(fontSize: 10),
           ),
           activeColorPrimary: Color.fromARGB(255, 252, 252, 252),
-          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
+          inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(Icons.person_outline),
+          // iconSize: 20,
+          title: ("boilers"),
+          textStyle: GoogleFonts.rubik(
+            textStyle: TextStyle(fontSize: 10),
+          ),
+          activeColorPrimary: Color.fromARGB(255, 252, 252, 252),
+          inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
         ),
       ];
     }
@@ -86,7 +97,7 @@ class MainView extends StatelessWidget {
       items: _navBarsItems(),
       confineInSafeArea: true,
       backgroundColor:
-          Color.fromARGB(255, 62, 62, 62), // Default is Colors.white.
+          Color.fromARGB(255, 42, 42, 42), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       // resizeToAvoidBottomInset:
       //     true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
