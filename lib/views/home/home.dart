@@ -188,10 +188,11 @@ class _homeViewState extends State<home> {
   }
 
   late final _random;
+  late final randomIndex;
   @override
   void initState() {
     _random = new Random();
-
+    randomIndex = _random.nextInt(welcomeMessage.length);
     _getUserData();
     super.initState();
   }
@@ -302,8 +303,7 @@ class _homeViewState extends State<home> {
                           width: 20,
                         ),
                         Text(
-                          welcomeMessage[
-                              _random.nextInt(welcomeMessage.length)],
+                          welcomeMessage[randomIndex],
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

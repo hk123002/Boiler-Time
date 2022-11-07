@@ -148,7 +148,6 @@ class _LoginViewState extends State<LoginView> {
                                 FirebaseAuth.instance.currentUser?.displayName,
                             "email": FirebaseAuth.instance.currentUser?.email,
                             "id": FirebaseAuth.instance.currentUser?.uid,
-                            "image": "",
                           });
 
                           Future getCalendar() async {
