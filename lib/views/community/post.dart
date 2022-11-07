@@ -62,7 +62,8 @@ class _communityState extends State<Post> {
                     DocumentReference docRef = await _exam.add({
                       "Title": title,
                       "Content": content,
-                      "Author": FirebaseAuth.instance.currentUser?.uid
+                      "Author": FirebaseAuth.instance.currentUser?.uid,
+                      "Comment": "",
                     });
 
                     devtools.log("---------");

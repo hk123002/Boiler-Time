@@ -27,7 +27,6 @@ class MainView extends StatelessWidget {
         const communityscreen(),
         const chatscreen(),
         const profilescreen(),
-        const profilescreen(),
       ];
     }
 
@@ -64,19 +63,9 @@ class MainView extends StatelessWidget {
           inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.note),
-          // iconSize: 20,
-          title: ("note"),
-          textStyle: GoogleFonts.rubik(
-            textStyle: TextStyle(fontSize: 10),
-          ),
-          activeColorPrimary: Color.fromARGB(255, 252, 252, 252),
-          inactiveColorPrimary: Color.fromARGB(255, 180, 179, 179),
-        ),
-        PersistentBottomNavBarItem(
           icon: const Icon(Icons.person_outline),
           // iconSize: 20,
-          title: ("boilers"),
+          title: ("profile"),
           textStyle: GoogleFonts.rubik(
             textStyle: TextStyle(fontSize: 10),
           ),
@@ -141,7 +130,7 @@ class communityscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Category();
+    return Category();
   }
 }
 

@@ -89,28 +89,11 @@ class _myPostViewState extends State<MyPost> {
           toolbarHeight: 40,
           title: const Text('Post'),
         ),
-        body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-          stream: FirebaseFirestore.instance
-              .collection("post")
-              .doc("upaEAOi13bDN0XZSxeoP")
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) return Text('Error = ${snapshot.error}');
-
-            if (snapshot.hasData) {
-              var output = snapshot.data;
-              var value = output!['Content']; // <-- Your value
-              return Text('Value = $value');
-            }
-
-            return Center(child: CircularProgressIndicator());
-          },
-        ),
+        body: Text("my post"));
 // Add new product
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () => _create(),
-        //   child: const Icon(Icons.add),
-        // ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
+    // floatingActionButton: FloatingActionButton(
+    //   onPressed: () => _create(),
+    //   child: const Icon(Icons.add),
+    // ),
   }
 }
