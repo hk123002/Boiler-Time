@@ -16,24 +16,20 @@ void main() {
   runApp(MaterialApp(
     title: 'Boiler Time Demo',
     theme: ThemeData(
-      //   primary: Color.fromARGB(255, 193, 155, 200),
+      // Define the default brightness and colors.
+      brightness: Brightness.dark,
+      // primaryColor: Colors.lightBlue[800],
 
-      colorScheme: const ColorScheme(
-        brightness: Brightness.light,
-        surface: Color.fromARGB(169, 52, 45, 53),
-        onSurface: Colors.black,
-        // Colors that are not relevant to AppBar in DARK mode:
-        primary: Color.fromARGB(255, 204, 170, 210),
-        onPrimary: Colors.white,
-        primaryVariant: Colors.black,
-        secondary: Color.fromARGB(255, 204, 170, 210),
-        secondaryVariant: Colors.orange,
-        onSecondary: Colors.white,
-        background: Colors.green,
-        onBackground: Colors.grey,
-        error: Colors.purple,
-        onError: Colors.black,
-      ),
+      // Define the default font family.
+      // fontFamily: 'Georgia',
+
+      // Define the default `TextTheme`. Use this to specify the default
+      // text styling for headlines, titles, bodies of text, and more.
+      // textTheme: const TextTheme(
+      //   headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      //   bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      // ),
     ),
     home: const HomePage(),
     routes: {

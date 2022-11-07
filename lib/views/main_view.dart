@@ -13,6 +13,7 @@ import '../enums/menu_action.dart';
 import 'package:boiler_time/constants/routes.dart';
 
 import 'community/category.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainView extends StatelessWidget {
   final int index;
@@ -32,28 +33,44 @@ class MainView extends StatelessWidget {
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home_outlined),
-          title: ("Home"),
-          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
-          inactiveColorPrimary: Colors.black,
+          icon: const Icon(Icons.home),
+          // iconSize: 20,
+          title: ("home"),
+          textStyle: GoogleFonts.rubik(
+            textStyle: TextStyle(fontSize: 12),
+          ),
+          activeColorPrimary: Color.fromARGB(255, 255, 255, 255),
+          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.margin),
-          title: ("Community"),
-          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
-          inactiveColorPrimary: Colors.black,
+          // iconSize: 20,
+          title: ("community"),
+          textStyle: GoogleFonts.rubik(
+            textStyle: TextStyle(fontSize: 12),
+          ),
+          activeColorPrimary: Color.fromARGB(255, 255, 255, 255),
+          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.calendar_month_outlined),
-          title: ("Calendar"),
-          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
-          inactiveColorPrimary: Colors.black,
+          // iconSize: 20,
+          title: ("calendar"),
+          textStyle: GoogleFonts.rubik(
+            textStyle: TextStyle(fontSize: 12),
+          ),
+          activeColorPrimary: Color.fromARGB(255, 255, 255, 255),
+          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.person),
-          title: ("Boilers"),
-          activeColorPrimary: Color.fromARGB(255, 193, 155, 200),
-          inactiveColorPrimary: Colors.black,
+          // iconSize: 20,
+          title: ("boilers"),
+          textStyle: GoogleFonts.rubik(
+            textStyle: TextStyle(fontSize: 12),
+          ),
+          activeColorPrimary: Color.fromARGB(255, 252, 252, 252),
+          inactiveColorPrimary: Color.fromARGB(255, 161, 161, 161),
         ),
       ];
     }
@@ -68,7 +85,8 @@ class MainView extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
+      backgroundColor:
+          Color.fromARGB(255, 62, 62, 62), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       // resizeToAvoidBottomInset:
       //     true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -76,8 +94,8 @@ class MainView extends StatelessWidget {
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+        // borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.black,
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,

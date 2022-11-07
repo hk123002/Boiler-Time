@@ -99,8 +99,11 @@ class _homeViewState extends State<home> {
       dayHint = 2;
     } else if (DateFormat('EEEE').format(date) == "Thursday") {
       dayHint = 3;
-    } else {
+    } else if (DateFormat('EEEE').format(date) == "Friday") {
       dayHint = 4;
+    }
+    {
+      dayHint = -1;
     }
     var calenarcollection = FirebaseFirestore.instance.collection('calendar');
 
@@ -184,717 +187,810 @@ class _homeViewState extends State<home> {
   int _index = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        toolbarHeight: 40,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Center(
-            child: Image(
-              image: AssetImage('assets/bt_logo_white.png'),
-            ),
-          ),
-        ),
-        // backgroundColor: Color(0x44000000),
-        // elevation: 0,
-        // title: Text(
-        //   "Boiler Time",
-        //   // style: TextStyle(fontSize: 15),
+    return SafeArea(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+
+        // appBar: AppBar(
+        //   toolbarHeight: 40,
+        //   leading: const Padding(
+        //     padding: EdgeInsets.all(8.0),
+        //     child: Center(
+        //       child: Image(
+        //         image: AssetImage('assets/bt_logo_white.png'),
+        //       ),
+        //     ),
+        //   ),
+        //   // backgroundColor: Color(0x44000000),
+        //   // elevation: 0,
+        //   // title: Text(
+        //   //   "Boiler Time",
+        //   //   // style: TextStyle(fontSize: 15),
+        //   // ),
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.vertical(
+        //       bottom: Radius.circular(5),
+        //     ),
+        //   ),
+
+        //   actions: [
+        //     PopupMenuButton(
+        //       onSelected: (value) async {
+        //         switch (value) {
+        //           case MenuAction.logout:
+        //             final shouldLogout = await showLogOutDialog(context);
+        //             if (shouldLogout) {
+        //               await AuthService.firebase().logOut();
+        //               Navigator.of(context, rootNavigator: true)
+        //                   .pushAndRemoveUntil(
+        //                 MaterialPageRoute(
+        //                   builder: (BuildContext context) {
+        //                     return LoginView();
+        //                   },
+        //                 ),
+        //                 (route) => false,
+        //               );
+        //             }
+        //         }
+        //       },
+        //       itemBuilder: (context) {
+        //         return const [
+        //           PopupMenuItem<MenuAction>(
+        //             value: MenuAction.logout,
+        //             child: Text("Log out"),
+        //           )
+        //         ];
+        //       },
+        //     )
+        //   ],
         // ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(5),
-          ),
-        ),
 
-        actions: [
-          PopupMenuButton(
-            onSelected: (value) async {
-              switch (value) {
-                case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout) {
-                    await AuthService.firebase().logOut();
-                    Navigator.of(context, rootNavigator: true)
-                        .pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LoginView();
+        body: ListView(
+          children: [
+            Wrap(children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Hello World !",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          name.toString(),
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
+              ),
+              Visibility(
+                visible: classList.isEmpty,
+                child: Card(
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.schedule),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Today's class",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 35,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 35,
+                            ),
+                            Text(
+                              "You have no class today!",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 15,
+                                  // fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(children: [
+                          SizedBox(
+                            width: 35,
+                          ),
+                        ]),
+                        SizedBox(
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: classList.isNotEmpty,
+                child: SizedBox(
+                  height: 150, // card height
+                  child: PageView.builder(
+                    itemCount: classList.length,
+                    controller: PageController(viewportFraction: 0.85),
+                    onPageChanged: (int index) =>
+                        setState(() => _index = index),
+                    itemBuilder: (_, i) {
+                      return Transform.scale(
+                        scale: i == _index ? 1 : 0.9,
+                        child: Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.schedule),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Today's class",
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 35,
+                                    ),
+                                    Text(
+                                      DateFormat('EEEE').format(date),
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 35,
+                                    ),
+                                    Text(
+                                      classList[i],
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                          fontSize: 15,
+                                          // fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(children: [
+                                  SizedBox(
+                                    width: 35,
+                                  ),
+                                  Text(
+                                    hourList[i],
+                                    style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 160,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.bus_alert),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: BusSchedule(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
                         },
                       ),
-                      (route) => false,
-                    );
-                  }
-              }
-            },
-            itemBuilder: (context) {
-              return const [
-                PopupMenuItem<MenuAction>(
-                  value: MenuAction.logout,
-                  child: Text("Log out"),
-                )
-              ];
-            },
-          )
-        ],
-      ),
-      body: ListView(
-        children: [
-          Wrap(children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                      Text(
+                        "Bus Schedule",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.school),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: LibraryTime(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
+                      ),
+                      Text(
+                        "Library Scheudle",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.dining),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: DiningMenu(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
+                      ),
+                      Text(
+                        "Dining Menu",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.schedule),
+                        iconSize: 30.0,
+                        onPressed: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: AcademicSchedule(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
+                      ),
+                      Text(
+                        "Academic Scheudle",
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Hello World !",
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        name.toString(),
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
+                  const SizedBox(height: 20),
+
+                  /// Carousel FullScreen
+                  BannerCarousel.fullScreen(
+                    banners: BannerImages.listBanners,
+                    height: 100,
+                    animation: false,
+                    initialPage: 1,
+                    indicatorBottom: false,
+                    // OR pageController: PageController(initialPage: 6),
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 150, // card height
-              child: PageView.builder(
-                itemCount: classList.length,
-                controller: PageController(viewportFraction: 0.85),
-                onPageChanged: (int index) => setState(() => _index = index),
-                itemBuilder: (_, i) {
-                  return Transform.scale(
-                    scale: i == _index ? 1 : 0.9,
-                    child: Card(
-                      elevation: 6,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
+              Container(
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.2),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                          5.0) //                 <--- border radius here
+                      ),
+                ),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: [
                             SizedBox(
-                              height: 20,
+                              width: 13,
                             ),
-                            Visibility(
-                                // visible: _index == 0,
-                                child: Row(
-                              children: [
-                                Icon(Icons.schedule),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Today's class",
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 35,
-                                ),
-                                Text(
-                                  DateFormat('EEEE').format(date),
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            Icon(
+                              Icons.view_agenda,
+                              size: 15,
                             ),
                             SizedBox(
-                              height: 10,
+                              width: 10,
                             ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 35,
+                            Text(
+                              "Most viewed",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                Text(
-                                  classList[i],
-                                  style: GoogleFonts.lato(
-                                    textStyle: TextStyle(
-                                      fontSize: 15,
-                                      // fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(children: [
-                              SizedBox(
-                                width: 35,
                               ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Row(children: [
+                        SizedBox(
+                          width: 65,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0.0,
+                            primary: Colors.red.withOpacity(0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(2),
+                                ),
+                                side: BorderSide(
+                                    color: Colors.red.withOpacity(0))),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return MainView(
+                                    index: 1,
+                                  );
+                                },
+                              ),
+                              (_) => false,
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
                               Text(
-                                hourList[i],
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                'see more',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 193, 155, 200),
+                                ),
+                              ), // <-- Text
+
+                              Icon(
+                                // <-- Icon
+                                Icons.navigate_next_outlined,
+                                size: 24.0,
+                                color: Color.fromARGB(255, 193, 155, 200),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                    ]),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            'Exam',
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            'Internship',
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            'Freshman',
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            'Rate My Professor',
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                  ],
+                ),
+              ),
+
+              Container(
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.2),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                          5.0) //                 <--- border radius here
+                      ),
+                ),
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 13,
+                            ),
+                            Icon(
+                              Icons.thumb_up,
+                              size: 15,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Today's post",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ]),
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ),
-            SizedBox(
-              height: 160,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.bus_alert),
-                      iconSize: 30.0,
-                      onPressed: () {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: BusSchedule(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        );
-                      },
-                    ),
-                    Text(
-                      "Bus Schedule",
-                      style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontSize: 10,
+                      Row(children: [
+                        SizedBox(
+                          width: 65,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.school),
-                      iconSize: 30.0,
-                      onPressed: () {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: LibraryTime(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        );
-                      },
-                    ),
-                    Text(
-                      "Library Scheudle",
-                      style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.dining),
-                      iconSize: 30.0,
-                      onPressed: () {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: DiningMenu(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        );
-                      },
-                    ),
-                    Text(
-                      "Dining Menu",
-                      style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.schedule),
-                      iconSize: 30.0,
-                      onPressed: () {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: AcademicSchedule(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        );
-                      },
-                    ),
-                    Text(
-                      "Academic Scheudle",
-                      style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                const SizedBox(height: 20),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0.0,
+                            primary: Colors.red.withOpacity(0),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(2),
+                                ),
+                                side: BorderSide(
+                                    color: Colors.red.withOpacity(0))),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true)
+                                .pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return MainView(
+                                    index: 1,
+                                  );
+                                },
+                              ),
+                              (_) => false,
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'see more',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 193, 155, 200),
+                                ),
+                              ), // <-- Text
 
-                /// Carousel FullScreen
-                BannerCarousel.fullScreen(
-                  banners: BannerImages.listBanners,
-                  height: 100,
-                  animation: false,
-                  initialPage: 1,
-                  indicatorBottom: false,
-                  // OR pageController: PageController(initialPage: 6),
-                ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.all(3.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(
-                        5.0) //                 <--- border radius here
-                    ),
-              ),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 13,
-                          ),
-                          Icon(
-                            Icons.view_agenda,
-                            size: 15,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Most viewed",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(children: [
-                      SizedBox(
-                        width: 65,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0.0,
-                          primary: Colors.red.withOpacity(0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(2),
-                              ),
-                              side:
-                                  BorderSide(color: Colors.red.withOpacity(0))),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context, rootNavigator: true)
-                              .pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return MainView(
-                                  index: 1,
-                                );
-                              },
-                            ),
-                            (_) => false,
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'see more',
-                              style: TextStyle(
+                              Icon(
+                                // <-- Icon
+                                Icons.navigate_next_outlined,
+                                size: 24.0,
                                 color: Color.fromARGB(255, 193, 155, 200),
                               ),
-                            ), // <-- Text
-
-                            Icon(
-                              // <-- Icon
-                              Icons.navigate_next_outlined,
-                              size: 24.0,
-                              color: Color.fromARGB(255, 193, 155, 200),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
+                      ]),
                     ]),
-                  ]),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          'Exam',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: Post(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        )
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          'Internship',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: Post(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        )
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          'Freshman',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: Post(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        )
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          'Rate My Professor',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {
-                        PersistentNavBarNavigator.pushNewScreen(
-                          context,
-                          screen: Post(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        )
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ),
-            ),
-
-            Container(
-              margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.all(3.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.2),
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(
-                        5.0) //                 <--- border radius here
-                    ),
-              ),
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 13,
-                          ),
-                          Icon(
-                            Icons.thumb_up,
-                            size: 15,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Today's post",
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            "example",
                             style: GoogleFonts.lato(
                               textStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
                               ),
                             ),
                           ),
-                        ],
+                        ),
+                        onPressed: () => {},
                       ),
                     ),
-                    Row(children: [
-                      SizedBox(
-                        width: 65,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0.0,
-                          primary: Colors.red.withOpacity(0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(2),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            "example",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
                               ),
-                              side:
-                                  BorderSide(color: Colors.red.withOpacity(0))),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context, rootNavigator: true)
-                              .pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return MainView(
-                                  index: 1,
-                                );
-                              },
                             ),
-                            (_) => false,
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'see more',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 193, 155, 200),
+                          ),
+                        ),
+                        onPressed: () => {},
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            "example",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
                               ),
-                            ), // <-- Text
-
-                            Icon(
-                              // <-- Icon
-                              Icons.navigate_next_outlined,
-                              size: 24.0,
-                              color: Color.fromARGB(255, 193, 155, 200),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ]),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          "example",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
                             ),
                           ),
                         ),
+                        onPressed: () => {},
                       ),
-                      onPressed: () => {},
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          "example",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
+                    SizedBox(
+                      height: 50,
+                      child: TextButton(
+                        child: ListTile(
+                          title: Text(
+                            "example",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                              ),
                             ),
                           ),
                         ),
+                        onPressed: () => {},
                       ),
-                      onPressed: () => {},
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          "example",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {},
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                    child: TextButton(
-                      child: ListTile(
-                        title: Text(
-                          "example",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      onPressed: () => {},
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            // Center(
-            //   child: Container(
-            //     margin: const EdgeInsets.only(top: 30.0),
-            //     child: FlatBanners(
-            //       imageWidth: 50,
-            //       gradientColors: [
-            //         Color.fromARGB(255, 2, 3, 2).withOpacity(0.9),
-            //         Color.fromARGB(255, 65, 69, 42).withOpacity(0.7),
-            //       ],
-            //       title: 'Gen.G Esports',
-            //       subtitle: 'CHOOOOVY',
-            //       btnText: 'find out more',
-            //       image: 'geng.png',
-            //     ),
-            //   ),
-            // ),
-          ]),
-        ],
+              // Center(
+              //   child: Container(
+              //     margin: const EdgeInsets.only(top: 30.0),
+              //     child: FlatBanners(
+              //       imageWidth: 50,
+              //       gradientColors: [
+              //         Color.fromARGB(255, 2, 3, 2).withOpacity(0.9),
+              //         Color.fromARGB(255, 65, 69, 42).withOpacity(0.7),
+              //       ],
+              //       title: 'Gen.G Esports',
+              //       subtitle: 'CHOOOOVY',
+              //       btnText: 'find out more',
+              //       image: 'geng.png',
+              //     ),
+              //   ),
+              // ),
+            ]),
+          ],
+        ),
       ),
     );
   }
