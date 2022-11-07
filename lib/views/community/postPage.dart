@@ -106,11 +106,29 @@ class _postPageViewState extends State<PostPage> {
 
             if (snapshot.hasData) {
               var output = snapshot.data;
-              var value = output!['Content']; // <-- Your value
-              return Text('Value = $value');
-            }
+              var content = output!['Content'];
+              var title = output['Title']; // <-- Your value
+              var comment = output['Comment'];
 
-            return Center(child: CircularProgressIndicator());
+              return Column(children: [
+                Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text('Title: $title'),
+                    subtitle: Text('Comment: $content'),
+                  ),
+                ),
+                Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text('Comment: $comment'),
+                  ),
+                ),
+              ]);
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
 // Add new product
