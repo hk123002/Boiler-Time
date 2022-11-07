@@ -109,7 +109,10 @@ class _CalendarViewState extends State<Calendar> {
   void _addObject(BuildContext context) {
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),
-      Color.fromARGB(255, 233, 213, 237),
+      Color.fromARGB(255, 137, 60, 60),
+      Color.fromARGB(255, 172, 144, 144),
+      Color.fromARGB(255, 73, 33, 207),
+      Color.fromARGB(255, 218, 20, 53),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -171,9 +174,7 @@ class _CalendarViewState extends State<Calendar> {
           onTap: () => {},
           child: Text(
             _className.text,
-            style: GoogleFonts.lato(
-              textStyle: TextStyle(),
-            ),
+
             // style: TextStyle(color: Colors.grey[350], fontSize: 12),
           ),
         ),
@@ -195,7 +196,10 @@ class _CalendarViewState extends State<Calendar> {
   ) {
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),
-      Color.fromARGB(255, 233, 213, 237),
+      Color.fromARGB(255, 137, 60, 60),
+      Color.fromARGB(255, 172, 144, 144),
+      Color.fromARGB(255, 73, 33, 207),
+      Color.fromARGB(255, 218, 20, 53),
     ];
 
     late int day; // day (monday = 0, tuesday = 1, etc...)
@@ -280,7 +284,10 @@ class _CalendarViewState extends State<Calendar> {
     tasks.clear();
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),
-      Color.fromARGB(255, 233, 213, 237),
+      Color.fromARGB(255, 137, 60, 60),
+      Color.fromARGB(255, 172, 144, 144),
+      Color.fromARGB(255, 73, 33, 207),
+      Color.fromARGB(255, 218, 20, 53),
     ];
 
     devtools.log("--------------------------");
@@ -376,9 +383,6 @@ class _CalendarViewState extends State<Calendar> {
                       return AlertDialog(
                         title: Text(
                           'Edit schedule',
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(),
-                          ),
                         ),
                         content: ListView(shrinkWrap: true, children: [
                           TextFormField(
@@ -394,18 +398,12 @@ class _CalendarViewState extends State<Calendar> {
                               child: DropdownButton2(
                             hint: Text(
                               dayHint,
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(),
-                              ),
                             ),
                             items: dayConstant
                                 .map((item) => DropdownMenuItem<String>(
                                       value: item,
                                       child: Text(
                                         item,
-                                        style: GoogleFonts.lato(
-                                          textStyle: TextStyle(),
-                                        ),
                                       ),
                                     ))
                                 .toList(),
@@ -424,8 +422,7 @@ class _CalendarViewState extends State<Calendar> {
                               child: DropdownButton2(
                             hint: Text(
                               startTimeHint,
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(),
+                              style: TextStyle(
                                 color: Theme.of(context).hintColor,
                               ),
                             ),
@@ -610,8 +607,7 @@ class _CalendarViewState extends State<Calendar> {
               child: Text(
                 schedule,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(),
+                style: TextStyle(
                   color: Theme.of(context).hintColor,
                 ),
               ),
@@ -627,6 +623,9 @@ class _CalendarViewState extends State<Calendar> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
+        // backgroundColor: Color.fromARGB(255, 46, 46, 46),
+        elevation: 0.0,
+
         toolbarHeight: 40,
         leading: const Padding(
           padding: EdgeInsets.all(8.0),
@@ -688,7 +687,9 @@ class _CalendarViewState extends State<Calendar> {
             cellHeight: 40,
             cellWidth: 59,
             showScrollBar: false,
-            dividerColor: Colors.black.withOpacity(0.5),
+            dividerColor: Colors.white.withOpacity(0.5),
+            horizontalTaskPadding: 2,
+            borderRadius: const BorderRadius.all(Radius.circular(2)),
           ),
           headers: const [
             TimePlannerTitle(

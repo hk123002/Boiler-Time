@@ -58,3 +58,5 @@ https://pub.dev/packages/url_launcher
 https://pub.dev/packages/flat_banners/example
 
 https://pub.dev/packages/banner_carousel
+
+https://pub.dev/packages/flex_color_scheme

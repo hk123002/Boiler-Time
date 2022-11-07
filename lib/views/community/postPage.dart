@@ -20,14 +20,11 @@ class PostPage extends StatefulWidget {
 class _postPageViewState extends State<PostPage> {
   String? documentID;
   String? collectionName;
-  late final DocumentReference _exam;
 
   @override
   void initState() {
     documentID = widget.documentID;
     collectionName = widget.collectionName;
-    _exam =
-        FirebaseFirestore.instance.collection(collectionName!).doc(documentID);
     super.initState();
   }
 
@@ -65,7 +62,10 @@ class _postPageViewState extends State<PostPage> {
                   onPressed: () async {
                     final String comment = _comment.text;
 
-                    await _exam.update({
+                    await FirebaseFirestore.instance
+                        .collection(collectionName!)
+                        .doc(documentID)
+                        .update({
                       "Comment": FieldValue.arrayUnion([comment])
                     });
 
@@ -80,7 +80,10 @@ class _postPageViewState extends State<PostPage> {
   }
 
   Future<void> _delete(String examID) async {
-    await _exam.delete();
+    await FirebaseFirestore.instance
+        .collection(collectionName!)
+        .doc(documentID)
+        .delete();
 
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('You have successfully deleted a post')));
@@ -93,50 +96,21 @@ class _postPageViewState extends State<PostPage> {
           toolbarHeight: 40,
           title: const Text('Post'),
         ),
-        body: StreamBuilder(
-          stream: _exam.snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            if (streamSnapshot.hasData) {
-              return ListView.builder(
-                itemCount: streamSnapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final DocumentSnapshot documentSnapshot =
-                      streamSnapshot.data!.docs[index];
-                  return Column(children: [
-                    Card(
-                      margin: const EdgeInsets.all(10),
-                      child: ListTile(
-                        title: Text(documentSnapshot['Title']),
-                        subtitle: Text(documentSnapshot['Content']),
-                      ),
-                    ),
-                    Card(
-                      margin: const EdgeInsets.all(10),
-                      child: ListTile(
-                        //title: Text(documentSnapshot['Commnet']),
-                        trailing: SizedBox(
-                          width: 100,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () => _update(documentSnapshot)),
-                              IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  onPressed: () =>
-                                      _delete(documentSnapshot.id)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]);
-                },
-              );
+        body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          stream: FirebaseFirestore.instance
+              .collection(collectionName!)
+              .doc(documentID)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) return Text('Error = ${snapshot.error}');
+
+            if (snapshot.hasData) {
+              var output = snapshot.data;
+              var value = output!['Content']; // <-- Your value
+              return Text('Value = $value');
             }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+
+            return Center(child: CircularProgressIndicator());
           },
         ),
 // Add new product

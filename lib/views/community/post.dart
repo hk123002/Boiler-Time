@@ -59,10 +59,22 @@ class _communityState extends State<Post> {
                     final String title = _title.text;
                     final String content = _content.text;
 
-                    await _exam.add({
+                    DocumentReference docRef = await _exam.add({
                       "Title": title,
                       "Content": content,
                       "Author": FirebaseAuth.instance.currentUser?.uid
+                    });
+
+                    devtools.log("---------");
+                    devtools.log((docRef.id).toString());
+                    devtools.log("---------");
+
+                    await FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(FirebaseAuth.instance.currentUser?.uid)
+                        .update({
+                      "mypost":
+                          FieldValue.arrayUnion(["post" + ":" + docRef.id]),
                     });
 
                     _title.text = '';
@@ -132,8 +144,15 @@ class _communityState extends State<Post> {
   }
 
   Future<void> _delete(String examID) async {
+    DocumentReference docRef = await _exam.doc(examID);
     await _exam.doc(examID).delete();
 
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .update({
+      "mypost": FieldValue.arrayRemove(["post" + ":" + docRef.id])
+    });
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('You have successfully deleted a post')));
   }

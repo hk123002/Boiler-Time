@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/boiler/myPost.dart';
 
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
@@ -46,6 +48,9 @@ class _homeViewState extends State<home> {
   var date;
   var dayHint;
 
+  List<String> welcomeMessage = [
+    "Welcome to Boiler Time",
+  ];
   // void _getTodayPost() async {
   //   var usercollection = FirebaseFirestore.instance.collection('hotPost');
 
@@ -173,9 +178,12 @@ class _homeViewState extends State<home> {
     }
   }
 
+  late final _random;
   @override
   void initState() {
     super.initState();
+    _random = new Random();
+
     _getUserData();
   }
 
@@ -190,102 +198,106 @@ class _homeViewState extends State<home> {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          // backgroundColor: Color.fromARGB(255, 46, 46, 46),
+          elevation: 0.0,
 
-        // appBar: AppBar(
-        //   toolbarHeight: 40,
-        //   leading: const Padding(
-        //     padding: EdgeInsets.all(8.0),
-        //     child: Center(
-        //       child: Image(
-        //         image: AssetImage('assets/bt_logo_white.png'),
-        //       ),
-        //     ),
-        //   ),
-        //   // backgroundColor: Color(0x44000000),
-        //   // elevation: 0,
-        //   // title: Text(
-        //   //   "Boiler Time",
-        //   //   // style: TextStyle(fontSize: 15),
-        //   // ),
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.vertical(
-        //       bottom: Radius.circular(5),
-        //     ),
-        //   ),
+          toolbarHeight: 40,
+          leading: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+              child: Image(
+                image: AssetImage('assets/bt_logo_white.png'),
+              ),
+            ),
+          ),
+          // backgroundColor: Color(0x44000000),
+          // elevation: 0,
+          // title: Text(
+          //   "Boiler Time",
+          //   // style: TextStyle(fontSize: 15),
+          // ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(5),
+            ),
+          ),
 
-        //   actions: [
-        //     PopupMenuButton(
-        //       onSelected: (value) async {
-        //         switch (value) {
-        //           case MenuAction.logout:
-        //             final shouldLogout = await showLogOutDialog(context);
-        //             if (shouldLogout) {
-        //               await AuthService.firebase().logOut();
-        //               Navigator.of(context, rootNavigator: true)
-        //                   .pushAndRemoveUntil(
-        //                 MaterialPageRoute(
-        //                   builder: (BuildContext context) {
-        //                     return LoginView();
-        //                   },
-        //                 ),
-        //                 (route) => false,
-        //               );
-        //             }
-        //         }
-        //       },
-        //       itemBuilder: (context) {
-        //         return const [
-        //           PopupMenuItem<MenuAction>(
-        //             value: MenuAction.logout,
-        //             child: Text("Log out"),
-        //           )
-        //         ];
-        //       },
-        //     )
-        //   ],
-        // ),
-
+          actions: [
+            PopupMenuButton(
+              onSelected: (value) async {
+                switch (value) {
+                  case MenuAction.logout:
+                    final shouldLogout = await showLogOutDialog(context);
+                    if (shouldLogout) {
+                      await AuthService.firebase().logOut();
+                      Navigator.of(context, rootNavigator: true)
+                          .pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return LoginView();
+                          },
+                        ),
+                        (route) => false,
+                      );
+                    }
+                }
+              },
+              itemBuilder: (context) {
+                return const [
+                  PopupMenuItem<MenuAction>(
+                    value: MenuAction.logout,
+                    child: Text("Log out"),
+                  )
+                ];
+              },
+            )
+          ],
+        ),
         body: ListView(
           children: [
             Wrap(children: [
+              //banner
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Hello World !",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        // const SizedBox(height: 20),
+
+                        /// Carousel FullScreen
+                        BannerCarousel.fullScreen(
+                          activeColor: Color.fromARGB(255, 15, 223, 207),
+
+                          banners: BannerImages.listBanners,
+                          height: 80,
+                          animation: false,
+                          initialPage: 0,
+                          indicatorBottom: false,
+                          // OR pageController: PageController(initialPage: 6),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 40,
                     ),
                     Row(
                       children: [
                         SizedBox(
-                          width: 10,
+                          width: 20,
                         ),
                         Text(
-                          name.toString(),
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                            ),
+                          welcomeMessage[
+                              _random.nextInt(welcomeMessage.length)],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
@@ -293,92 +305,115 @@ class _homeViewState extends State<home> {
                     SizedBox(
                       height: 20,
                     ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          name.toString(),
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 189, 189, 189),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                   ],
                 ),
               ),
+
+              // card when there's no class
               Visibility(
                 visible: classList.isEmpty,
-                child: Card(
-                  elevation: 6,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            Icon(Icons.schedule),
+                child: Center(
+                  child: Container(
+                    width: 330,
+                    child: Card(
+                      // color: Color.fromARGB(255, 71, 71, 71),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                            color: Color.fromARGB(
+                                255, 43, 43, 43)), // color for borderline
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
                             SizedBox(
-                              width: 10,
+                              height: 30,
                             ),
-                            Text(
-                              "Today's class",
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                            Row(
+                              children: [
+                                Text(
+                                  "\u{1F4CB}  Today's class",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
                             SizedBox(
-                              width: 35,
+                              height: 5,
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 35,
-                            ),
-                            Text(
-                              "You have no class today!",
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                  fontSize: 15,
-                                  // fontWeight: FontWeight.bold,
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 35,
                                 ),
-                              ),
+                              ],
                             ),
                             SizedBox(
-                              width: 20,
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 35,
+                                ),
+                                Text(
+                                  "You have no class today! \u{1F389}",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(children: [
+                              SizedBox(
+                                width: 35,
+                              ),
+                            ]),
+                            SizedBox(
+                              height: 50,
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(children: [
-                          SizedBox(
-                            width: 35,
-                          ),
-                        ]),
-                        SizedBox(
-                          height: 50,
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
+
+              //card when there's class today
               Visibility(
                 visible: classList.isNotEmpty,
                 child: SizedBox(
-                  height: 150, // card height
+                  height: 170, // card height
                   child: PageView.builder(
                     itemCount: classList.length,
                     controller: PageController(viewportFraction: 0.85),
@@ -388,9 +423,14 @@ class _homeViewState extends State<home> {
                       return Transform.scale(
                         scale: i == _index ? 1 : 0.9,
                         child: Card(
-                          elevation: 6,
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                                color: Color.fromARGB(255, 43, 43, 43)),
+
+                            /// color for borderline
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8),
                             child: Column(
@@ -401,17 +441,11 @@ class _homeViewState extends State<home> {
                                 ),
                                 Row(
                                   children: [
-                                    Icon(Icons.schedule),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
                                     Text(
-                                      "Today's class",
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      "\u{1F4CB}  Today's class",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ],
@@ -425,17 +459,17 @@ class _homeViewState extends State<home> {
                                       width: 35,
                                     ),
                                     Text(
-                                      DateFormat('EEEE').format(date),
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                          fontSize: 13,
-                                        ),
+                                      DateFormat('EEEE')
+                                          .format(date)
+                                          .toLowerCase(),
+                                      style: TextStyle(
+                                        fontSize: 13,
                                       ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
                                 Row(
                                   children: [
@@ -444,11 +478,9 @@ class _homeViewState extends State<home> {
                                     ),
                                     Text(
                                       classList[i],
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                          fontSize: 15,
-                                          // fontWeight: FontWeight.bold,
-                                        ),
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        // fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     SizedBox(
@@ -465,10 +497,8 @@ class _homeViewState extends State<home> {
                                   ),
                                   Text(
                                     hourList[i],
-                                    style: GoogleFonts.lato(
-                                      textStyle: TextStyle(
-                                        fontSize: 15,
-                                      ),
+                                    style: TextStyle(
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ]),
@@ -481,17 +511,59 @@ class _homeViewState extends State<home> {
                   ),
                 ),
               ),
+
               SizedBox(
-                height: 160,
+                height: 180,
               ),
+              //row for button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // button for my post
                   Column(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.bus_alert),
-                        iconSize: 30.0,
+                      FloatingActionButton.small(
+                        heroTag: "mypost",
+                        elevation: 0,
+                        backgroundColor: Color.fromARGB(255, 41, 41, 41),
+                        onPressed: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: MyPost(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        },
+                        child: Center(
+                          child: Icon(
+                            size: 20,
+                            Icons.my_library_add,
+                            color: Color.fromARGB(180, 51, 255, 51),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "my post",
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //button for bus schedule
+
+                  Column(
+                    children: [
+                      FloatingActionButton.small(
+                        heroTag: "bus",
+                        elevation: 0,
+                        backgroundColor: Color.fromARGB(255, 41, 41, 41),
                         onPressed: () {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
@@ -502,22 +574,34 @@ class _homeViewState extends State<home> {
                                 PageTransitionAnimation.cupertino,
                           );
                         },
+                        child: Center(
+                          child: Icon(
+                            size: 20,
+                            Icons.bus_alert_outlined,
+                            color: Color.fromARGB(180, 255, 255, 0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Text(
-                        "Bus Schedule",
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 10,
-                          ),
+                        "bus schedule",
+                        style: TextStyle(
+                          fontSize: 10,
                         ),
                       ),
                     ],
                   ),
+
+                  //button for library
+
                   Column(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.school),
-                        iconSize: 30.0,
+                      FloatingActionButton.small(
+                        heroTag: "library",
+                        elevation: 0,
+                        backgroundColor: Color.fromARGB(255, 41, 41, 41),
                         onPressed: () {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
@@ -528,22 +612,33 @@ class _homeViewState extends State<home> {
                                 PageTransitionAnimation.cupertino,
                           );
                         },
+                        child: Center(
+                          child: Icon(
+                            size: 20,
+                            Icons.school,
+                            color: Color.fromARGB(180, 15, 223, 207),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Text(
-                        "Library Scheudle",
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 10,
-                          ),
+                        "library",
+                        style: TextStyle(
+                          fontSize: 10,
                         ),
                       ),
                     ],
                   ),
+
+                  //button for menu
                   Column(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.dining),
-                        iconSize: 30.0,
+                      FloatingActionButton.small(
+                        heroTag: "menu",
+                        elevation: 0,
+                        backgroundColor: Color.fromARGB(255, 41, 41, 41),
                         onPressed: () {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
@@ -554,22 +649,33 @@ class _homeViewState extends State<home> {
                                 PageTransitionAnimation.cupertino,
                           );
                         },
+                        child: Center(
+                          child: Icon(
+                            size: 20,
+                            Icons.dining,
+                            color: Color.fromARGB(180, 223, 15, 135),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Text(
-                        "Dining Menu",
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 10,
-                          ),
+                        "menu",
+                        style: TextStyle(
+                          fontSize: 10,
                         ),
                       ),
                     ],
                   ),
+
+                  //button for academic schedule
                   Column(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.schedule),
-                        iconSize: 30.0,
+                      FloatingActionButton.small(
+                        heroTag: "holiday",
+                        elevation: 0,
+                        backgroundColor: Color.fromARGB(255, 41, 41, 41),
                         onPressed: () {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
@@ -580,41 +686,39 @@ class _homeViewState extends State<home> {
                                 PageTransitionAnimation.cupertino,
                           );
                         },
+                        child: Center(
+                          child: Icon(
+                            size: 20,
+                            Icons.schedule,
+                            color: Color.fromARGB(180, 103, 15, 223),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Text(
-                        "Academic Scheudle",
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 10,
-                          ),
+                        "holidays",
+                        style: TextStyle(
+                          fontSize: 10,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  const SizedBox(height: 20),
-
-                  /// Carousel FullScreen
-                  BannerCarousel.fullScreen(
-                    banners: BannerImages.listBanners,
-                    height: 100,
-                    animation: false,
-                    initialPage: 1,
-                    indicatorBottom: false,
-                    // OR pageController: PageController(initialPage: 6),
-                  ),
-                ],
+              SizedBox(
+                height: 80,
               ),
+
+              //most viewed
+
               Container(
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Color.fromARGB(255, 40, 40, 40),
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(
                           5.0) //                 <--- border radius here
@@ -624,7 +728,7 @@ class _homeViewState extends State<home> {
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: 5,
+                      height: 3,
                     ),
                     Row(children: [
                       Align(
@@ -634,29 +738,17 @@ class _homeViewState extends State<home> {
                             SizedBox(
                               width: 13,
                             ),
-                            Icon(
-                              Icons.view_agenda,
-                              size: 15,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
                             Text(
-                              "Most viewed",
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              "\u{2714}    Most viewed",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
                       ),
                       Row(children: [
-                        SizedBox(
-                          width: 65,
-                        ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0.0,
@@ -682,20 +774,22 @@ class _homeViewState extends State<home> {
                             );
                           },
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                            // mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                'see more',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 193, 155, 200),
-                                ),
-                              ), // <-- Text
+                              // Text(
+                              //   'see more',
+                              //   style: TextStyle(
+                              //     color: Colors.white,
+                              //   ),
+                              // ), // <-- Text
 
                               Icon(
                                 // <-- Icon
                                 Icons.navigate_next_outlined,
+                                color: Colors.white,
+
                                 size: 24.0,
-                                color: Color.fromARGB(255, 193, 155, 200),
+                                // color: Color.fromARGB(255, 193, 155, 200),
                               ),
                             ],
                           ),
@@ -706,13 +800,16 @@ class _homeViewState extends State<home> {
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            'Exam',
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Exam',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         onPressed: () => {
@@ -731,13 +828,16 @@ class _homeViewState extends State<home> {
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            'Internship',
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Internship',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         onPressed: () => {
@@ -756,13 +856,16 @@ class _homeViewState extends State<home> {
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            'Freshman',
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Freshman',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         onPressed: () => {
@@ -781,13 +884,16 @@ class _homeViewState extends State<home> {
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            'Rate My Professor',
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Rate My Professor',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         onPressed: () => {
@@ -803,19 +909,19 @@ class _homeViewState extends State<home> {
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 5,
                     ),
                   ],
                 ),
               ),
 
+              //hot pots
+
               Container(
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.2),
-                  ),
+                  border: Border.all(color: Color.fromARGB(255, 43, 43, 43)),
                   borderRadius: BorderRadius.all(Radius.circular(
                           5.0) //                 <--- border radius here
                       ),
@@ -824,7 +930,7 @@ class _homeViewState extends State<home> {
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: 5,
+                      height: 3,
                     ),
                     Row(children: [
                       Align(
@@ -834,29 +940,27 @@ class _homeViewState extends State<home> {
                             SizedBox(
                               width: 13,
                             ),
-                            Icon(
-                              Icons.thumb_up,
-                              size: 15,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            // Icon(
+                            //   Icons.view_agenda,
+                            //   size: 15,
+                            // ),
+                            // SizedBox(
+                            //   width: 10,
+                            // ),
                             Text(
-                              "Today's post",
-                              style: GoogleFonts.lato(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              "\u{1F525}   Hot post",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
                       ),
                       Row(children: [
-                        SizedBox(
-                          width: 65,
-                        ),
+                        // SizedBox(
+                        //   width: 110,
+                        // ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0.0,
@@ -882,20 +986,22 @@ class _homeViewState extends State<home> {
                             );
                           },
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                            // mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                'see more',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 193, 155, 200),
-                                ),
-                              ), // <-- Text
+                              // Text(
+                              //   'see more',
+                              //   style: TextStyle(
+                              //     color: Colors.white,
+                              //   ),
+                              // ), // <-- Text
 
                               Icon(
                                 // <-- Icon
                                 Icons.navigate_next_outlined,
+                                color: Colors.white,
+
                                 size: 24.0,
-                                color: Color.fromARGB(255, 193, 155, 200),
+                                // color: Color.fromARGB(255, 193, 155, 200),
                               ),
                             ],
                           ),
@@ -906,88 +1012,120 @@ class _homeViewState extends State<home> {
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            "example",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Exam',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
                       ),
                     ),
                     SizedBox(
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            "example",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Internship',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
                       ),
                     ),
                     SizedBox(
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            "example",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Freshman',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
                       ),
                     ),
                     SizedBox(
                       height: 50,
                       child: TextButton(
                         child: ListTile(
-                          title: Text(
-                            "example",
-                            style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                fontSize: 15,
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Rate My Professor',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          )
+                        },
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: 5,
                     ),
                   ],
                 ),
               ),
-              // Center(
-              //   child: Container(
-              //     margin: const EdgeInsets.only(top: 30.0),
-              //     child: FlatBanners(
-              //       imageWidth: 50,
-              //       gradientColors: [
-              //         Color.fromARGB(255, 2, 3, 2).withOpacity(0.9),
-              //         Color.fromARGB(255, 65, 69, 42).withOpacity(0.7),
-              //       ],
-              //       title: 'Gen.G Esports',
-              //       subtitle: 'CHOOOOVY',
-              //       btnText: 'find out more',
-              //       image: 'geng.png',
-              //     ),
-              //   ),
-              // ),
             ]),
           ],
         ),
@@ -998,7 +1136,7 @@ class _homeViewState extends State<home> {
 
 class BannerImages {
   static const String banner1 =
-      "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
+      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
   static const String banner2 =
       "https://www.kukinews.com/data/kuk/cache/2022/06/14/kuk202206140165.680x.0.jpg";
   static const String banner3 =
@@ -1017,7 +1155,7 @@ class BannerImages {
 
 class BannerClass {
   static const String banner1 =
-      "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
+      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
   static const String banner2 =
       "https://www.kukinews.com/data/kuk/cache/2022/06/14/kuk202206140165.680x.0.jpg";
   static const String banner3 =
