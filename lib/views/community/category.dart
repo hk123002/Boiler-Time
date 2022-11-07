@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -6,9 +7,44 @@ import '../../services/auth/auth_service.dart';
 import '../auth/login_view.dart';
 import '../boiler/boiler.dart';
 import 'post.dart';
+import 'dart:developer' as devtools show log;
 
-class Category extends StatelessWidget {
+class Category extends StatefulWidget {
   const Category({super.key});
+
+  @override
+  State<Category> createState() => _CategoryState();
+}
+
+class _CategoryState extends State<Category> {
+  List<String> categoryList = [];
+  Future<void> _initialize() async {
+    var collection = FirebaseFirestore.instance.collection('post list');
+
+    var docSnapshot = await collection.doc("tnNh7D0STKp0wrjnN8jE").get();
+
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()!;
+      var schedule = data['category'];
+      for (String item in schedule) {
+        setState(() {
+          categoryList.add(item);
+        });
+      }
+    }
+    devtools.log(categoryList.toString());
+  }
+
+  void initState() {
+    _initialize();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +111,7 @@ class Category extends StatelessWidget {
               alignment: Alignment.center,
               child: Container(
                 margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
                   border: Border.all(color: Color.fromARGB(255, 131, 124, 132)),
                   borderRadius: BorderRadius.all(Radius.circular(
@@ -85,38 +121,38 @@ class Category extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color(0x00000000),
-                        ),
-                        child: const ListTile(
-                          title: Text('Exam'),
-                        ),
-                        onPressed: () {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          );
-                        }),
-                    TextButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color(0x00000000),
-                        ),
-                        child: const ListTile(
-                          title: Text('Game'),
-                        ),
-                        onPressed: () {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Game"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: categoryList.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                height: 60,
+                                child: TextButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0x00000000),
+                                    ),
+                                    child: ListTile(
+                                      title: Text(
+                                          "\u{1F4AC}   " + categoryList[index]),
+                                    ),
+                                    onPressed: () {
+                                      PersistentNavBarNavigator.pushNewScreen(
+                                        context,
+                                        screen: Post(
+                                            categoryName: categoryList[index]),
+                                        withNavBar:
+                                            false, // OPTIONAL VALUE. True by default.
+                                        pageTransitionAnimation:
+                                            PageTransitionAnimation.cupertino,
+                                      );
+                                    }),
+                              ),
+                            ],
                           );
                         }),
                   ],

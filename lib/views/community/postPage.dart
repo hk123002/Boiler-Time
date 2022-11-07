@@ -108,6 +108,8 @@ class _postPageViewState extends State<PostPage> {
               var output = snapshot.data;
               var content = output!['Content'];
               var title = output['Title'];
+              var category = output['Category'];
+
               // <-- Your value
               var comment = output['Comment'];
               devtools.log("--------------");
@@ -129,6 +131,12 @@ class _postPageViewState extends State<PostPage> {
                   child: ListTile(
                     title: Text('Title: $title'),
                     subtitle: Text('Content: $content'),
+                  ),
+                ),
+                Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text('category: $category'),
                   ),
                 ),
                 ListView.builder(

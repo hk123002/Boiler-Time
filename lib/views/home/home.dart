@@ -759,7 +759,7 @@ class _homeViewState extends State<home> {
                               width: 13,
                             ),
                             Text(
-                              "\u{2714}    Most viewed",
+                              "  Most viewed",
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -824,7 +824,7 @@ class _homeViewState extends State<home> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Exam',
+                                '\u{1F4AC}   Exam',
                                 style: TextStyle(
                                   fontSize: 13,
                                 ),
@@ -852,7 +852,7 @@ class _homeViewState extends State<home> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Internship',
+                                '\u{1F4AC}   Internship',
                                 style: TextStyle(
                                   fontSize: 13,
                                 ),
@@ -880,7 +880,7 @@ class _homeViewState extends State<home> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Freshman',
+                                '\u{1F4AC}   Freshman',
                                 style: TextStyle(
                                   fontSize: 13,
                                 ),
@@ -908,7 +908,7 @@ class _homeViewState extends State<home> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Rate My Professor',
+                                '\u{1F4AC}   Rate My Professor',
                                 style: TextStyle(
                                   fontSize: 13,
                                 ),

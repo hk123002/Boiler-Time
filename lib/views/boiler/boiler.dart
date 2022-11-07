@@ -525,7 +525,7 @@ class _BoilerState extends State<Boiler> {
                                       '  v 0.0.0',
                                       style: TextStyle(
                                           fontStyle: FontStyle.italic,
-                                          color: Colors.black.withOpacity(0.5)),
+                                          color: Colors.white.withOpacity(0.5)),
                                     ),
                                   ],
                                 ),

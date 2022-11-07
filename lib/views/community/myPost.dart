@@ -64,7 +64,6 @@ class _myPostState extends State<MyPost> {
                   onPressed: () async {
                     final String title = _title.text;
                     final String content = _content.text;
-
                     await _exam.doc(documentSnapshot?.id).update({
                       "Title": title,
                       "Content": content,
@@ -85,12 +84,6 @@ class _myPostState extends State<MyPost> {
     DocumentReference docRef = await _exam.doc(examID);
     await _exam.doc(examID).delete();
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .update({
-      "mypost": FieldValue.arrayRemove(["post" + ":" + docRef.id])
-    });
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('You have successfully deleted a post')));
   }
