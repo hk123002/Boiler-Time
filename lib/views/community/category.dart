@@ -95,141 +95,30 @@ class Category extends StatelessWidget {
                         onPressed: () {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
                                 PageTransitionAnimation.cupertino,
                           );
                         }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Rate My Professor'),
-                    //     ),
-                    //     onPressed: () {
-                    //       PersistentNavBarNavigator.pushNewScreen(
-                    //         context,
-                    //         screen: RateMyProfessor(),
-                    //         withNavBar: false, // OPTIONAL VALUE. True by default.
-                    //         pageTransitionAnimation:
-                    //             PageTransitionAnimation.cupertino,
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Miscellaneous'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Miscellaneous()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Alumni'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Alumni()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Senior'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Senior()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Junior'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Junior()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Sophomore'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Sophomore()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Freshman'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Freshman()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Job Search'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const JobSearch()),
-                    //       );
-                    //     }),
-                    // TextButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Color(0x00000000),
-                    //     ),
-                    //     child: const ListTile(
-                    //       title: Text('Internship'),
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const Intern()),
-                    //       );
-                    //     }),
+                    TextButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0x00000000),
+                        ),
+                        child: const ListTile(
+                          title: Text('Game'),
+                        ),
+                        onPressed: () {
+                          PersistentNavBarNavigator.pushNewScreen(
+                            context,
+                            screen: Post(categoryName: "Game"),
+                            withNavBar:
+                                false, // OPTIONAL VALUE. True by default.
+                            pageTransitionAnimation:
+                                PageTransitionAnimation.cupertino,
+                          );
+                        }),
                   ],
                 ),
               ),

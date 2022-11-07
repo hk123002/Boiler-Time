@@ -6,7 +6,6 @@ import 'dart:math';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
-import 'package:boiler_time/views/boiler/myPost.dart';
 
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
@@ -23,6 +22,7 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../auth/login_view.dart';
 import '../boiler/boiler.dart';
+import '../community/myPost.dart';
 import '../community/post.dart';
 import '../main_view.dart';
 import '../community/post.dart';
@@ -45,11 +45,14 @@ class _homeViewState extends State<home> {
   // List<String> hotPostID = [];
 
   String? name;
-  var date;
-  var dayHint;
+  late DateTime date;
+  late String day;
+  late int dayHint;
 
   List<String> welcomeMessage = [
     "Welcome to Boiler Time",
+    "Not last dance,\nThe dance lasts",
+    "What's important is\nunbroken heart",
   ];
   // void _getTodayPost() async {
   //   var usercollection = FirebaseFirestore.instance.collection('hotPost');
@@ -74,7 +77,11 @@ class _homeViewState extends State<home> {
   //   });
   // }
 
-  void _getUserData() async {
+  Future<void> _getUserData() async {
+    setState(() {
+      date = DateTime.now();
+      day = DateFormat('EEEE').format(date);
+    });
     var usercollection = FirebaseFirestore.instance.collection('users');
 
     var docSnapshot =
@@ -92,22 +99,19 @@ class _homeViewState extends State<home> {
     }
 
     //fetch data for calendar
-    setState(() {
-      date = DateTime.now();
-    });
-    devtools.log(DateFormat('EEEE').format(date));
-    if (DateFormat('EEEE').format(date) == "Monday") {
+
+    devtools.log(day + "and " + (day == "Monday").toString());
+    if (day == "Monday") {
       dayHint = 0;
-    } else if (DateFormat('EEEE').format(date) == "Tuesday") {
+    } else if (day == "Tuesday") {
       dayHint = 1;
-    } else if (DateFormat('EEEE').format(date) == "Wednesday") {
+    } else if (day == "Wednesday") {
       dayHint = 2;
-    } else if (DateFormat('EEEE').format(date) == "Thursday") {
+    } else if (day == "Thursday") {
       dayHint = 3;
-    } else if (DateFormat('EEEE').format(date) == "Friday") {
+    } else if (day == "Friday") {
       dayHint = 4;
-    }
-    {
+    } else {
       dayHint = -1;
     }
     var calenarcollection = FirebaseFirestore.instance.collection('calendar');
@@ -127,7 +131,12 @@ class _homeViewState extends State<home> {
         int hour = int.parse(split[2]);
         int minute = int.parse(split[3]);
         int duration = int.parse(split[4]);
+        devtools.log("day is " +
+            day.toString() +
+            " and dayhint is " +
+            dayHint.toString());
         if (day == dayHint) {
+          devtools.log("adding class...");
           String startTimeHint;
           int modifiedStartHour = 0;
 
@@ -181,10 +190,10 @@ class _homeViewState extends State<home> {
   late final _random;
   @override
   void initState() {
-    super.initState();
     _random = new Random();
 
     _getUserData();
+    super.initState();
   }
 
   @override
@@ -368,6 +377,19 @@ class _homeViewState extends State<home> {
                                 SizedBox(
                                   width: 35,
                                 ),
+                                Text(
+                                  day.toLowerCase(),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 35,
+                                ),
                               ],
                             ),
                             SizedBox(
@@ -459,9 +481,7 @@ class _homeViewState extends State<home> {
                                       width: 35,
                                     ),
                                     Text(
-                                      DateFormat('EEEE')
-                                          .format(date)
-                                          .toLowerCase(),
+                                      day.toLowerCase(),
                                       style: TextStyle(
                                         fontSize: 13,
                                       ),
@@ -815,7 +835,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -843,7 +863,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -871,7 +891,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -899,7 +919,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1027,7 +1047,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1055,7 +1075,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1083,7 +1103,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1111,7 +1131,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:

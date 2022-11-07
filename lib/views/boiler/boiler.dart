@@ -18,7 +18,7 @@ import 'dart:developer' as devtools show log;
 
 import '../../enums/menu_action.dart';
 import '../../utilities/show_error_dialog.dart';
-import 'myPost.dart';
+import '../community/myPost.dart';
 
 class Boiler extends StatefulWidget {
   const Boiler({super.key});
