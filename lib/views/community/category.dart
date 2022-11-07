@@ -85,7 +85,6 @@ class Category extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("community"),
                     TextButton(
                         style: ElevatedButton.styleFrom(
                           primary: Color(0x00000000),

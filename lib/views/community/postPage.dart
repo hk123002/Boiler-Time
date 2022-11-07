@@ -107,23 +107,42 @@ class _postPageViewState extends State<PostPage> {
             if (snapshot.hasData) {
               var output = snapshot.data;
               var content = output!['Content'];
-              var title = output['Title']; // <-- Your value
+              var title = output['Title'];
+              // <-- Your value
               var comment = output['Comment'];
+              devtools.log("--------------");
+              devtools.log(comment.toString());
+              devtools.log("--------------");
+
+              List<String> commentList = [];
+
+              if (comment.length > 0) {
+                for (String item in comment) {
+                  commentList.add(item);
+                  devtools.log(item);
+                }
+              }
 
               return Column(children: [
                 Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
                     title: Text('Title: $title'),
-                    subtitle: Text('Comment: $content'),
+                    subtitle: Text('Content: $content'),
                   ),
                 ),
-                Card(
-                  margin: const EdgeInsets.all(10),
-                  child: ListTile(
-                    title: Text('Comment: $comment'),
-                  ),
-                ),
+                ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: commentList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        margin: const EdgeInsets.all(10),
+                        child: ListTile(
+                          title: Text('Comment: ' + commentList[index]),
+                        ),
+                      );
+                    })
               ]);
             }
             return const Center(
