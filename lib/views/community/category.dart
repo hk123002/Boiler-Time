@@ -21,7 +21,7 @@ class _CategoryState extends State<Category> {
   Future<void> _initialize() async {
     var collection = FirebaseFirestore.instance.collection('post list');
 
-    var docSnapshot = await collection.doc("tnNh7D0STKp0wrjnN8jE").get();
+    var docSnapshot = await collection.doc("all category").get();
 
     if (docSnapshot.exists) {
       Map<String, dynamic> data = docSnapshot.data()!;

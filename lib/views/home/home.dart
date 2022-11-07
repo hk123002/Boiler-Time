@@ -43,7 +43,7 @@ class _homeViewState extends State<home> {
   // List<String> hotPostTitle = ["hi", "hi1", "hi2", "hi3"];
   // List<String> hotPostContent = [];
   // List<String> hotPostID = [];
-
+  List<String> categoryList = [];
   String? name;
   late DateTime date;
   late String day;
@@ -187,6 +187,23 @@ class _homeViewState extends State<home> {
     }
   }
 
+  Future<void> _initialize() async {
+    var collection = FirebaseFirestore.instance.collection('post list');
+
+    var docSnapshot = await collection.doc("most viewed").get();
+
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()!;
+      var schedule = data['category'];
+      for (String item in schedule) {
+        setState(() {
+          categoryList.add(item);
+        });
+      }
+    }
+    devtools.log(categoryList.toString());
+  }
+
   late final _random;
   late final randomIndex;
   @override
@@ -194,6 +211,7 @@ class _homeViewState extends State<home> {
     _random = new Random();
     randomIndex = _random.nextInt(welcomeMessage.length);
     _getUserData();
+    _initialize();
     super.initState();
   }
 
@@ -816,118 +834,42 @@ class _homeViewState extends State<home> {
                         ),
                       ]),
                     ]),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '\u{1F4AC}   Exam',
-                                style: TextStyle(
-                                  fontSize: 13,
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: categoryList.length,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 50,
+                            child: TextButton(
+                              child: ListTile(
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '\u{1F4CC}   ' + categoryList[index],
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '\u{1F4AC}   Internship',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '\u{1F4AC}   Freshman',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '\u{1F4AC}   Rate My Professor',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
+                              onPressed: () => {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen:
+                                      Post(categoryName: categoryList[index]),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                )
+                              },
+                            ),
+                          );
+                        }),
                     SizedBox(
                       height: 5,
                     ),
