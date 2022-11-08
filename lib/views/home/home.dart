@@ -50,7 +50,7 @@ class _homeViewState extends State<home> {
   late int dayHint;
 
   List<String> welcomeMessage = [
-    "Welcome to Boiler Time",
+    // "Welcome to Boiler Time",
     "Not last dance,\nThe dance lasts",
     "What's important is\nunbroken heart",
   ];
@@ -1098,9 +1098,9 @@ class _homeViewState extends State<home> {
 
 class BannerImages {
   static const String banner1 =
-      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
+      "https://www.jaxon.gg/wp-content/uploads/2022/11/Deft.png";
   static const String banner2 =
-      "https://www.kukinews.com/data/kuk/cache/2022/06/14/kuk202206140165.680x.0.jpg";
+      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
   static const String banner3 =
       "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
 
@@ -1117,9 +1117,9 @@ class BannerImages {
 
 class BannerClass {
   static const String banner1 =
-      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
+      "https://www.jaxon.gg/wp-content/uploads/2022/11/Deft.png";
   static const String banner2 =
-      "https://www.kukinews.com/data/kuk/cache/2022/06/14/kuk202206140165.680x.0.jpg";
+      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
   static const String banner3 =
       "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
 

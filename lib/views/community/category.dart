@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flat_banners/flat_banners.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -107,57 +108,84 @@ class _CategoryState extends State<Category> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Align(
-              alignment: Alignment.center,
-              child: Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 131, 124, 132)),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                          5.0) //                 <--- border radius here
-                      ),
+            child: Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                    child: FlatBanners(
+                      imageWidth: 50,
+                      gradientColors: [
+                        const Color(0xff6C59D4).withOpacity(0.9),
+                        const Color(0xff869DFB).withOpacity(0.7),
+                      ],
+                      title: 'Welcome to boiler time',
+                      subtitle: '개발 버전',
+                      btnText: '버튼 onpressed',
+                      image: 'assets/bt_logo_white.png',
+                      onPressed: () {},
+                    ),
+                  ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: categoryList.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                height: 60,
-                                child: TextButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Color(0x00000000),
-                                    ),
-                                    child: ListTile(
-                                      title: Text(
-                                          "\u{1F4AC}   " + categoryList[index]),
-                                    ),
-                                    onPressed: () {
-                                      PersistentNavBarNavigator.pushNewScreen(
-                                        context,
-                                        screen: Post(
-                                            categoryName: categoryList[index]),
-                                        withNavBar:
-                                            false, // OPTIONAL VALUE. True by default.
-                                        pageTransitionAnimation:
-                                            PageTransitionAnimation.cupertino,
-                                      );
-                                    }),
-                              ),
-                            ],
-                          );
-                        }),
-                  ],
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    margin: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(2.0),
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Color.fromARGB(255, 131, 124, 132)),
+                      borderRadius: BorderRadius.all(Radius.circular(
+                              5.0) //                 <--- border radius here
+                          ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: categoryList.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    height: 60,
+                                    child: TextButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Color(0x00000000),
+                                        ),
+                                        child: ListTile(
+                                          title: Text("\u{1F4AC}   " +
+                                              categoryList[index]),
+                                        ),
+                                        onPressed: () {
+                                          PersistentNavBarNavigator
+                                              .pushNewScreen(
+                                            context,
+                                            screen: Post(
+                                                categoryName:
+                                                    categoryList[index]),
+                                            withNavBar:
+                                                false, // OPTIONAL VALUE. True by default.
+                                            pageTransitionAnimation:
+                                                PageTransitionAnimation
+                                                    .cupertino,
+                                          );
+                                        }),
+                                  ),
+                                ],
+                              );
+                            }),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ));
