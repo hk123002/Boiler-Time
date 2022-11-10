@@ -185,8 +185,8 @@ class _communityState extends State<Post> {
                       child: ListTile(
                         title: Text(documentSnapshot['Title']),
                         subtitle: Text(
-                          documentSnapshot['Content'].length > 12
-                              ? documentSnapshot['Content'].substring(0, 12)
+                          documentSnapshot['Content'].length > 20
+                              ? documentSnapshot['Content'].substring(0, 20)
                               : documentSnapshot['Content'],
                         ),
                         onTap: () {
