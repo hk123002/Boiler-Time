@@ -6,7 +6,6 @@ import 'dart:math';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
-import 'package:boiler_time/views/boiler/myPost.dart';
 
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
@@ -23,6 +22,7 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../auth/login_view.dart';
 import '../boiler/boiler.dart';
+import '../community/myPost.dart';
 import '../community/post.dart';
 import '../main_view.dart';
 import '../community/post.dart';
@@ -43,13 +43,16 @@ class _homeViewState extends State<home> {
   // List<String> hotPostTitle = ["hi", "hi1", "hi2", "hi3"];
   // List<String> hotPostContent = [];
   // List<String> hotPostID = [];
-
+  List<String> categoryList = [];
   String? name;
-  var date;
-  var dayHint;
+  late DateTime date;
+  late String day;
+  late int dayHint;
 
   List<String> welcomeMessage = [
-    "Welcome to Boiler Time",
+    // "Welcome to Boiler Time",
+    "Not last dance,\nThe dance lasts",
+    "What's important is\nunbroken heart",
   ];
   // void _getTodayPost() async {
   //   var usercollection = FirebaseFirestore.instance.collection('hotPost');
@@ -74,7 +77,11 @@ class _homeViewState extends State<home> {
   //   });
   // }
 
-  void _getUserData() async {
+  Future<void> _getUserData() async {
+    setState(() {
+      date = DateTime.now();
+      day = DateFormat('EEEE').format(date);
+    });
     var usercollection = FirebaseFirestore.instance.collection('users');
 
     var docSnapshot =
@@ -92,22 +99,19 @@ class _homeViewState extends State<home> {
     }
 
     //fetch data for calendar
-    setState(() {
-      date = DateTime.now();
-    });
-    devtools.log(DateFormat('EEEE').format(date));
-    if (DateFormat('EEEE').format(date) == "Monday") {
+
+    devtools.log(day + "and " + (day == "Monday").toString());
+    if (day == "Monday") {
       dayHint = 0;
-    } else if (DateFormat('EEEE').format(date) == "Tuesday") {
+    } else if (day == "Tuesday") {
       dayHint = 1;
-    } else if (DateFormat('EEEE').format(date) == "Wednesday") {
+    } else if (day == "Wednesday") {
       dayHint = 2;
-    } else if (DateFormat('EEEE').format(date) == "Thursday") {
+    } else if (day == "Thursday") {
       dayHint = 3;
-    } else if (DateFormat('EEEE').format(date) == "Friday") {
+    } else if (day == "Friday") {
       dayHint = 4;
-    }
-    {
+    } else {
       dayHint = -1;
     }
     var calenarcollection = FirebaseFirestore.instance.collection('calendar');
@@ -127,7 +131,12 @@ class _homeViewState extends State<home> {
         int hour = int.parse(split[2]);
         int minute = int.parse(split[3]);
         int duration = int.parse(split[4]);
+        devtools.log("day is " +
+            day.toString() +
+            " and dayhint is " +
+            dayHint.toString());
         if (day == dayHint) {
+          devtools.log("adding class...");
           String startTimeHint;
           int modifiedStartHour = 0;
 
@@ -178,13 +187,32 @@ class _homeViewState extends State<home> {
     }
   }
 
+  Future<void> _initialize() async {
+    var collection = FirebaseFirestore.instance.collection('post list');
+
+    var docSnapshot = await collection.doc("most viewed").get();
+
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()!;
+      var schedule = data['category'];
+      for (String item in schedule) {
+        setState(() {
+          categoryList.add(item);
+        });
+      }
+    }
+    devtools.log(categoryList.toString());
+  }
+
   late final _random;
+  late final randomIndex;
   @override
   void initState() {
-    super.initState();
     _random = new Random();
-
+    randomIndex = _random.nextInt(welcomeMessage.length);
     _getUserData();
+    _initialize();
+    super.initState();
   }
 
   @override
@@ -293,8 +321,7 @@ class _homeViewState extends State<home> {
                           width: 20,
                         ),
                         Text(
-                          welcomeMessage[
-                              _random.nextInt(welcomeMessage.length)],
+                          welcomeMessage[randomIndex],
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -362,6 +389,19 @@ class _homeViewState extends State<home> {
                             ),
                             SizedBox(
                               height: 5,
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 35,
+                                ),
+                                Text(
+                                  day.toLowerCase(),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
                             ),
                             Row(
                               children: [
@@ -459,9 +499,7 @@ class _homeViewState extends State<home> {
                                       width: 35,
                                     ),
                                     Text(
-                                      DateFormat('EEEE')
-                                          .format(date)
-                                          .toLowerCase(),
+                                      day.toLowerCase(),
                                       style: TextStyle(
                                         fontSize: 13,
                                       ),
@@ -739,7 +777,7 @@ class _homeViewState extends State<home> {
                               width: 13,
                             ),
                             Text(
-                              "\u{2714}    Most viewed",
+                              "  Most viewed",
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -796,118 +834,42 @@ class _homeViewState extends State<home> {
                         ),
                       ]),
                     ]),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Exam',
-                                style: TextStyle(
-                                  fontSize: 13,
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: categoryList.length,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 50,
+                            child: TextButton(
+                              child: ListTile(
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '\u{1F4CC}   ' + categoryList[index],
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Internship',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Freshman',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Rate My Professor',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
+                              onPressed: () => {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen:
+                                      Post(categoryName: categoryList[index]),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                )
+                              },
+                            ),
+                          );
+                        }),
                     SizedBox(
                       height: 5,
                     ),
@@ -1027,7 +989,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1055,7 +1017,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1083,7 +1045,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1111,7 +1073,7 @@ class _homeViewState extends State<home> {
                         onPressed: () => {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: Post(),
+                            screen: Post(categoryName: "Exam"),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -1136,9 +1098,9 @@ class _homeViewState extends State<home> {
 
 class BannerImages {
   static const String banner1 =
-      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
+      "https://www.jaxon.gg/wp-content/uploads/2022/11/Deft.png";
   static const String banner2 =
-      "https://www.kukinews.com/data/kuk/cache/2022/06/14/kuk202206140165.680x.0.jpg";
+      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
   static const String banner3 =
       "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
 
@@ -1155,9 +1117,9 @@ class BannerImages {
 
 class BannerClass {
   static const String banner1 =
-      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
+      "https://www.jaxon.gg/wp-content/uploads/2022/11/Deft.png";
   static const String banner2 =
-      "https://www.kukinews.com/data/kuk/cache/2022/06/14/kuk202206140165.680x.0.jpg";
+      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
   static const String banner3 =
       "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
 

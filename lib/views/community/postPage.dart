@@ -106,11 +106,56 @@ class _postPageViewState extends State<PostPage> {
 
             if (snapshot.hasData) {
               var output = snapshot.data;
-              var value = output!['Content']; // <-- Your value
-              return Text('Value = $value');
-            }
+              var content = output!['Content'];
+              var title = output['Title'];
+              var category = output['Category'];
 
-            return Center(child: CircularProgressIndicator());
+              // <-- Your value
+              var comment = output['Comment'];
+              devtools.log("--------------");
+              devtools.log(comment.toString());
+              devtools.log("--------------");
+
+              List<String> commentList = [];
+
+              if (comment.length > 0) {
+                for (String item in comment) {
+                  commentList.add(item);
+                  devtools.log(item);
+                }
+              }
+
+              return Column(children: [
+                Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text('Title: $title'),
+                    subtitle: Text('Content: $content'),
+                  ),
+                ),
+                Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text('category: $category'),
+                  ),
+                ),
+                ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: commentList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        margin: const EdgeInsets.all(10),
+                        child: ListTile(
+                          title: Text('Comment: ' + commentList[index]),
+                        ),
+                      );
+                    })
+              ]);
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
 // Add new product

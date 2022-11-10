@@ -93,7 +93,7 @@ class _CalendarViewState extends State<Calendar> {
   ];
   @override
   void initState() {
-    _intialize(context);
+    _initialize(context);
     _className = TextEditingController();
 
     super.initState();
@@ -280,7 +280,7 @@ class _CalendarViewState extends State<Calendar> {
     selectedStartTime = null;
   }
 
-  Future<void> _intialize(BuildContext context) async {
+  Future<void> _initialize(BuildContext context) async {
     tasks.clear();
     List<Color?> colors = [
       // Color.fromARGB(255, 193, 155, 200),

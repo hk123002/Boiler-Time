@@ -10,91 +10,21 @@ import 'dart:developer' as devtools show log;
 import '../../enums/menu_action.dart';
 import '../main_view.dart';
 
-class Post extends StatefulWidget {
-  final categoryName;
-  const Post({required this.categoryName});
+class MyPost extends StatefulWidget {
+  const MyPost({super.key});
 
   @override
-  State<Post> createState() => _communityState();
+  State<MyPost> createState() => _myPostState();
 }
 
 //final _post = FirebaseFirestore.instance.collection('post');
+
 final CollectionReference _exam = FirebaseFirestore.instance.collection('post');
 
-class _communityState extends State<Post> {
-  late final categoryName;
-
+class _myPostState extends State<MyPost> {
 // text fields' controllers
   final TextEditingController _title = TextEditingController();
   final TextEditingController _content = TextEditingController();
-
-  @override
-  void initState() {
-    categoryName = widget.categoryName;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  Future<void> _create([DocumentSnapshot? documentSnapshot]) async {
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext ctx) {
-          return Padding(
-            padding: EdgeInsets.only(
-                top: 20,
-                left: 20,
-                right: 20,
-                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextField(
-                  controller: _title,
-                  decoration: const InputDecoration(labelText: 'Title'),
-                ),
-                TextField(
-                  controller: _content,
-                  maxLines: 10,
-                  decoration: const InputDecoration(
-                      alignLabelWithHint: true, labelText: 'Content'),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                ElevatedButton(
-                  child: const Text('Create'),
-                  onPressed: () async {
-                    final String title = _title.text;
-                    final String content = _content.text;
-
-                    DocumentReference docRef = await _exam.add({
-                      "Title": title,
-                      "Content": content,
-                      "Author": FirebaseAuth.instance.currentUser?.uid,
-                      "Comment": "",
-                      "Category": categoryName,
-                    });
-
-                    devtools.log("---------");
-                    devtools.log((docRef.id).toString());
-                    devtools.log("---------");
-
-                    _title.text = '';
-                    _content.text = '';
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ),
-          );
-        });
-  }
 
   Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
     if (documentSnapshot != null) {
@@ -134,7 +64,6 @@ class _communityState extends State<Post> {
                   onPressed: () async {
                     final String title = _title.text;
                     final String content = _content.text;
-
                     await _exam.doc(documentSnapshot?.id).update({
                       "Title": title,
                       "Content": content,
@@ -164,7 +93,7 @@ class _communityState extends State<Post> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 40,
-          title: Text(categoryName),
+          title: const Text('My post'),
         ),
         //body: ListView.builder(
         //itemCount: 5,
@@ -179,7 +108,8 @@ class _communityState extends State<Post> {
                   final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];
                   return Visibility(
-                    visible: documentSnapshot["Category"] == categoryName,
+                    visible: documentSnapshot["Author"] ==
+                        FirebaseAuth.instance.currentUser?.uid,
                     child: Card(
                       margin: const EdgeInsets.all(10),
                       child: ListTile(
@@ -227,12 +157,7 @@ class _communityState extends State<Post> {
               child: CircularProgressIndicator(),
             );
           },
-        ),
+        ));
 // Add new product
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => _create(),
-          child: const Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }
 }

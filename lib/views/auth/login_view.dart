@@ -67,7 +67,9 @@ class _LoginViewState extends State<LoginView> {
                           /*decoration: BoxDecoration(
                               color: Colors.red,
                               borderRadius: BorderRadius.circular(50.0)),*/
-                          child: Image.asset('assets/boilertime_banner.png')),
+                          child: Image.asset(
+                            'assets/boilertime_banner.png',
+                          )),
                     ),
                   ),
                 ),
@@ -146,7 +148,6 @@ class _LoginViewState extends State<LoginView> {
                                 FirebaseAuth.instance.currentUser?.displayName,
                             "email": FirebaseAuth.instance.currentUser?.email,
                             "id": FirebaseAuth.instance.currentUser?.uid,
-                            "image": "",
                           });
 
                           Future getCalendar() async {
