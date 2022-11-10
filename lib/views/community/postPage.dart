@@ -129,16 +129,49 @@ class _postPageViewState extends State<PostPage> {
                 Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
-                    title: Text('Title: $title'),
-                    subtitle: Text('Content: $content'),
+                    title: Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          Text(
+                            '$title',
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '$category',
+                            style: const TextStyle(
+                                fontSize: 15,
+                                color: Color.fromARGB(255, 64, 64, 64)),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                        ],
+                      ),
+                    ),
+                    subtitle: Container(
+                      // height: 200,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          children: [
+                            Text(
+                              '$content',
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                Card(
-                  margin: const EdgeInsets.all(10),
-                  child: ListTile(
-                    title: Text('category: $category'),
-                  ),
-                ),
+                Text("Comment"),
                 ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -147,7 +180,7 @@ class _postPageViewState extends State<PostPage> {
                       return Card(
                         margin: const EdgeInsets.all(10),
                         child: ListTile(
-                          title: Text('Comment: ' + commentList[index]),
+                          title: Text(commentList[index]),
                         ),
                       );
                     })

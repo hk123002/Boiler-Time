@@ -180,172 +180,16 @@ class _BoilerState extends State<Boiler> {
                 ),
               ),
               const SizedBox(height: 30),
-              Container(
-                // margin: const EdgeInsets.all(15.0),
-                // padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 40, 40, 40),
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                          5.0) //                 <--- border radius here
-                      ),
-                ),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 13,
-                            ),
-                            Text(
-                              "\u{2714}    Most viewed",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(children: [
-                        SizedBox(
-                          width: 110,
-                        ),
-                      ]),
-                    ]),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Exam',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          // PersistentNavBarNavigator.pushNewScreen(
-                          //   context,
-                          //   screen: Post(),
-                          //   withNavBar:
-                          //       false, // OPTIONAL VALUE. True by default.
-                          //   pageTransitionAnimation:
-                          //       PageTransitionAnimation.cupertino,
-                          // )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Internship',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          // PersistentNavBarNavigator.pushNewScreen(
-                          //   context,
-                          //   screen: Post(),
-                          //   withNavBar:
-                          //       false, // OPTIONAL VALUE. True by default.
-                          //   pageTransitionAnimation:
-                          //       PageTransitionAnimation.cupertino,
-                          // )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Freshman',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          // PersistentNavBarNavigator.pushNewScreen(
-                          //   context,
-                          //   screen: Post(),
-                          //   withNavBar:
-                          //       false, // OPTIONAL VALUE. True by default.
-                          //   pageTransitionAnimation:
-                          //       PageTransitionAnimation.cupertino,
-                          // )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Rate My Professor',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          // PersistentNavBarNavigator.pushNewScreen(
-                          //   context,
-                          //   screen: Post(),
-                          //   withNavBar:
-                          //       false, // OPTIONAL VALUE. True by default.
-                          //   pageTransitionAnimation:
-                          //       PageTransitionAnimation.cupertino,
-                          // )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                ),
-              ),
+
+              // Account
+
               Container(
                   // width: 10000,
                   // margin: const EdgeInsets.all(15.0),
                   // padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Color.fromARGB(255, 40, 40, 40),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(
                             5.0) //                 <--- border radius here
@@ -407,7 +251,7 @@ class _BoilerState extends State<Boiler> {
                               ),
                               child: const ListTile(
                                   title: Text(
-                                'Edit name',
+                                'Change name',
                               )),
                               onPressed: () {
                                 PersistentNavBarNavigator.pushNewScreen(
@@ -430,40 +274,8 @@ class _BoilerState extends State<Boiler> {
                                 title: Text('Change password'),
                               ),
                               onPressed: () async {
-                                editEmailDialog(context);
-
-                                var email =
-                                    FirebaseAuth.instance.currentUser?.email;
-                                await AuthService.firebase().sendPasswordReset(
-                                    toEmail: email.toString());
+                                editPasswordConfirm(context);
                               }),
-                        ),
-                        SizedBox(
-                          height: 50,
-                          child: TextButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0x00000000),
-                            ),
-                            child: const ListTile(
-                              title: Text('Log out'),
-                            ),
-                            onPressed: () async {
-                              final shouldLogout =
-                                  await showLogOutDialog(context);
-                              if (shouldLogout) {
-                                await AuthService.firebase().logOut();
-                                Navigator.of(context, rootNavigator: true)
-                                    .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return LoginView();
-                                    },
-                                  ),
-                                  (route) => false,
-                                );
-                              }
-                            },
-                          ),
                         ),
                         SizedBox(
                           height: 25,
@@ -472,13 +284,16 @@ class _BoilerState extends State<Boiler> {
               SizedBox(
                 height: 10,
               ),
+
+              //about
+
               Container(
                   // width: 10000,
                   // margin: const EdgeInsets.all(15.0),
                   // padding: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Color.fromARGB(255, 40, 40, 40),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(
                             5.0) //                 <--- border radius here
@@ -569,6 +384,28 @@ class _BoilerState extends State<Boiler> {
                         ),
                       ])),
               SizedBox(
+                height: 30,
+              ),
+              FloatingActionButton.extended(
+                onPressed: () async {
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await AuthService.firebase().logOut();
+                    Navigator.of(context, rootNavigator: true)
+                        .pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return LoginView();
+                        },
+                      ),
+                      (route) => false,
+                    );
+                  }
+                },
+                icon: Icon(Icons.logout_outlined),
+                label: Text("Log out"),
+              ),
+              SizedBox(
                 height: 40,
               ),
               Row(
@@ -603,6 +440,37 @@ Future<bool> showLogOutDialog(BuildContext context) {
                   Navigator.of(context).pop(true);
                 },
                 child: const Text('Log out'))
+          ],
+        );
+      }).then((value) => value ?? false);
+}
+
+Future<bool> editPasswordConfirm(BuildContext context) {
+  return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Change password'),
+          content: const Text(
+            'Do you want change your password?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+                onPressed: () async {
+                  var email = FirebaseAuth.instance.currentUser?.email;
+                  await AuthService.firebase()
+                      .sendPasswordReset(toEmail: email.toString());
+                  Navigator.of(context).pop(true);
+
+                  editEmailDialog(context);
+                },
+                child: const Text('Yes'))
           ],
         );
       }).then((value) => value ?? false);
