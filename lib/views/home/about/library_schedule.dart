@@ -32,7 +32,7 @@ class LibraryTime extends StatelessWidget {
               ),
               child: const ExpansionTile(
                 title: Text('Wilmeth Active Learning Center (WALC)'),
-                subtitle: Text('Example Sub Title'),
+                subtitle: Text('340 Centennial Mall Dr'),
                 leading: Icon(
                   Icons.info,
                   size: 30,
@@ -54,7 +54,7 @@ class LibraryTime extends StatelessWidget {
               ),
               child: const ExpansionTile(
                 title: Text('Hicks Undergraduate Library'),
-                subtitle: Text('Example Sub Title'),
+                subtitle: Text('504 W State St'),
                 leading: Icon(
                   Icons.info,
                   size: 30,
@@ -76,7 +76,7 @@ class LibraryTime extends StatelessWidget {
               ),
               child: const ExpansionTile(
                 title: Text('Parrish Library of Management & Economics'),
-                subtitle: Text('Example Sub Title'),
+                subtitle: Text('403 W State St'),
                 leading: Icon(
                   Icons.info,
                   size: 30,
@@ -98,7 +98,7 @@ class LibraryTime extends StatelessWidget {
               ),
               child: const ExpansionTile(
                 title: Text('West Lafayette LIbrary'),
-                subtitle: Text('Example Sub Title'),
+                subtitle: Text('208 W Columbia St'),
                 leading: Icon(
                   Icons.info,
                   size: 30,
