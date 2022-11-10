@@ -129,6 +129,7 @@ class _postPageViewState extends State<PostPage> {
                 Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
+                    leading: const Icon(Icons.person),
                     title: Align(
                       alignment: Alignment.topLeft,
                       child: Column(
@@ -174,8 +175,9 @@ class _postPageViewState extends State<PostPage> {
                     ),
                   ),
                 ),
-                const Icon(IconData(0xee35, fontFamily: 'MateriaIcons')),
-                const Text("Comment"),
+                const ListTile(
+                    leading: Icon(Icons.comment), subtitle: Text('Comment')),
+
                 ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
