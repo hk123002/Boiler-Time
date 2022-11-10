@@ -54,9 +54,16 @@ class _homeViewState extends State<home> {
   late int dayHint;
 
   List<String> welcomeMessage = [
-    // "Welcome to Boiler Time",
     "Not last dance,\nThe dance lasts",
     "What's important is\nunbroken heart",
+    "It's not how much time you have,\nit's how you use it",
+    "Forget the past,\ncause it's just covering the future",
+    "I fight for the better future",
+    "Never underestimate the\npower of the Scout's code.",
+    "If you believe in your worth, fight",
+    "The past is a mirror\nthat refers the future",
+    "It's hard to climb the mountain,\nbut the views from the top\nare well worth it",
+    "Those who wait to be freed\ndo not deserve freedom",
   ];
 
   //get user data
@@ -1021,12 +1028,12 @@ class BannerImages {
   static const String banner1 =
       "https://www.jaxon.gg/wp-content/uploads/2022/11/Deft.png";
   static const String banner2 =
-      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
+      "https://www.purdue.edu/studentsuccess/images/pillar-banner.jpg";
   static const String banner3 =
       "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
 
   static const String banner4 =
-      "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
+      "https://parimatchnews.com/wp-content/uploads/2022/11/%D0%B4%D0%B4.png";
 
   static List<BannerModel> listBanners = [
     BannerModel(imagePath: banner1, id: "1"),
@@ -1040,13 +1047,12 @@ class BannerClass {
   static const String banner1 =
       "https://www.jaxon.gg/wp-content/uploads/2022/11/Deft.png";
   static const String banner2 =
-      "https://static.semrush.com/blog/uploads/media/c2/52/c2521160ece538cfdbfb218788caf9ea/mDWwN6GNJt_lE7-pGth6IXsdxvqVmPeaGHw-F_dHXiKN8p3FGgIVicwvbdShvLirF5slOvKUkxpfMkaVdne2a6do6vHWdLZSfy1i-lGmfZL9-FyS162K6P-QGbZbk1vKp9YjNSil%3Ds0.png";
+      "https://www.purdue.edu/studentsuccess/images/pillar-banner.jpg";
   static const String banner3 =
       "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
 
   static const String banner4 =
-      "https://file.thisisgame.com/upload/nboard/news/2022/02/11/20220211104008_4939w.jpg";
-
+      "https://parimatchnews.com/wp-content/uploads/2022/11/%D0%B4%D0%B4.png";
   static List<BannerModel> listBanners = [
     BannerModel(imagePath: banner1, id: "1"),
     BannerModel(imagePath: banner2, id: "2"),

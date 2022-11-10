@@ -345,7 +345,7 @@ class _BoilerState extends State<Boiler> {
                                       style: TextStyle(fontSize: 15),
                                     ),
                                     Text(
-                                      '  v 0.0.0',
+                                      '  v 0.0.1',
                                       style: TextStyle(
                                           fontStyle: FontStyle.italic,
                                           color: Colors.white.withOpacity(0.5)),

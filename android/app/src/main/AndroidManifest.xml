@@ -2,7 +2,7 @@
     package="com.example.boiler_time">
    <application
         android:usesCleartextTraffic="true"
-        android:label="Corn Market"
+        android:label="Boiler Time"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
