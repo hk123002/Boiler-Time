@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/boiler/developers.dart';
 import 'package:boiler_time/views/community/postPage.dart';
 
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
@@ -676,13 +677,13 @@ class _homeViewState extends State<home> {
                   Column(
                     children: [
                       FloatingActionButton.small(
-                        heroTag: "menu",
+                        heroTag: "developers",
                         elevation: 0,
                         backgroundColor: Color.fromARGB(255, 41, 41, 41),
                         onPressed: () {
                           PersistentNavBarNavigator.pushNewScreen(
                             context,
-                            screen: DiningMenu(),
+                            screen: Developers(),
                             withNavBar:
                                 false, // OPTIONAL VALUE. True by default.
                             pageTransitionAnimation:
@@ -692,7 +693,7 @@ class _homeViewState extends State<home> {
                         child: Center(
                           child: Icon(
                             size: 20,
-                            Icons.dining,
+                            Icons.person,
                             color: Color.fromARGB(180, 223, 15, 135),
                           ),
                         ),
@@ -701,7 +702,7 @@ class _homeViewState extends State<home> {
                         height: 5,
                       ),
                       Text(
-                        "menu",
+                        "developers",
                         style: TextStyle(
                           fontSize: 10,
                         ),

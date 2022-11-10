@@ -129,29 +129,34 @@ class _postPageViewState extends State<PostPage> {
                 Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
-                    leading: const Icon(Icons.person),
                     title: Align(
                       alignment: Alignment.topLeft,
                       child: Column(
                         children: [
-                          const Icon(
-                              IconData(0xef6e, fontFamily: 'MateriaIcons')),
-                          Text(
-                            '$title',
-                            style: const TextStyle(fontSize: 20),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              const Icon(Icons.person),
+                              Text(
+                                '  $title',
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            '$category',
-                            textAlign: TextAlign.left,
-                            style: const TextStyle(
-                                fontSize: 15,
-                                color: Color.fromARGB(255, 64, 64, 64)),
-                          ),
+                          // Text(
+                          //   '$category',
+                          //   textAlign: TextAlign.left,
+                          //   style: const TextStyle(
+                          //       fontSize: 15,
+                          //       color: Color.fromARGB(255, 64, 64, 64)),
+                          // ),
                           SizedBox(
-                            height: 40,
+                            height: 30,
                           ),
                         ],
                       ),
@@ -175,9 +180,21 @@ class _postPageViewState extends State<PostPage> {
                     ),
                   ),
                 ),
-                const ListTile(
-                    leading: Icon(Icons.comment), subtitle: Text('Comment')),
-
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(Icons.comment),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Comment'),
+                  ],
+                ),
                 ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -200,7 +217,7 @@ class _postPageViewState extends State<PostPage> {
 // Add new product
         floatingActionButton: FloatingActionButton(
           onPressed: () => _create(),
-          child: const Icon(IconData(0xee41, fontFamily: 'MateriaIcons')),
+          child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
   }

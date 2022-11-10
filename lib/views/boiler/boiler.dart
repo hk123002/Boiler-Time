@@ -231,6 +231,7 @@ class _BoilerState extends State<Boiler> {
                               child: const ListTile(
                                   title: Text(
                                 'My posts',
+                                style: TextStyle(fontSize: 15),
                               )),
                               onPressed: () {
                                 PersistentNavBarNavigator.pushNewScreen(
@@ -252,6 +253,7 @@ class _BoilerState extends State<Boiler> {
                               child: const ListTile(
                                   title: Text(
                                 'Change name',
+                                style: TextStyle(fontSize: 15),
                               )),
                               onPressed: () {
                                 PersistentNavBarNavigator.pushNewScreen(
@@ -271,7 +273,10 @@ class _BoilerState extends State<Boiler> {
                                 primary: Color(0x00000000),
                               ),
                               child: const ListTile(
-                                title: Text('Change password'),
+                                title: Text(
+                                  'Change password',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                               onPressed: () async {
                                 editPasswordConfirm(context);
@@ -335,7 +340,10 @@ class _BoilerState extends State<Boiler> {
                               child: ListTile(
                                 title: Row(
                                   children: [
-                                    Text('App version'),
+                                    Text(
+                                      'App version',
+                                      style: TextStyle(fontSize: 15),
+                                    ),
                                     Text(
                                       '  v 0.0.0',
                                       style: TextStyle(
@@ -354,7 +362,10 @@ class _BoilerState extends State<Boiler> {
                                 primary: Color(0x00000000),
                               ),
                               child: const ListTile(
-                                title: Text('Developers'),
+                                title: Text(
+                                  'Developers',
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                               onPressed: () {
                                 PersistentNavBarNavigator.pushNewScreen(
@@ -374,7 +385,10 @@ class _BoilerState extends State<Boiler> {
                               primary: Color(0x00000000),
                             ),
                             child: const ListTile(
-                              title: Text('Github'),
+                              title: Text(
+                                'Github',
+                                style: TextStyle(fontSize: 15),
+                              ),
                             ),
                             onPressed: () {},
                           ),
