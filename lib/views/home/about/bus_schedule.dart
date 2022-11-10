@@ -404,7 +404,8 @@ class BusSchedule extends StatelessWidget {
                 ),
                 children: [
                   ListTile(
-                      title: Text('Schedule'), subtitle: Text('Every  Minute')),
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 12 Minute')),
                   ListTile(
                       title: Text('Monday - Friday'),
                       subtitle: Text('7:00 AM - 8:00 PM')),
