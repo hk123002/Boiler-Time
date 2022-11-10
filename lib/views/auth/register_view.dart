@@ -42,6 +42,7 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         toolbarHeight: 40,
         title: const Text('Register'),
@@ -124,6 +125,9 @@ class _RegisterViewState extends State<RegisterView> {
                     hintText: 'Please enter your password again'),
               ),
             ),
+          ),
+          SizedBox(
+            height: 30,
           ),
           Container(
             margin: const EdgeInsets.only(top: 20.0),

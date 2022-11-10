@@ -47,13 +47,21 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       ),
       body: Column(
         children: [
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: 'Email'),
-          ),
+          Container(
+              margin: const EdgeInsets.only(
+                top: 20.0,
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  //padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: TextField(
+                    controller: _email,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(hintText: 'Email'),
+                  ))),
           TextButton(
             onPressed: () async {
               final email = _email.text;

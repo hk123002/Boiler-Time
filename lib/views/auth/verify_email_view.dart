@@ -37,14 +37,24 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
           },
           child: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black54,
+            color: Colors.white,
           ),
         ),
       ),
       body: Column(
         children: [
-          const Text(
-              "We've sent you an email verification. Please verifiy your account with you email."),
+          SizedBox(
+            height: 30,
+          ),
+          Center(
+            child: Text(
+              "We've sent you an email verification.\nPlease verifiy your account with you email.",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
           TextButton(
             onPressed: () async {
               await AuthService.firebase().sendEmailVerification();
