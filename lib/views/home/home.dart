@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:boiler_time/constants/routes.dart';
 import 'package:boiler_time/services/auth/auth_service.dart';
+import 'package:boiler_time/views/community/postPage.dart';
 
 import 'package:boiler_time/views/home/about/academic_schedule.dart';
 import 'package:boiler_time/views/home/about/bus_schedule.dart';
@@ -44,6 +45,8 @@ class _homeViewState extends State<home> {
   // List<String> hotPostContent = [];
   // List<String> hotPostID = [];
   List<String> categoryList = [];
+  List<String> postList = [];
+  List<String> postNameList = [];
   String? name;
   late DateTime date;
   late String day;
@@ -54,28 +57,8 @@ class _homeViewState extends State<home> {
     "Not last dance,\nThe dance lasts",
     "What's important is\nunbroken heart",
   ];
-  // void _getTodayPost() async {
-  //   var usercollection = FirebaseFirestore.instance.collection('hotPost');
 
-  //   var docSnapshot =
-  //       await usercollection.doc(FirebaseAuth.instance.currentUser?.uid).get();
-
-  //   if (docSnapshot.exists) {
-  //     Map<String, dynamic> data = docSnapshot.data()!;
-
-  //     // You can then retrieve the value from the Map like this:
-
-  //     setState(() {
-  //       name = data['name'];
-  //     });
-  //     devtools.log(name.toString());
-  //   }
-
-  //   //fetch data for calendar
-  //   setState(() {
-  //     date = DateTime.now();
-  //   });
-  // }
+  //get user data
 
   Future<void> _getUserData() async {
     setState(() {
@@ -187,6 +170,8 @@ class _homeViewState extends State<home> {
     }
   }
 
+// initialize most viewed and host post from firebase
+
   Future<void> _initialize() async {
     var collection = FirebaseFirestore.instance.collection('post list');
 
@@ -202,6 +187,23 @@ class _homeViewState extends State<home> {
       }
     }
     devtools.log(categoryList.toString());
+
+    docSnapshot = await collection.doc("hot post").get();
+
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()!;
+      var postData = data['post'];
+
+      for (String item in postData) {
+        var split = item.split(":");
+        var name = split[0];
+        var id = split[1];
+        postList.add(id);
+        postNameList.add(name);
+      }
+    }
+
+    devtools.log(postList.toString());
   }
 
   late final _random;
@@ -877,13 +879,15 @@ class _homeViewState extends State<home> {
                 ),
               ),
 
-              //hot pots
+              //most viewed
 
               Container(
                 margin: const EdgeInsets.all(15.0),
                 padding: const EdgeInsets.all(3.0),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 43, 43, 43)),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 40, 40, 40),
+                  ),
                   borderRadius: BorderRadius.all(Radius.circular(
                           5.0) //                 <--- border radius here
                       ),
@@ -902,15 +906,8 @@ class _homeViewState extends State<home> {
                             SizedBox(
                               width: 13,
                             ),
-                            // Icon(
-                            //   Icons.view_agenda,
-                            //   size: 15,
-                            // ),
-                            // SizedBox(
-                            //   width: 10,
-                            // ),
                             Text(
-                              "\u{1F525}   Hot post",
+                              "  Hot post",
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -920,9 +917,6 @@ class _homeViewState extends State<home> {
                         ),
                       ),
                       Row(children: [
-                        // SizedBox(
-                        //   width: 110,
-                        // ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             elevation: 0.0,
@@ -970,124 +964,50 @@ class _homeViewState extends State<home> {
                         ),
                       ]),
                     ]),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Exam',
-                                style: TextStyle(
-                                  fontSize: 13,
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: postList.length,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 50,
+                            child: TextButton(
+                              child: ListTile(
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '\u{1F4CC}   ' + postNameList[index],
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Internship',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Freshman',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextButton(
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Rate My Professor',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onPressed: () => {
-                          PersistentNavBarNavigator.pushNewScreen(
-                            context,
-                            screen: Post(categoryName: "Exam"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          )
-                        },
-                      ),
-                    ),
+                              onPressed: () => {
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: PostPage(
+                                      documentID: postList[index],
+                                      collectionName: "post"),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                  pageTransitionAnimation:
+                                      PageTransitionAnimation.cupertino,
+                                )
+                              },
+                            ),
+                          );
+                        }),
                     SizedBox(
                       height: 5,
                     ),
                   ],
                 ),
               ),
+              //hot pots
             ]),
           ],
         ),
