@@ -129,14 +129,23 @@ class _postPageViewState extends State<PostPage> {
                 Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
-                    title: Text('Title: $title'),
-                    subtitle: Text('Content: $content'),
+                    title: Text(
+                      'category: $category',
+                      style: const TextStyle(fontSize: 35),
+                    ),
                   ),
                 ),
                 Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
-                    title: Text('category: $category'),
+                    title: Text(
+                      'Title: $title',
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                    subtitle: Text(
+                      'Content: $content',
+                      style: const TextStyle(fontSize: 25),
+                    ),
                   ),
                 ),
                 ListView.builder(
