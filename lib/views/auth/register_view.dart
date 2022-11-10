@@ -51,96 +51,145 @@ class _RegisterViewState extends State<RegisterView> {
           },
           child: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black54,
+            color: Colors.white,
           ),
         ),
       ),
       body: Column(
         children: [
           Container(
-            child: TextField(
-              controller: _name,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: const InputDecoration(hintText: 'Name'),
+            margin: const EdgeInsets.only(
+              top: 20.0,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
+              child: TextField(
+                controller: _name,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(hintText: 'Name'),
+              ),
             ),
           ),
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: 'Email'),
+          Container(
+            margin: const EdgeInsets.only(
+              top: 20.0,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
+              child: TextField(
+                controller: _email,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(hintText: 'Email'),
+              ),
+            ),
           ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration: const InputDecoration(hintText: 'Password'),
+          Container(
+            margin: const EdgeInsets.only(
+              top: 20.0,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
+              child: TextField(
+                controller: _password,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(hintText: 'Password'),
+              ),
+            ),
           ),
-          TextField(
-            controller: _checkpassword,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration: const InputDecoration(
-                hintText: 'Please enter your password again'),
+          Container(
+            margin: const EdgeInsets.only(
+              top: 20.0,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
+              child: TextField(
+                controller: _checkpassword,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(
+                    hintText: 'Please enter your password again'),
+              ),
+            ),
           ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-              final name = _name.text;
-              final checkpassword = _checkpassword.text;
+          Container(
+            margin: const EdgeInsets.only(top: 20.0),
+            height: 50,
+            width: 250,
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 204, 170, 210),
+                borderRadius: BorderRadius.circular(20)),
+            child: TextButton(
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
+                final name = _name.text;
+                final checkpassword = _checkpassword.text;
 
-              if (checkpassword != password) {
-                await showErrorDialog(
-                  context,
-                  'Password dont match',
-                );
-              } else {
-                try {
-                  await AuthService.firebase().createUser(
-                    email: email,
-                    password: password,
-                    displayName: name,
-                  );
-                  await AuthService.firebase().logIn(
-                    email: email,
-                    password: password,
-                  );
-                  final user = AuthService.firebase().currentUser;
-
-                  devtools.log(user.toString());
-
-                  AuthService.firebase().sendEmailVerification();
-
-                  Navigator.of(context).pushNamed(verifyEmailRoute);
-                } on WeakPasswordAuthException {
+                if (checkpassword != password) {
                   await showErrorDialog(
                     context,
-                    'weak password',
+                    'Password dont match',
                   );
-                } on EmailAlreadyInUseException {
-                  await showErrorDialog(
-                    context,
-                    'The email is already in use',
-                  );
-                } on InvalidEmailAuthException {
-                  await showErrorDialog(
-                    context,
-                    'invalid email!',
-                  );
-                } on GenericAuthException {
-                  await showErrorDialog(
-                    context,
-                    'Failed to register',
-                  );
+                } else {
+                  try {
+                    await AuthService.firebase().createUser(
+                      email: email,
+                      password: password,
+                      displayName: name,
+                    );
+                    await AuthService.firebase().logIn(
+                      email: email,
+                      password: password,
+                    );
+                    final user = AuthService.firebase().currentUser;
+
+                    devtools.log(user.toString());
+
+                    AuthService.firebase().sendEmailVerification();
+
+                    Navigator.of(context).pushNamed(verifyEmailRoute);
+                  } on WeakPasswordAuthException {
+                    await showErrorDialog(
+                      context,
+                      'weak password',
+                    );
+                  } on EmailAlreadyInUseException {
+                    await showErrorDialog(
+                      context,
+                      'The email is already in use',
+                    );
+                  } on InvalidEmailAuthException {
+                    await showErrorDialog(
+                      context,
+                      'invalid email!',
+                    );
+                  } on GenericAuthException {
+                    await showErrorDialog(
+                      context,
+                      'Failed to register',
+                    );
+                  }
                 }
-              }
-            },
-            child: const Text('Register'),
+              },
+              child: const Text(
+                'Register',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ),
           TextButton(
               onPressed: () {
