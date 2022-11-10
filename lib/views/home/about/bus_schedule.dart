@@ -31,15 +31,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blueGrey,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('13 Silver Loop'),
                 subtitle: Text('Campus Loop'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 6 ~ 8 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 6:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -48,15 +57,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.amber,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('28 Gold Loop'),
                 subtitle: Text('To Purdue Campus'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 13 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 12:00 AM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -65,15 +83,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.amber,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('28 Gold Loop'),
                 subtitle: Text('To Purdue Airport'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 13 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 11:30 AM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -82,15 +109,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('4B Purdue West'),
                 subtitle: Text('To Citybus Center'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 11:30 AM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -99,15 +135,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('4B Purdue West'),
                 subtitle: Text('To Walmart'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 11:30 AM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -116,15 +161,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('23 The Connector'),
                 subtitle: Text('To Lafayette'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 6:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -133,15 +187,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('23 The Connector'),
                 subtitle: Text('To West Lafayette & Purdue Campus'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 12:00 AM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -150,15 +213,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.red,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('24 Red Point'),
                 subtitle: Text('To Purdue Campus'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:30 AM - 9:30 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -167,66 +239,102 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.red,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('24 Red Point'),
                 subtitle: Text('To Red Point'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:30 AM - 9:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Colors.brown,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('5 Happy Hollow'),
                 subtitle: Text('To River and Kalberer'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 20 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 9:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Colors.brown,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('21A Lake & Alight'),
                 subtitle: Text('To Lake & Alight'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:30 AM - 9:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Colors.brown,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('17 Ross Ade'),
                 subtitle: Text('Campus Loop'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 6:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -235,15 +343,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.red,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('10 Northwestern'),
                 subtitle: Text('To Purdue Campus'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 9:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -252,15 +369,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.red,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('10 Northwestern'),
                 subtitle: Text('To Shining Armor'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 9:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -269,32 +395,49 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('35 Linberg Express'),
                 subtitle: Text('Village west and Cottage Apts Loop'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'), subtitle: Text('Every  Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 8:00 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
+                color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('15 Tower Arces'),
                 subtitle: Text('To Purdue Campus'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 20 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 11:30 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -303,15 +446,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.red,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('15 Tower Arces'),
                 subtitle: Text('To Tower Arces'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 20 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('7:00 AM - 11:30 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -320,15 +472,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('1B Salisbury'),
-                subtitle: Text('To Citybus Center'),
-                trailing: Icon(Icons.arrow_forward_ios),
+                subtitle: Text('To Citybus'),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 11:30 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
             Container(
@@ -337,15 +498,24 @@ class BusSchedule extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue,
               ),
-              child: ListTile(
+              child: const ExpansionTile(
                 title: Text('1B Salisbury'),
                 subtitle: Text('To Walmart'),
-                trailing: Icon(Icons.arrow_forward_ios),
                 leading: Icon(
-                  Icons.library_books,
+                  Icons.directions_bus,
                   size: 30,
                 ),
-                contentPadding: EdgeInsets.all(10),
+                children: [
+                  ListTile(
+                      title: Text('Schedule'),
+                      subtitle: Text('Every 30 Minute')),
+                  ListTile(
+                      title: Text('Monday - Friday'),
+                      subtitle: Text('6:30 AM - 11:30 PM')),
+                  ListTile(
+                      title: Text('Saturday - Sunday'),
+                      subtitle: Text('Closed')),
+                ],
               ),
             ),
           ],
