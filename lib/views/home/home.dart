@@ -978,7 +978,7 @@ class _homeViewState extends State<home> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '\u{1F4CC}   ' + postNameList[index],
+                                      '\u{1F525}   ' + postNameList[index],
                                       style: TextStyle(
                                         fontSize: 13,
                                       ),
