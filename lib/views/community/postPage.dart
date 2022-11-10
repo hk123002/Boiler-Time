@@ -112,16 +112,16 @@ class _postPageViewState extends State<PostPage> {
 
               // <-- Your value
               var comment = output['Comment'];
-              devtools.log("--------------");
-              devtools.log(comment.toString());
-              devtools.log("--------------");
+              ("--------------");
+              (comment.toString());
+              ("--------------");
 
               List<String> commentList = [];
 
               if (comment.length > 0) {
                 for (String item in comment) {
                   commentList.add(item);
-                  devtools.log(item);
+                  (item);
                 }
               }
 

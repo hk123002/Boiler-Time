@@ -86,12 +86,12 @@ class _homeViewState extends State<home> {
       setState(() {
         name = data['name'];
       });
-      devtools.log(name.toString());
+      (name.toString());
     }
 
     //fetch data for calendar
 
-    devtools.log(day + "and " + (day == "Monday").toString());
+    (day + "and " + (day == "Monday").toString());
     if (day == "Monday") {
       dayHint = 0;
     } else if (day == "Tuesday") {
@@ -122,18 +122,15 @@ class _homeViewState extends State<home> {
         int hour = int.parse(split[2]);
         int minute = int.parse(split[3]);
         int duration = int.parse(split[4]);
-        devtools.log("day is " +
-            day.toString() +
-            " and dayhint is " +
-            dayHint.toString());
+        ("day is " + day.toString() + " and dayhint is " + dayHint.toString());
         if (day == dayHint) {
-          devtools.log("adding class...");
+          ("adding class...");
           String startTimeHint;
           int modifiedStartHour = 0;
 
           if (hour > 12) {
             modifiedStartHour = hour - 12;
-            devtools.log(hour.toString());
+            (hour.toString());
             startTimeHint = modifiedStartHour.toString() + ":";
             if (minute.toString() == "0") {
               startTimeHint += "0" + "0";
@@ -194,7 +191,7 @@ class _homeViewState extends State<home> {
         });
       }
     }
-    devtools.log(categoryList.toString());
+    (categoryList.toString());
 
     docSnapshot = await collection.doc("hot post").get();
 
@@ -211,7 +208,7 @@ class _homeViewState extends State<home> {
       }
     }
 
-    devtools.log(postList.toString());
+    (postList.toString());
   }
 
   late final _random;

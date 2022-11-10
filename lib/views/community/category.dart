@@ -33,7 +33,7 @@ class _CategoryState extends State<Category> {
         });
       }
     }
-    devtools.log(categoryList.toString());
+    (categoryList.toString());
   }
 
   void initState() {

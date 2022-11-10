@@ -120,7 +120,7 @@ class _myPostState extends State<MyPost> {
                               : documentSnapshot['Content'],
                         ),
                         onTap: () {
-                          devtools.log(documentSnapshot.id);
+                          (documentSnapshot.id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

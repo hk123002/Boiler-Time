@@ -81,9 +81,9 @@ class _communityState extends State<Post> {
                       "Category": categoryName,
                     });
 
-                    devtools.log("---------");
-                    devtools.log((docRef.id).toString());
-                    devtools.log("---------");
+                    ("---------");
+                    ((docRef.id).toString());
+                    ("---------");
 
                     _title.text = '';
                     _content.text = '';
@@ -190,7 +190,7 @@ class _communityState extends State<Post> {
                               : documentSnapshot['Content'],
                         ),
                         onTap: () {
-                          devtools.log(documentSnapshot.id);
+                          (documentSnapshot.id);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

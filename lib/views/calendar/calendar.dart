@@ -134,8 +134,6 @@ class _CalendarViewState extends State<Calendar> {
       day = 4;
     }
 
-    devtools.log(day.toString());
-
     startHourminStr = selectedStartTime.toString().split(":");
 
     startHourmin = startHourminStr.map(int.parse).toList();
@@ -224,8 +222,6 @@ class _CalendarViewState extends State<Calendar> {
       day = dayHint;
     }
 
-    devtools.log(day.toString());
-
     // if selected is null, set to hint
     if (selectedStartTime != null) {
       startHourminStr = selectedStartTime.toString().split(":");
@@ -253,12 +249,10 @@ class _CalendarViewState extends State<Calendar> {
 
     devtools
         .log("class name text in _editOBject-----------------------------\n");
-    devtools.log(_className.text);
     devtools
         .log("class name text in _editOBject-----------------------------\n");
 
     if (_className.text == "") {
-      devtools.log("class name empty in editobject");
       _className.text = classNameHint;
     }
 
@@ -290,7 +284,6 @@ class _CalendarViewState extends State<Calendar> {
       Color.fromARGB(255, 218, 20, 53),
     ];
 
-    devtools.log("--------------------------");
     var collection = FirebaseFirestore.instance.collection('calendar');
 
     var docSnapshot =
@@ -302,8 +295,6 @@ class _CalendarViewState extends State<Calendar> {
       // You can then retrieve the value from the Map like this:
       var schedule = data['schedule'];
       for (String item in schedule) {
-        devtools.log(item);
-
         var split = item.split(":");
 
         String schedule = split[0];
@@ -332,7 +323,6 @@ class _CalendarViewState extends State<Calendar> {
 
         if (hour > 12) {
           modifiedStartHour = hour - 12;
-          devtools.log(hour.toString());
           startTimeHint = modifiedStartHour.toString() + ":";
           if (minute.toString() == "0") {
             startTimeHint += "0" + "0";
@@ -412,7 +402,6 @@ class _CalendarViewState extends State<Calendar> {
                               setState(() {
                                 selectedDay = value as String;
                               });
-                              devtools.log(selectedDay.toString());
                             },
                             buttonHeight: 40,
                             buttonWidth: 140,
@@ -442,7 +431,6 @@ class _CalendarViewState extends State<Calendar> {
                               setState(() {
                                 selectedStartTime = value as String;
                               });
-                              devtools.log(selectedStartTime.toString());
                             },
                             buttonHeight: 40,
                             buttonWidth: 140,
@@ -473,7 +461,7 @@ class _CalendarViewState extends State<Calendar> {
                               setState(() {
                                 selectedEndTime = value as String;
                               });
-                              devtools.log(selectedEndTime.toString());
+                              (selectedEndTime.toString());
                             },
                             buttonHeight: 40,
                             buttonWidth: 140,
@@ -745,7 +733,7 @@ class _CalendarViewState extends State<Calendar> {
                       setState(() {
                         selectedDay = value as String;
                       });
-                      devtools.log(selectedDay.toString());
+                      (selectedDay.toString());
                     },
                     buttonHeight: 40,
                     buttonWidth: 140,
@@ -776,7 +764,7 @@ class _CalendarViewState extends State<Calendar> {
                       setState(() {
                         selectedStartTime = value as String;
                       });
-                      devtools.log(selectedStartTime.toString());
+                      (selectedStartTime.toString());
                     },
                     buttonHeight: 40,
                     buttonWidth: 140,
@@ -807,7 +795,7 @@ class _CalendarViewState extends State<Calendar> {
                       setState(() {
                         selectedEndTime = value as String;
                       });
-                      devtools.log(selectedEndTime.toString());
+                      (selectedEndTime.toString());
                     },
                     buttonHeight: 40,
                     buttonWidth: 140,
