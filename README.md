@@ -9,11 +9,15 @@
 
   </h1>
 </a>
+ 
+ <h1 align="center">
+   <img width = "80%" src="[https://user-images.githubusercontent.com/89869612/197655945-524d6f7d-a44d-49c7-8e18-c6348baa05e6.png](https://user-images.githubusercontent.com/89869612/212778055-24a0e635-aa1e-4c2e-849e-83f2fc3735fe.jpg)">
 
-![app image](https://user-images.githubusercontent.com/89869612/212778055-24a0e635-aa1e-4c2e-849e-83f2fc3735fe.jpg)
-![app image 2](https://user-images.githubusercontent.com/89869612/212778056-63173dc5-9e02-42e6-bdea-c3d8b3a31e69.jpg)
-![app image 3](https://user-images.githubusercontent.com/89869612/212778058-0a90a418-9a92-4e5c-a93f-e322026e916c.jpg)
-![app image 4](https://user-images.githubusercontent.com/89869612/212778059-7c932ef1-d18c-4ede-a351-9c59aa950bc9.jpg)
+  ![app image](https://user-images.githubusercontent.com/89869612/212778055-24a0e635-aa1e-4c2e-849e-83f2fc3735fe.jpg)
+  ![app image 2](https://user-images.githubusercontent.com/89869612/212778056-63173dc5-9e02-42e6-bdea-c3d8b3a31e69.jpg)
+  ![app image 3](https://user-images.githubusercontent.com/89869612/212778058-0a90a418-9a92-4e5c-a93f-e322026e916c.jpg)
+  ![app image 4](https://user-images.githubusercontent.com/89869612/212778059-7c932ef1-d18c-4ede-a351-9c59aa950bc9.jpg)
+ </h1>
 
 
 Flutter is Google's SDK for crafting beautiful, fast user experiences for
