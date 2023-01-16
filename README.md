@@ -5,7 +5,7 @@
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/89869612/197655945-524d6f7d-a44d-49c7-8e18-c6348baa05e6.png">
       <img alt="Flutter" src="https://user-images.githubusercontent.com/89869612/197655945-524d6f7d-a44d-49c7-8e18-c6348baa05e6.png">
-       <img alt="app image" src="https://user-images.githubusercontent.com/89869612/212778055-24a0e635-aa1e-4c2e-849e-83f2fc3735fe.jpg">
+       <img src="https://user-images.githubusercontent.com/89869612/212778055-24a0e635-aa1e-4c2e-849e-83f2fc3735fe.jpg">
 
     </picture>
 
